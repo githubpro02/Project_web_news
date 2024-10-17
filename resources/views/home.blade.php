@@ -22,19 +22,19 @@
 									<!-- Post Item Start -->
 									<div class="post--item post--layout-1 post--title-large">
 										<div class="post--img">
-											<a href="javascript:;" class="thumb">
-												<img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+											<a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="thumb">
+												<img src="{{ asset($posts_new[$i][0]->image ? 'storage/' .$posts_new[$i][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 													alt=""></a>
-											<a href="" class="cat">Kinh Doanh</a>
+											<a href="{{ route('categories.show', $posts_new[$i][0]->category) }}" class="cat">{{ $posts_new[$i][0]->category->name }}</a>
 
 											<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
 											<div class="post--info">
 												<ul class="nav meta">
-													<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-													<li><a href="javascript:;">1 ngày trước</a></li>
+													<li><a href="javascript:;">{{ $posts_new[$i][0]->author->name }}</a></li>
+													<li><a href="javascript:;">{{ $posts_new[$i][0]->created_at->locale('vi')->diffForHumans() }}</a></li>
 												</ul>
 												<div class="title">
-													<h2 class="h4"><a href="" class="btn-link">Đường băng sân bay Côn Đảo có thể được mở rộng</a>
+													<h2 class="h4"><a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="btn-link">{{ $posts_new[$i][0]->title }}</a>
 													</h2>
 												</div>
 											</div>
@@ -49,23 +49,24 @@
 									<!-- Post Item Start -->
 									<div class="post--item post--layout-1 post--title-larger">
 										<div class="post--img">
-											<a href=""class="thumb">
-												<img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-													style="height:200px" alt=""></a>
+											{{-- {{ dd($posts_new[2][0]) }} --}}
+											<a href="{{ route('posts.show', $posts_new[2][0]) }}"class="thumb">
+												<img src="{{ asset($posts_new[2][0]->image ? 'storage/' .$posts_new[2][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
+												style="height:200px" alt=""></a>
 
-											<a href="" class="cat">Kinh Tế</a>
+											<a href="{{ route('categories.show', $posts_new[2][0]->category) }}" class="cat">{{ $posts_new[2][0]->category->name }}</a>
 											<a href="javascript:;" class="icon"><i class="fa fa-fire"></i></a>
 
 											<div class="post--info">
 												<ul class="nav meta">
-													<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-													<li><a href="javascript:;">2 ngày trước</a></li>
+													<li><a href="javascript:;">{{ $posts_new[2][0]->author->name }}</a></li>
+													<li><a href="javascript:;">{{ $posts_new[2][0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 												</ul>
 
 												<div class="title">
 													<h2 class="h4"><a
-															href=""
-															class="btn-link">Giá vàng hôm nay 25/6: Tiếp đà suy giảm</a></h2>
+															href="{{ route('posts.show', $posts_new[2][0]) }}"
+															class="btn-link">{{ $posts_new[2][0]->title }}</a></h2>
 												</div>
 											</div>
 										</div>
@@ -80,22 +81,24 @@
 							<!-- Post Item Start -->
 							<div class="post--item post--layout-1 post--title-larger">
 								<div class="post--img">
-									<a href=""
-										class="thumb"><img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}" style="height:200px"  alt=""></a>
-										<a href="" class="cat">Sức Khỏe</a>
+									{{-- {{ dd($posts_new[3][0]) }} --}}
+									<a href="{{ route('posts.show', $posts_new[3][0]) }}" class="thumb">
+										<img src="{{ asset($posts_new[3][0]->image ? 'storage/' .$posts_new[3][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}" 
+										alt=""></a>
+									<a href="{{ route('categories.show', $posts_new[3][0]->category ) }}" class="cat">{{ $posts_new[3][0]->category->name }}</a>
 															
 									<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
 
 									<div class="post--info">
 										<ul class="nav meta">
-											<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-											<li><a href="javascript:;">1 ngày trước</a></li>
+											<li><a href="javascript:;">{{ $posts_new[3][0]->author->name }}</a></li>
+											<li><a href="javascript:;">{{ $posts_new[3][0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 										</ul>
 
 										<div class="title">
 											<h2 class="h4"><a
-													href=""
-													class="btn-link">Virus bị xóa sổ 40 năm 'trỗi dậy' ở Anh</a>
+													href="{{ route('posts.show', $posts_new[3][0]) }}"
+													class="btn-link">{{ $posts_new[3][0]->title }}</a>
 											</h2>
 										</div>
 									</div>
@@ -119,10 +122,10 @@
 							<div class="col-md-6 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Thế Giới</h2>
+									<h2 class="h4">{{ $category_home[0]->name }}</h2>
 								</div>
 								<!-- Post Items Title End -->
-
+								{{-- {{ dd($post_category_home8) }} --}}
 								<!-- Post Items Start -->
 								<div class="post--items post--items-2" data-ajax-content="outer">
 									<ul class="nav row gutter--15" data-ajax-content="inner">
@@ -132,22 +135,22 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1">
 												<div class="post--img">
-													<a href=""
-														class="thumb"><img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}" 
+													<a href="{{ route('posts.show', $post_category_home0[0]) }}"
+														class="thumb"><img src="{{ asset($post_category_home0[0]->image ? 'storage/' . $post_category_home0[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}" 
 															alt=""></a>
 															
 													<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngay truoc</a></li>
+															<li><a href="javascript:;">{{ $post_category_home0[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home0[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Nga chỉ trích EU trao tư cách ứng viên cho Ukraine</a>
+																	href="{{ route('posts.show', $post_category_home0[0]) }}"
+																	class="btn-link">{{ $post_category_home0[0]->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -157,124 +160,42 @@
 										</li>
 
 
+									@for ($i = 1; $i <= 4; $i++)
+										@if($i==1 || $i == 3 )
 										<li class="col-xs-12">
 											<!-- Divider Start -->
 											<hr class="divider">
 											<!-- Divider End -->
 										</li>
+										@endif 
+										<li class="col-xs-6">
+											<!-- Post Item Start -->
 
-											<li class="col-xs-6">
-												<!-- Post Item Start -->
-												<div class="post--item post--layout-2">
-													<div class="post--img">
-														<a href=""
-															class="thumb"><img
-																src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-																alt=""></a>
+											<div class="post--item post--layout-2">
+												<div class="post--img">
+													<a href="{{ route('posts.show', $post_category_home0[$i]) }}"
+														class="thumb"><img
+															src="{{ asset($post_category_home0[$i]->image ? 'storage/' . $post_category_home0[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
+															alt=""></a>
 
-														<div class="post--info">
-															<ul class="nav meta">
-																<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-																<li><a href="javascript:;">3 ngày trước</a></li>
-															</ul>
+													<div class="post--info">
+														<ul class="nav meta">
+															<li><a href="javascript:;">{{ $post_category_home0[$i]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home0[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
+														</ul>
 
-															<div class="title">
-																<h3 class="h4"><a
-																		href=""
-																		class="btn-link">Mưa lũ càn quét miền nam Trung Quốc</a>
-																</h3>
-															</div>
+														<div class="title">
+															<h3 class="h4"><a
+																	href="{{ route('posts.show', $post_category_home0[$i]) }}"
+																	class="btn-link">{{ $post_category_home0[$i]->title }}</a>
+															</h3>
 														</div>
 													</div>
 												</div>
-												<!-- Post Item End -->
-
-												<li class="col-xs-6">
-													<!-- Post Item Start -->
-													<div class="post--item post--layout-2">
-														<div class="post--img">
-															<a href=""
-																class="thumb"><img
-																	src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-																	alt=""></a>
-	
-															<div class="post--info">
-																<ul class="nav meta">
-																	<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-																	<li><a href="javascript:;">3 ngày trước</a></li>
-																</ul>
-	
-																<div class="title">
-																	<h3 class="h4"><a
-																			href=""
-																			class="btn-link">Mưa lũ càn quét miền nam Trung Quốc</a>
-																	</h3>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- Post Item End -->
-												
-													<li class="col-xs-12">
-														<!-- Divider Start -->
-														<hr class="divider">
-														<!-- Divider End -->
-													</li>
-
-												<li class="col-xs-6">
-													<!-- Post Item Start -->
-													<div class="post--item post--layout-2">
-														<div class="post--img">
-															<a href=""
-																class="thumb"><img
-																	src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-																	alt=""></a>
-
-															<div class="post--info">
-																<ul class="nav meta">
-																	<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-																	<li><a href="javascript:;">3 ngày trước</a></li>
-																</ul>
-
-																<div class="title">
-																	<h3 class="h4"><a
-																			href=""
-																			class="btn-link">Mưa lũ càn quét miền nam Trung Quốc</a>
-																	</h3>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- Post Item End -->
-
-
-												
-												<li class="col-xs-6">
-													<!-- Post Item Start -->
-													<div class="post--item post--layout-2">
-														<div class="post--img">
-															<a href=""
-																class="thumb"><img
-																	src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-																	alt=""></a>
-
-															<div class="post--info">
-																<ul class="nav meta">
-																	<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-																	<li><a href="javascript:;">3 ngày trước</a></li>
-																</ul>
-
-																<div class="title">
-																	<h3 class="h4"><a
-																			href=""
-																			class="btn-link">Mưa lũ càn quét miền nam Trung Quốc</a>
-																	</h3>
-																</div>
-															</div>
-														</div>
-													</div>
-													<!-- Post Item End -->
-											</li>											
+											</div>
+											<!-- Post Item End -->
+										</li>
+									@endfor
 									</ul>
 								</div>
 								<!-- Post Items End -->
@@ -285,7 +206,7 @@
 							<div class="col-md-6 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Xã Hội</h2>
+									<h2 class="h4">{{ $category_home[1]->name }}</h2>
 								</div>
 								<!-- Post Items Title End -->
 
@@ -297,23 +218,23 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home1[0]) }}"
 														class="thumb"><img
-														src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+														src="{{ asset($post_category_home1[0]->image ? 'storage/' . $post_category_home1[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 														alt=""></a>
 												
 													<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home1[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home1[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Đường băng sân bay Côn Đảo có thể được mở rộng</a>
+																	href="{{ route('posts.show', $post_category_home1[0]) }}"
+																	class="btn-link">{{ $post_category_home1[0]->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -321,109 +242,35 @@
 											</div>
 											<!-- Post Item End -->
 										</li>
+										
+									@for ($i = 1; $i <= 5; $i++)
+									<li>
+										<!-- Post Item Start -->
+										<div class="post--item post--layout-3">
+											<div class="post--img">
+												<a href="{{ route('posts.show', $post_category_home1[$i]) }}"
+													class="thumb"><img
+														src="{{ asset($post_category_home1[$i]->image ? 'storage/' . $post_category_home1[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
+														alt=""></a>
 
-										<li class="col-xs-12">
+												<div class="post--info">
+													<ul class="nav meta">
+														<li><a href="javascript:;">{{ $post_category_home1[$i]->author->name }}</a></li>
+														<li><a href="javascript:;">{{ $post_category_home1[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
+													</ul>
 
-											<!-- Post Item Start -->
-											<div class="post--item post--layout-3">
-												<div class="post--img">
-													<a href=""
-														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-															alt=""></a>
-
-													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
-														</ul>
-
-														<div class="title">
-															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Việt Nam - Campuchia: Mối quan hệ mãi mãi xanh tươi, đời đời bền vững</a>
-															</h3>
-														</div>
+													<div class="title">
+														<h3 class="h4"><a
+																href="{{ route('posts.show', $post_category_home1[$i]) }}"
+																class="btn-link">{{ $post_category_home1[$i]->title }}</a>
+														</h3>
 													</div>
 												</div>
 											</div>
-											<!-- Post Item End -->
-
-											<!-- Post Item Start -->
-											<div class="post--item post--layout-3">
-												<div class="post--img">
-													<a href=""
-														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-															alt=""></a>
-
-													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
-														</ul>
-
-														<div class="title">
-															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Việt Nam - Campuchia: Mối quan hệ mãi mãi xanh tươi, đời đời bền vững</a>
-															</h3>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Post Item End -->
-
-											<!-- Post Item Start -->
-											<div class="post--item post--layout-3">
-												<div class="post--img">
-													<a href=""
-														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-															alt=""></a>
-
-													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
-														</ul>
-
-														<div class="title">
-															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Việt Nam - Campuchia: Mối quan hệ mãi mãi xanh tươi, đời đời bền vững</a>
-															</h3>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Post Item End -->
-
-											<!-- Post Item Start -->
-											<div class="post--item post--layout-3">
-												<div class="post--img">
-													<a href=""
-														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-															alt=""></a>
-
-													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
-														</ul>
-
-														<div class="title">
-															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Việt Nam - Campuchia: Mối quan hệ mãi mãi xanh tươi, đời đời bền vững</a>
-															</h3>
-														</div>
-													</div>
-												</div>
-											</div>
-											<!-- Post Item End -->
-										</li>
+										</div>
+										<!-- Post Item End -->
+									</li>
+									@endfor
 
 									</ul>
 								</div>
@@ -435,7 +282,7 @@
 							<div class="col-md-12 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Kinh Tế</h2>
+									<h2 class="h4">{{ $category_home[2]->name }}</h2>
 
 								</div>
 								<!-- Post Items Title End -->
@@ -447,23 +294,23 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-2">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home2[0]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home2[0]->image ? 'storage/' . $post_category_home2[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 															alt=""></a>
-													<a href="" class="cat">Kinh Tế</a>
+													<a href="{{ route('categories.show', $post_category_home2[0]->category) }}" class="cat">{{ $post_category_home2[0]->category->name }}</a>
 													<a href="javascript:;" class="icon"><i class="fa fa-star-o"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">4 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home2[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home2[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Giá vàng hôm nay 25/6: Tiếp đà suy giảm</a>
+																	href="{{ route('posts.show', $post_category_home2[0]) }}"
+																	class="btn-link">{{ $post_category_home2[0]->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -471,19 +318,23 @@
 											</div>
 											<!-- Post Item End -->
 
-											<hr class="mar_bottom15 ">
+										<hr class="mar_bottom15 ">
 
 											<ul class="list_news_show_home">
+												@for ($i = 4; $i <= 6; $i++)
+													@if($i!=6)
 													<li class="boder_link_show_home">
-														<h3 class="h3"><a href="">CEO MB: 'Chuyển đổi số cần kết hợp giữa cạnh tranh và hợp tác'</a></h3>
+														<h3 class="h3"><a href="{{ route('posts.show', $post_category_home2[$i]) }}">{{ $post_category_home2[$i]->title }}</a></h3>
 													</li>
-													<li class="boder_link_show_home">
-														<h3 class="h3"><a href="">EVN kiến nghị gỡ khó cho điện mặt trời mái nhà tự dùng</a></h3>
-													</li>
-													<li>
-														<h3 class="h3"><a href="">Bitcoin mất mốc 20.000 USD</a></h3>
-													</li>
+													@endif
 
+													@if($i==6)
+													<li>
+														<h3 class="h3"><a href="{{ route('posts.show', $post_category_home2[$i]) }}">{{ $post_category_home2[$i]->title }}</a></h3>
+													</li>
+													@endif
+												
+												@endfor
 											</ul>
 
 										</li>
@@ -509,21 +360,21 @@
 														<!-- Post Item Start -->
 														<div class="post--item post--layout-2">
 															<div class="post--img">
-																<a href=""
+																<a href="{{ route('posts.show', $post_category_home2[$i]) }}"
 																	class="thumb"><img 
-																		src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+																		src="{{ asset($post_category_home2[$i]->image ? 'storage/' . $post_category_home2[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 																		alt=""></a>
 
 																<div class="post--info">
 																	<ul class="nav meta">																		
-																		<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-																		<li><a href="javascript:;">1 ngày trước</a></li>
+																		<li><a href="javascript:;">{{ $post_category_home2[$i]->author->name }}</a></li>
+																		<li><a href="javascript:;">{{ $post_category_home2[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 																	</ul>
 
 																	<div class="title">
 																		<h3 class="h4"><a
-																				href=""
-																				class="btn-link">Giá vàng ở thế giằng co</a></h3>
+																				href="{{ route('posts.show', $post_category_home2[$i]) }}"
+																				class="btn-link">{{ $post_category_home2[$i]->title }}</a></h3>
 																	</div>
 																</div>
 															</div>
@@ -546,7 +397,7 @@
 							<div class="col-md-6 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Sức Khỏe</h2>
+									<h2 class="h4">{{ $category_home[3]->name }}</h2>
 
 
 								</div>
@@ -559,23 +410,23 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home3[0]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home3[0]->image ? 'storage/' . $post_category_home3[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 															alt=""></a>
-													<a href=""
-														class="cat">Sức Khỏe</a>
-													<a href="" class="icon"><i class="fa fa-fire"></i></a>
+													<a href="{{ route('categories.show', $post_category_home3[0]->category) }}"
+														class="cat">{{ $post_category_home3[0]->category->name }}</a>
+													<a href="{{ route('categories.show', $post_category_home3[0]->category) }}" class="icon"><i class="fa fa-fire"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home3[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home3[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
-															<h3 class="h4"><a href=""
-																	class="btn-link">Virus bị xóa sổ 40 năm 'trỗi dậy' ở Anh</a>
+															<h3 class="h4"><a href="{{ route('posts.show', $post_category_home3[0]) }}"
+																	class="btn-link">{{ $post_category_home3[0]->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -596,21 +447,21 @@
 												<!-- Post Item Start -->
 												<div class="post--item post--layout-2">
 													<div class="post--img">
-														<a href=""
+														<a href="{{ route('posts.show', $post_category_home3[$i]) }}"
 															class="thumb"><img
-																src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+																src="{{ asset($post_category_home3[$i]->image ? 'storage/' . $post_category_home3[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 																alt=""></a>
 
 														<div class="post--info">
 															<ul class="nav meta">
-																<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-																<li><a href="javascript:;">1 ngày trước</a></li>
+																<li><a href="javascript:;">{{ $post_category_home3[$i]->author->name }}</a></li>
+																<li><a href="javascript:;">{{ $post_category_home3[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 															</ul>
 
 															<div class="title">
 																<h3 class="h4"><a
-																		href=""
-																		class="btn-link">Phát hiện ung thư máu từ triệu chứng đau họng, khó nuốt</a>
+																		href="{{ route('posts.show', $post_category_home3[$i]) }}"
+																		class="btn-link">{{ $post_category_home3[$i]->title }}</a>
 																</h3>
 															</div>
 														</div>
@@ -631,7 +482,7 @@
 							<div class="col-md-6 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Giáo Dục</h2>
+									<h2 class="h4">{{ $category_home[4]->name }}</h2>
 								</div>
 								<!-- Post Items Title End -->
 
@@ -642,23 +493,23 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1">
 												<div class="post--img">
-													<a href=""
-														class="thumb"><img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+													<a href="{{ route('posts.show', $post_category_home4[0]) }}"
+														class="thumb"><img src="{{ asset($post_category_home4[0]->image ? 'storage/' . $post_category_home4[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 															alt=""></a>
-													<a href=""
-														class="cat">Giáo Dục</a>
-													<a href="" class="icon"><i class="fa fa-eye"></i></a>
+													<a href="{{ route('categories.show', $post_category_home4[0]->category) }}"
+														class="cat">{{ $post_category_home4[0]->category->name }}</a>
+													<a href="{{ route('categories.show', $post_category_home4[0]->category) }}" class="icon"><i class="fa fa-eye"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">3 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home4[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home4[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Gần 4.000 học sinh giành suất vào trường chuyên Trần Đại Nghĩa</a>
+																	href="{{ route('posts.show', $post_category_home4[0]) }}"
+																	class="btn-link">{{ $post_category_home4[0]->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -672,21 +523,21 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-3">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home4[$i]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home4[$i]->image ? 'storage/' . $post_category_home4[$i]->image->path : 'storage/placeholders/placeholder-image.png')}}"
 															alt=""></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">2 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home4[$i]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home4[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">IT Hutech OpenDay</a></h3>
+																	href="{{ route('posts.show', $post_category_home4[$i]) }}"
+																	class="btn-link">{{ $post_category_home4[$i]->title }}</a></h3>
 														</div>
 													</div>
 												</div>
@@ -927,7 +778,7 @@
 			<div class="main--content pd--30-0">
 				<!-- Post Items Title Start -->
 				<div class="post--items-title" data-ajax="tab">
-					<h2 class="h4">Thể Thao</h2>
+					<h2 class="h4">{{ $category_home[5]->name }}</h2>
 				</div>
 				<!-- Post Items Title End -->
 
@@ -938,21 +789,21 @@
 							<!-- Post Item Start -->
 							<div class="post--item post--layout-1 post--type-video post--title-large">
 								<div class="post--img">
-									<a href="" class="thumb"><img
-											src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}" alt=""></a>
-									<a href="" class="cat">Thể Thao</a>
-									<a href="" class="icon"><i class="fa fa-eye"></i></a>
+									<a href="{{ route('posts.show', $post_category_home5[0]) }}" class="thumb"><img
+											src="{{ asset($post_category_home5[0]->image ? 'storage/' . $post_category_home5[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}" alt=""></a>
+									<a href="{{ route('categories.show', $post_category_home5[0]->category) }}" class="cat">{{ $post_category_home5[0]->category->name }}</a>
+									<a href="{{ route('categories.show', $post_category_home5[0]->category) }}" class="icon"><i class="fa fa-eye"></i></a>
 
 									<div class="post--info">
 										<ul class="nav meta">
-											<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-											<li><a href="javascript:;">2 ngày trước</a></li>
+											<li><a href="javascript:;">{{ $post_category_home5[0]->author->name }}</a></li>
+											<li><a href="javascript:;">{{ $post_category_home5[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 										</ul>
 
 										<div class="title">
 											<h2 class="h4"><a
-													href=""
-													class="btn-link">Ronaldo được tìm kiếm nhiều nhất thế giới thể thao</a></h2>
+													href="{{ route('posts.show', $post_category_home5[0]) }}"
+													class="btn-link">{{ $post_category_home5[0]->title }}</a></h2>
 										</div>
 									</div>
 								</div>
@@ -971,21 +822,21 @@
 									<!-- Post Item Start -->
 									<div class="post--item post--type-audio post--layout-3">
 										<div class="post--img">
-											<a href=""
+											<a href="{{ route('posts.show', $post_category_home5[$i]) }}"
 												class="thumb"><img
-													src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+													src="{{ asset($post_category_home5[$i]->image ? 'storage/' . $post_category_home5[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 													alt=""></a>
 
 											<div class="post--info">
 												<ul class="nav meta">
-													<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-													<li><a href="javascript:;">2 ngày trước</a></li>
+													<li><a href="javascript:;">{{ $post_category_home5[$i]->author->name }}</a></li>
+													<li><a href="javascript:;">{{ $post_category_home5[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 												</ul>
 
 												<div class="title">
 													<h3 class="h4"><a
-															href=""
-															class="btn-link">CEO Arnold: 'Man Utd đốt quá nhiều tiền'</a></h3>
+															href="{{ route('posts.show', $post_category_home5[$i]) }}"
+															class="btn-link">{{ $post_category_home5[$i]->title }}</a></h3>
 												</div>
 											</div>
 										</div>
@@ -1021,7 +872,7 @@
 							<div class="col-md-6 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Giải Trí</h2>
+									<h2 class="h4">{{ $category_home[6]->name }}</h2>
 
 
 								</div>
@@ -1034,23 +885,23 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home6[0]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}" alt=""></a>
-													<a href=""
-														class="cat">Giải Trí</a>
-													<a href="" class="icon"><i class="fa fa-star-o"></i></a>
+															src="{{ asset($post_category_home6[0]->image ? 'storage/' . $post_category_home6[0]->image->path : 'storage/placeholders/placeholder-image.png') }}" alt=""></a>
+													<a href="{{ route('categories.show', $post_category_home6[0]->category) }}"
+														class="cat">{{ $post_category_home6[0]->category->name }}</a>
+													<a href="{{ route('categories.show', $post_category_home6[0]->category) }}" class="icon"><i class="fa fa-star-o"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">2 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home6[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home6[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">10 ứng viên cho vương miện Miss Universe Vietnam 2024</a></h3>
+																	href="{{ route('posts.show', $post_category_home6[0]) }}"
+																	class="btn-link">{{ $post_category_home6[0]->title }}</a></h3>
 														</div>
 													</div>
 												</div>
@@ -1063,21 +914,21 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-3">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home6[$i]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home6[0]->image ? 'storage/' . $post_category_home6[$i]->image->path : 'storage/placeholders/placeholder-image.png') }}"
 															alt=""></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home6[$i]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home6[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Phim về Marilyn Monroe hé lộ bi kịch hậu trường</a></h3>
+																	href="{{ route('posts.show', $post_category_home6[$i]) }}"
+																	class="btn-link">{{ $post_category_home6[$i]->title }}</a></h3>
 														</div>
 													</div>
 												</div>
@@ -1098,7 +949,7 @@
 							<div class="col-md-6 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Pháp Luật</h2>
+									<h2 class="h4">{{ $category_home[7]->name }}</h2>
 
 
 								</div>
@@ -1112,24 +963,24 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home7[0]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home7[0]->image ? 'storage/' . $post_category_home7[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 															alt=""></a>
-													<a href=""
-														class="cat">Pháp Luật</a>
-													<a href="" class="icon"><i class="fa fa-heart-o"></i></a>
+													<a href="{{ route('categories.show', $post_category_home7[0]->category) }}"
+														class="cat">{{ $post_category_home7[0]->category->name }}</a>
+													<a href="{{ route('categories.show', $post_category_home7[0]->category) }}" class="icon"><i class="fa fa-heart-o"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">2 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home7[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home7[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Thợ khóa vướng tù oan vì quá tài năng</a>
+																	href="{{ route('posts.show', $post_category_home7[0]) }}"
+																	class="btn-link">{{ $post_category_home7[0]->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -1150,21 +1001,21 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-2">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home7[$i]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home7[$i]->image ? 'storage/' . $post_category_home7[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 															alt=""></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home7[$i]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home7[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">'Cát tặc' ở Sài Gòn bị vây bắt</a></h3>
+																	href="{{ route('posts.show', $post_category_home7[$i]) }}"
+																	class="btn-link">{{ $post_category_home7[$i]->title }}</a></h3>
 														</div>
 													</div>
 												</div>
@@ -1182,7 +1033,7 @@
 							<div class="col-md-12 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Công Nghệ</h2>
+									<h2 class="h4">{{ $category_home[8]->name }}</h2>
 
 
 								</div>
@@ -1195,23 +1046,23 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-2">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home8[0]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}" alt="">
+															src="{{ asset($post_category_home8[0]->image ? 'storage/' . $post_category_home8[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}" alt="">
 													</a>
-													<a href="" class="cat">Công Nghệ</a>
-													<a href="" class="icon"><i class="fa fa-star-o"></i></a>
+													<a href="{{ route('categories.show', $post_category_home8[0]->category) }}" class="cat">{{ $post_category_home8[0]->category->name }}</a>
+													<a href="{{ route('categories.show', $post_category_home8[0]->category) }}" class="icon"><i class="fa fa-star-o"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">5 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home8[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home8[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h3 class="h4"><a
-																	href=""
-																	class="btn-link">Big Tech Trung Quốc chỉ còn là cái bóng của chính mình</a>
+																	href="{{ route('posts.show', $post_category_home8[0]) }}"
+																	class="btn-link">{{ $post_category_home8[0]->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -1226,14 +1077,14 @@
 													@if($i!=5)
 													<li class="boder_link_show_home">
 														<h3 class="h3"><a
-																href="">Trợ lý ảo, trí tuệ nhân tạo lần đầu tiên được sử dụng tại Tòa án nhân dân tối cao</a></h3>
+																href="{{ route('posts.show', $post_category_home8[$i]) }}">{{ $post_category_home8[$i]->title }}</a></h3>
 													</li>
 													@endif
 
 													@if($i==5)
 													<li>
 														<h3 class="h3"><a
-																href="">Người dùng ngân hàng lại điêu đứng vì phần mềm độc hại này</a></h3>
+																href="{{ route('posts.show', $post_category_home8[$i]) }}">{{ $post_category_home8[$i]->title }}</a></h3>
 													</li>
 													@endif
 												@endfor
@@ -1258,21 +1109,21 @@
 														<!-- Post Item Start -->
 														<div class="post--item post--layout-2">
 															<div class="post--img">
-																<a href=""
+																<a href="{{ route('posts.show', $post_category_home8[$i]) }}"
 																	class="thumb"><img
-																		src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+																		src="{{ asset($post_category_home8[$i]->image ? 'storage/' . $post_category_home8[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 																		alt=""></a>
 
 																<div class="post--info">
 																	<ul class="nav meta">
-																		<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-																		<li><a href="javascript:;">1 ngày trước</a></li>
+																		<li><a href="javascript:;">{{ $post_category_home8[$i]->author->name }}</a></li>
+																		<li><a href="javascript:;">{{ $post_category_home8[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 																	</ul>
 
 																	<div class="title">
 																		<h3 class="h4"><a
-																				href=""
-																				class="btn-link">Trợ lý ảo, trí tuệ nhân tạo lần đầu tiên được sử dụng tại Tòa án nhân dân tối cao</a></h3>
+																				href="{{ route('posts.show', $post_category_home8[$i]) }}"
+																				class="btn-link">{{ $post_category_home8[$i]->title }}</a></h3>
 																	</div>
 																</div>
 															</div>
@@ -1295,7 +1146,7 @@
 							<div class="col-md-12 ptop--30 pbottom--30">
 								<!-- Post Items Title Start -->
 								<div class="post--items-title" data-ajax="tab">
-									<h2 class="h4">Khoa Học</h2>
+									<h2 class="h4">{{ $category_home[9]->name }}</h2>
 
 								</div>
 								<!-- Post Items Title End -->
@@ -1307,24 +1158,24 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1 post--title-large">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home9[0]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home9[0]->image ? 'storage/' . $post_category_home9[0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 															alt=""></a>
-													<a href=""
-														class="cat">Khoa Học</a>
-													<a href="" class="icon"><i class="fa fa-eye"></i></a>
+													<a href="{{ route('categories.show', $post_category_home9[0]->category) }}"
+														class="cat">{{ $post_category_home9[0]->category->name }}</a>
+													<a href="{{ route('categories.show', $post_category_home9[0]->category) }}" class="icon"><i class="fa fa-eye"></i></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">1 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home9[0]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home9[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title text-xxs-ellipsis">
 															<h2 class="h4"><a
-																	href=""
-																	class="btn-link">Pin sinh học tạo ra điện nhờ 3 loại vi khuẩn</a></h2>
+																	href="{{ route('posts.show', $post_category_home9[0]) }}"
+																	class="btn-link">{{ $post_category_home9[0]->title }}</a></h2>
 														</div>
 													</div>
 												</div>
@@ -1336,21 +1187,21 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-1">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $post_category_home9[$i]) }}"
 														class="thumb"><img
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($post_category_home9[$i]->image ? 'storage/' . $post_category_home9[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
 															alt=""></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">Nguyen Duc Manh</a></li>
-															<li><a href="javascript:;">2 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $post_category_home9[$i]->author->name }}</a></li>
+															<li><a href="javascript:;">{{ $post_category_home9[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
 														</ul>
 
 														<div class="title">
 															<h2 class="h4"><a
-																	href=""
-																	class="btn-link">Tìm thấy 2 siêu Trái Đất nằm rất gần Hệ Mặt Trời</a></h2>
+																	href="{{ route('posts.show', $post_category_home9[$i]) }}"
+																	class="btn-link">{{ $post_category_home9[$i]->title }}</a></h2>
 														</div>
 													</div>
 												</div>

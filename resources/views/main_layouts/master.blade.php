@@ -118,10 +118,43 @@ $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
 							<li class="btn-cta">
 								<a href="{{ route('login') }}">
 									<i class="fa fm fa-user-o"></i>
-									<span>Login</span>
+									<span>Đăng Nhập</span>
 								</a>
 							</li>
 							@endguest
+
+							@auth
+							<li class="has-dropdown">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+									<i class="fa fm fa-user-o"></i>
+									{{ auth()->user()->name }} 
+									<span class="caret"></span>
+								</a>
+								<ul class="dropdown-menu">
+									@if(auth()->user()->role->name !== 'user')
+									<li>
+										<a href="{{ route('admin.index') }}">Admin - Dashbroad</a>
+									</li>
+									@endif
+									<li>
+										<a href="">Tài khoản của tôi</a>
+									</li>
+									<li>
+										<a onclick="event.preventDefault(); document.getElementById('nav-logout-form').submit();"
+										href="">Đăng xuất
+										<i class="fa fm fa-arrow-circle-right"></i>
+										</a>
+
+										<form id="nav-logout-form" action="{{ route('logout') }}" method="POST">
+											@csrf
+										</form>
+									</li>
+								</ul>
+							</li>
+							@endauth
+			
+							</ul>
+							<!-- Header Topbar Action End -->
 
 					</ul>
 					<!-- Header Topbar Action End -->
@@ -187,16 +220,20 @@ $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
 								<i class="icon_home fa fa-home"></i>
 							</a>
 						</li>
-						<li><a href="">Thế giới</a></li>
-						<li><a href="">Xã hội</a></li>
-						<li><a href="">Kinh tế</a></li>
-						<li><a href="">Văn Hóa</a></li>
-						<li><a href="">Giáo dục</a></li>
-						<li><a href="">Thể Thao</a></li>
-						<li><a href="">Giải trí</a></li>
-						<li><a href="">Pháp luật</a></li>
-						<li><a href="">Công nghệ</a></li>
-						<li><a href="">Khoa học</a></li>
+						<li><a href="">{{ $categories[9]->name }}</a></li>
+						<li><a href="">{{ $categories[8]->name }}</a></li>
+						<li><a href="">{{ $categories[7]->name }}</a></li>
+						<li><a href="">{{ $categories[6]->name }}</a></li>
+						<li><a href="">{{ $categories[5]->name }}</a></li>
+						<li><a href="">{{ $categories[4]->name }}</a></li>
+						<li><a href="">{{ $categories[3]->name }}</a></li>
+						<li><a href="">{{ $categories[2]->name }}</a></li>
+						<li><a href="">{{ $categories[1]->name }}</a></li>
+						<li><a href="">{{ $categories[0]->name }}</a></li>
+						{{-- @foreach($categories as $category)
+							<li><a href="">{{ $category->name }}</a></li>
+						@endforeach --}}
+
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Trang<i
 									class="fa flm fa-angle-down"></i></a>

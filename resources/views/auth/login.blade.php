@@ -64,7 +64,7 @@
                 <!-- Login Form Start -->
                 <div class="login--form">
                     <div class="title">
-                        <h1 class="h1">Login</h1>
+                        <h1 class="h1">Đăng Nhập</h1>
                     </div>
 
                     <form method="POST" action="{{ route('login') }}">
@@ -81,7 +81,7 @@
 
                         <div class="form-group">
                             <label>
-                                <span>Password</span>
+                                <span>Mật Khẩu</span>
                                 <input id="password" type="password"
                                     class="form-control"  name="password"
                                     required autocomplete="current-password">
@@ -92,17 +92,17 @@
                             <label>
                                 <input type="checkbox" name="remember" id="remember"
                                     {{ old('remember') ? 'checked' : '' }}>
-                                <span>Remember me</span>
+                                <span>Nhớ mật khẩu</span>
                             </label>
                         </div>
 
                         <button type="submit" class="btn btn-lg btn-block btn-primary">
-                            {{ __('Login') }}
+                            {{ __('Đăng Nhập') }}
                         </button>
 
                         <p class="help-block clearfix">
-                            <a href="{{ route('forgot-password') }}" class="btn-link pull-left">Forgot Password?</a>
-                            <a href="{{ route('register') }}" class="btn-link pull-right">Register</a>
+                            <a href="{{ route('forgot-password') }}" class="btn-link pull-left">Quên mật khẩu?</a>
+                            <a href="{{ route('register') }}" class="btn-link pull-right">Đăng ký tài khoản </a>
                         </p>
 
                     </form>

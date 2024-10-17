@@ -33,8 +33,8 @@
 	<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="{{ route('home') }}" class="btn-link"><i class="fa fm fa-home"></i>Trang Chủ</a></li>
-				<li><a href="{{ route('categories.show') }}" class="btn-link">Thế Giới</a></li>
-				<li class="active"><span>Nga chỉ trích EU trao tư cách ứng viên cho Ukraine</span></li>
+				<li><a href="{{ route('categories.show', $post->category ) }}" class="btn-link">{{ $post->category->name }}</a></li>
+				<li class="active"><span>{{ $post->title }}</span></li>
 			</ul>
 	</div>
 </div>

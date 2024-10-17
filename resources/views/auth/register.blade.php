@@ -58,10 +58,31 @@
         <!-- Login Section Start -->
         <div class="login--section pd--100-0 bg--overlay" data-bg-img="{{ asset('kcnew/frontend/img/KCN.png')}}">
             <div class="container">
+
+                <!-- Alert Message Start -->
+                @if(session('success'))
+                    <div class="alert alert-success">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                <!-- Alert Message End -->
+
+                <!-- Alert for Validation Errors -->
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <!-- Alert End -->
+
                 <!-- Login Form Start -->
                 <div class="login--form">
                     <div class="title">
-                        <h1 class="h1">Register</h1>
+                        <h1 class="h1">Đăng Ký</h1>
 
                     </div>
 
@@ -69,7 +90,7 @@
                         @csrf
                         <div class="form-group">
                             <label>
-                                <span>{{ __('Name') }}</span>
+                                <span>{{ __('Họ Và Tên') }}</span>
                                 <input id="name" type="text"
                                     class="form-control" name="name"
                                     value="{{ old('name') }}" required autocomplete="name" autofocus>
@@ -88,7 +109,7 @@
 
                         <div class="form-group">
                             <label>
-                                <span>Password</span>
+                                <span>Mật Khẩu</span>
                                 <input id="password" type="password"
                                     class="form-control" name="password"
                                     required autocomplete="current-password">
@@ -97,7 +118,7 @@
                         </div>
                         <div class="form-group">
                             <label>
-                                <span>{{ __('Confirm Password') }}</span>
+                                <span>{{ __('Xác Nhận Mật Khẩu') }}</span>
                                 <input id="password-confirm" type="password" class="form-control"
                                     name="password_confirmation" required autocomplete="new-password">
 
@@ -105,12 +126,12 @@
                         </div>
 
                         <button type="submit" class="btn btn-lg btn-block btn-primary">
-                            {{ __('Register') }}
+                            {{ __('Đăng Ký') }}
                         </button>
 
                         <p class="help-block clearfix">
-                            <span>Do you already have an account?</span>
-                            <a href="{{ route('login') }}" class="btn-link pull-center">Login</a>
+                            <span>Bạn đã có tài khoản chưa?</span>
+                            <a href="{{ route('login') }}" class="btn-link pull-center">Đăng Nhập</a>
                         </p>
 
                     </form>

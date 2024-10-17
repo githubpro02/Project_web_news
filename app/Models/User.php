@@ -13,7 +13,7 @@ use App\Models\Role;
 
 class User extends Authenticatable
 {
-    use  HasFactory, Notifiable;
+    use  HasApiTokens, HasFactory, Notifiable;
 
 
     protected $fillable = [
@@ -36,5 +36,13 @@ class User extends Authenticatable
 
     public function role() {
         return $this->belongsTo(Role::class);
+    }
+
+    public function posts() {
+        return $this->hasMany(Post::class);
+    } 
+    
+    public function categories() {
+        return $this->hasMany(Category::class);
     } 
 }
