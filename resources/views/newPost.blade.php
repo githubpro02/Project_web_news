@@ -27,19 +27,19 @@
                                     <!-- Post Items Start -->
                                     <div class="post--items post--items-2" data-ajax-content="outer">
                                         <ul class="nav" data-ajax-content="inner">
-											@for($i =0 ; $i < 9 ; $i++)
+											@for($i =0 ; $i < count($newPosts_category) ; $i++)
                                             <li>
                                                 <!-- Post Item Start -->
                                                 <div class="post--item">
                                                     <div class="row">
                                                         <div class="col-md-6">
                                                             <div class="post--img">
-                                                                <a href=""
+                                                                <a href="{{ route('posts.show', $newPosts_category[$i] ) }}"
                                                                     class="thumb"><img
-                                                                        src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+                                                                        src="{{ asset($newPosts_category[$i]->image ? 'storage/' . $newPosts_category[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
                                                                         alt=""></a>
-                                                                <a href=""
-                                                                    class="cat">Khoa Học</a>
+                                                                <a href="{{ route('categories.show', $newPosts_category[$i]->category) }}"
+                                                                    class="cat">{{ $newPosts_category[$i]->category->name }}</a>
 
                                                             </div>
                                                         </div>
@@ -47,26 +47,26 @@
                                                         <div class="col-md-6">
                                                             <div class="post--info">
                                                                 <ul class="nav meta">
-																	<li><span>Nguyen Duc Manh</a></li>
-																	<li><span>1 ngày trước</span></li>
-                                                                    <li><a href="#"><i class="fa fm fa-eye"></i>0</span></li>
+																	<li><span>{{ $newPosts_category[$i]->author->name }}</a></li>
+																	<li><span>{{ $newPosts_category[$i]->created_at->locale('vi')->diffForHumans() }}</span></li>
+                                                                    <li><a href="#"><i class="fa fm fa-eye"></i>{{ $newPosts_category[$i]->views }}</span></li>
                                                                     <li><a href=""><i class="fa fm fa-comments"></i>1</a></li>
                                                                 </ul>
 
 
                                                                 <div class="title">
                                                                     <h2 class="h3" style="color:black"><a
-                                                                            href=""
-                                                                            class="btn-link">Nga chỉ trích EU trao tư cách ứng viên cho Ukraine</a></h3>
+                                                                            href="{{ route('posts.show', $newPosts_category[$i] ) }}"
+                                                                            class="btn-link">{{ $newPosts_category[$i]->title }}</a></h3>
                                                                 </div>
                                                             </div>
 
                                                             <div class="post--content">
-                                                                <p>Nga cảnh báo quyết định trao tư cách ứng viên cho Ukraine của EU sẽ gây ra những hậu quả tiêu cực và "nô dịch" các nước láng giềng.</p>
+                                                                <p>{{ $newPosts_category[$i]->excerpt }}</p>
                                                             </div>
 
                                                             <div class="post--action">
-                                                                <a class="btn btn-link" href="">Đọc thêm</a>
+                                                                <a class="btn btn-link" href="{{ route('posts.show', $newPosts_category[$i] ) }}">Đọc thêm</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -99,7 +99,7 @@
                    <div class="main--sidebar col-md-4 col-sm-5 ptop--30 pbottom--30" data-sticky-content="true">
                     <div class="sticky-content-inner">
                     
-                        <div class="widget">
+                        {{-- <div class="widget">
                             <div class="widget--title">
                                 <h2 class="h4">Tin tức nổi bật</h2>
                                 <i class="icon fa fa-newspaper-o"></i>
@@ -255,7 +255,8 @@
                                 <!-- Post Items End -->
                             </div>
                             <!-- List Widgets End -->
-                        </div>
+                        </div> --}}
+                        <x-blog.side-outstanding_posts :outstanding_posts="$outstanding_posts"/>
                         <!-- Widget End -->
 
 

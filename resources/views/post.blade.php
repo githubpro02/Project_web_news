@@ -52,54 +52,34 @@
                             <div class="post--cats">
                                 <ul class="nav">
                                     <li><span><i class="fa fa-folder-open-o"></i></span></li>
-									@for($i = 0; $i <  5 ; $i++)
-                                    <li><a class="text capitalize" href="">nga-ukraina</a></li>
+									@for($i = 0; $i <  count($post->tags) ; $i++)
+                                    <li><a class="text capitalize" href="{{ route('tags.show',  $post->tags[$i]) }}">{{ $post->tags[$i]->name }}</a></li>
 									@endfor
                                 </ul>
                             </div>
 
                             <div class="post--info">
                                 <ul class="nav meta">
-									<li class="text capitalize"><a href="#">5/8/2024<a></li>
-                                    <li><a href="#">Nguyen Duc Manh</a></li>
-                                    <li><span><i class="fa fm fa-eye"></i>10</span></li>
-                                    <li><a href="#"><i class="fa fm fa-comments-o"></i>2</a></li>
+									<li class="text capitalize"><a href="#">{{ $post->created_at->locale('vi')->translatedFormat('l'), }} {{  $post->created_at->locale('vi')->format('d/m/Y') }}<a></li>
+                                    <li><a href="#">{{ $post->author->name }}</a></li>
+                                    <li><span><i class="fa fm fa-eye"></i>{{ $post->views }}</span></li>
+                                    <li><a href="#"><i class="fa fm fa-comments-o"></i>{{ count($post->comments) }}</a></li>
                                 </ul>
 
                                 <div class="title">
-                                    <h2 class="post_title h4">Nga chỉ trích EU trao tư cách ứng viên cho Ukraine</h2>
+                                    <h2 class="post_title h4">{{ $post->title }}</h2>
                                 </div>
                             </div>
                             <div class="post--body post--content">
-								"Với quyết định trao cho Ukraine và Moldova tư cách là các nước ứng cử viên, Liên minh châu Âu (EU) 
-								khẳng định rằng họ tiếp tục lợi dụng các nước SNG trên phương diện địa chính trị để kiềm chế Nga. Họ không tính 
-								tới hậu quả tiêu cực của động thái như vậy", phát ngôn viên Bộ Ngoại giao Nga Maria Zakharova cho biết hôm 24/6. SNG 
-								là Cộng đồng các Quốc gia Độc lập gồm các nước từng thuộc Liên Xô.Phát ngôn viên Bộ Ngoại giao Nga cáo buộc bằng các 
-								mở rộng sang Ukraine và Moldova, EU đã "hy sinh những lý tưởng dân chủ của mình" cho "sự bành trướng không giới hạn và 
-								nô dịch về kinh tế, chính trị với các nước láng giềng".
-								<div class="post--img">
-									<a href="#" class="thumb"><img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-										alt=""></a>
-								</div>
-								Người phát ngôn Bộ Ngoại giao Nga Maria Zakharova tại St.Petersburg hôm 15/6. Ảnh: AFP.
-								Người phát ngôn Điện Kremlin Dmitry Peskov trước đó cũng bình luận về việc EU trao tư cách ứng viên cho Ukraine, gọi đây là 
-								"vấn đề nội bộ của châu Âu". "Điều quan trọng là tất cả những quá trình này không gây thêm vấn đề cho chúng tôi và cho quan hệ 
-								của chúng tôi với các quốc gia này", ông Peskov nói.Bộ trưởng Ngoại giao Nga Sergey Lavrov cũng nhận định việc Ukraine và Moldova 
-								muốn gia nhập EU không gây ra rủi ro nào cho Moskva vì khối này không phải liên minh quân sự. Tuy nhiên, ông Lavrov cáo buộc "EU và 
-								NATO đang muốn gây chiến" với Nga.EU hôm 23/6 quyết định cấp tư cách ứng viên cho Ukraine và nước láng giềng Moldova trong hội nghị 
-								thượng đỉnh tại Brussels, Bỉ. Tổng thống Ukraine Zelensky ca ngợi đây là "thời khắc lịch sử có một không hai trong quan hệ Ukraine - EU, 
-								khởi đầu cho trang sử mới của châu Âu".Sau khi được phê duyệt tư cách ứng viên, Ukraine sẽ phải nỗ lực để đáp ứng Tiêu chí Copenhagen 
-								được EU đề ra đối với các nước xin gia nhập, về nền kinh tế thị trường tự do cũng như các giá trị về dân chủ, nhân quyền.Tổng thống Ukraine 
-								đã nhiều lần thúc giục EU cho phép Ukraine gia nhập ngay lập tức theo cái ông mô tả là "thủ tục đặc biệt mới", song không nêu chi tiết. Lãnh 
-								đạo Pháp, Đức, Tây Ban Nha và Hà Lan hồi tháng 3 đã bác bỏ lời kêu gọi về nhanh chóng kết nạp.
+                                {!! str_replace('src="../../../', 'src="'.asset('/'), $post->body) !!}					
                             </div>
                         </div>
                         <!-- Post Item End -->
 
                         <!-- Advertisement Start -->
                         <div class="ad--space pd--20-0-40">
-							<p class="author-info">Người viết: Nguyen Duc Manh</p>
-							<p class="post-time">Thời gian: 4 ngày trước</p>
+							<p class="author-info">Người viết: {{ $post->author->name }}</p>
+							<p class="post-time">Thời gian: {{ $post->created_at->locale('vi')->diffForHumans() }}c</p>
                         </div>
                         <!-- Advertisement End -->
 
@@ -107,8 +87,8 @@
                         <div class="post--tags">
                             <ul class="nav">
                                 <li><span><i class="fa fa-tags"></i> Từ khóa </span></li>
-								@for($i = 0; $i <  5 ; $i++)
-                                    <li><a class="text capitalize" href="">nga-ukraina</a></li>
+								@for($i = 0; $i <  count($post->tags) ; $i++)
+                                    <li><a class="text capitalize" href="{{ route('tags.show',  $post->tags[$i]) }}">{{ $post->tags[$i]->name }}</a></li>
 								@endfor
                             </ul>
                         </div>
@@ -138,12 +118,13 @@
                         <div class="comment--list pd--30-0">
                             <!-- Post Items Title Start -->
                             <div class="post--items-title">
-                                <h2 class="h4"><span class="post_count_comment h4" >2 </span> bình luận</h2>
+                                <h2 class="h4"><span class="post_count_comment h4" >{{ count($post->comments) }}</span> bình luận</h2>
                                 <i class="icon fa fa-comments-o"></i>
                             </div>
                             <!-- Post Items Title End -->
 
                             <ul class="comment--items nav">
+                                @foreach($post->comments as $comment)
                                 <li>
                                     <!-- Comment Item Start -->
                                    <div class="comment--item clearfix">
@@ -152,12 +133,12 @@
 										</div>
 										<div class="comment--info">
 											<div class="comment--header clearfix">
-												<p class="name">Nguyen Duc Manh</p>
-												<p class="date">3 ngày trước</p>
+												<p class="name">{{ $comment->user->name }}</p>
+												<p class="date">{{ $comment->created_at->locale('vi')->diffForHumans() }}</p>
 												<a href="javascript:;" class="reply"><i class="fa fa-flag"></i></a>
 											</div>
 											<div class="comment--content">
-												<p>Hay lắm</p>
+												<p>{{ $comment->the_comment }}</p>
 												<p class="star">
 													<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
 												</p>
@@ -166,29 +147,7 @@
                                     </div>
                                     <!-- Comment Item End -->
                                 </li>
-
-								<li>
-                                    <!-- Comment Item Start -->
-                                   <div class="comment--item clearfix">
-										<div class="comment--img float--left">
-                                            <img style="border-radius: 50%; margin: auto; background-size: cover ;  width: 68px; height: 68px;   background-image: url({{ asset('blog_template/images/person2.jpg') }})"  alt="">
-										</div>
-										<div class="comment--info">
-											<div class="comment--header clearfix">
-												<p class="name">Nguyen Duc Manh</p>
-												<p class="date">3 ngày trước</p>
-												<a href="javascript:;" class="reply"><i class="fa fa-flag"></i></a>
-											</div>
-											<div class="comment--content">
-												<p>Hay lắm</p>
-												<p class="star">
-													<span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
-												</p>
-											</div>
-										</div>
-                                    </div>
-                                    <!-- Comment Item End -->
-                                </li>
+                                @endforeach
                             </ul>
 							
                         </div>
@@ -204,28 +163,30 @@
                             <!-- Post Items Title End -->
 							
                             <div class="comment-respond">
-
-								<form action="" data-form="validate">
+                                <x-blog.message :status="'success'"/>
+								@auth	
+								<!-- <form method="POST" action="{{ route('posts.add_comment', $post )}}"> -->
+                                <form onsubmit="return false;" autocomplete="off" method="POST" >
+									@csrf
 									<p>Đừng lo ! Địa chỉ email của bạn sẽ không được công bố (*).</p>
-									<div class="row">
-										<div class="col">
-											<label>
-												<span>Comment *</span>
-												<textarea name="comment" id="comment" class="form-control" required></textarea>
-											</label>
-										</div>
+									<div class="row form-group">
 										<div class="col-md-12">
-											<button type="submit" class="btn btn-primary">Đăng</button>
+											<textarea name="the_comment" id="message" cols="30" rows="5" class="form-control" placeholder="Đánh giá bài viết này"></textarea>
 										</div>
 									</div>
+                                    <small style="color: red; font-size: 14px;" class="comment_error"> </small>
+									<div class="form-group">
+										<input id="input_comment" type="submit" value="Bình luận" class="send-comment-btn btn btn-primary">
+									</div>
 								</form>
+                                @endauth
 
-								{{-- @guest
+								@guest
 								<p class="h4">
 									<a href="{{ route('login') }}">Đăng nhập</a> hoặc 
 									<a href="{{ route('register') }}">Đăng ký</a> để bình luận bài viết
 								</p>
-								@endguest --}}
+								@endguest
                             </div>
 
                         </div>
@@ -242,14 +203,14 @@
 							<!-- Post Items Start -->
                             <div class="post--items post--items-2" data-ajax-content="outer">
                                 <ul class="nav row" data-ajax-content="inner">
-										@for($i=0;$i<4;$i++)
+                                    @foreach($postTheSame as $postTheSame)
                                         <li class="col-sm-12 pbottom--30">
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-3">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $postTheSame) }}"
 														class="thumb">
-                                                        <img src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+                                                        <img src="{{ asset($postTheSame->image ? 'storage/' .$postTheSame->image->path : 'storage/placeholders/placeholder-image.png')}}"
 															alt="">
                                                     </a>
 
@@ -257,17 +218,17 @@
 													
 														<div class="title">
 															<h3  class="h4">
-																<a href="" class="btn-link">Mưa lũ càn quét miền nam Trung Quốc</a>
+																<a href="{{ route('posts.show', $postTheSame) }}" class="btn-link">{{ $postTheSame->title }}</a>
 															</h3>
                                                             <p style="font-size:16px" >
-																<span >Nhiều vùng ở miền nam Trung Quốc hứng chịu bão lớn, gây ngập lụt nghiêm trọng ở nhiều thành phố và lở đất ở vùng nông thôn</span>
+																<span >{{ $postTheSame->excerpt }}</span>
                                                             </p>
 														</div>
 
                                                         <ul style="padding-top:10px" class="nav meta ">
-															<li><a href="javascript:;">Nguyen Duc Manh</a>
+															<li><a href="javascript:;">{{ $postTheSame->author->name }}</a>
 															</li>
-															<li><a href="javascript:;">2 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $postTheSame->created_at->locale('vi')->diffForHumans() }}c</a></li>
                                                             <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>2</a></li>
 														</ul>
 													</div>
@@ -275,7 +236,7 @@
 											</div>
 											<!-- Post Item End -->
 										</li>
-                                        @endfor
+                                        @endforeach
 
                                 </ul>
 
@@ -298,163 +259,8 @@
                     <div class="main--sidebar col-md-4 col-sm-5 ptop--30 pbottom--30" data-sticky-content="true">
                         <div class="sticky-content-inner">
                         
-                            <div class="widget">
-                                <div class="widget--title">
-                                    <h2 class="h4">Tin tức nổi bật</h2>
-                                    <i class="icon fa fa-newspaper-o"></i>
-                                </div>
-                            
-                                <!-- List Widgets Start -->
-                                <div class="list--widget list--widget-1">
-                                    <div class="list--widget-nav" data-ajax="tab">
-                                        <ul class="nav nav-justified">
-                                            <li>
-                                                <a  class="outstandPosts" href="#" data-ajax-action="load_widget_hot_news">Tin nóng</a>
-                                            </li>
-                                            <li class="active">
-                                                <a class="outstandPosts" href="" data-ajax-action="load_widget_trendy_news">Xu hướng</a>
-                                            </li>
-                                            <li>
-                                                <a class="outstandPosts" href="" data-ajax-action="load_widget_most_watched">Xem nhiều nhất</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                            
-                                    <!-- Post Items Start -->
-                                    <div class="post--items post--items-3" data-ajax-content="outer">
-                                        <ul class="nav listPost" data-ajax-content="inner">
-                                                <li>
-                                                    <!-- Post Item Start -->
-                                                    <div class="post--item post--layout-3">
-                                                        <div class="post--img">
-                                                            <a href="" class="thumb"><img
-                                                                    src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-                                                                    alt=""></a>
-                                                            <div class="post--info">
-                                                                <ul class="nav meta">
-                                                                    <li><a href="javascript:;">2 ngày trước</a></li>
-                                                                    <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>1</a></li>
-                                                                    <li><span><i class="fa fm fa-eye"></i>5</span></li>
-                                                                </ul>
-                            
-                                                                <div class="title">
-                                                                    <h3 class="h4"><a href=""
-                                                                            class="btn-link">EVN kiến nghị gỡ khó cho điện mặt trời mái nhà tự dùng</a>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Post Item End -->
-                                                </li>
-                                                <li>
-                                                    <!-- Post Item Start -->
-                                                    <div class="post--item post--layout-3">
-                                                        <div class="post--img">
-                                                            <a href="" class="thumb"><img
-                                                                    src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-                                                                    alt=""></a>
-                                                            <div class="post--info">
-                                                                <ul class="nav meta">
-                                                                    <li><a href="javascript:;">2 ngày trước</a></li>
-                                                                    <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>0</a></li>
-                                                                    <li><span><i class="fa fm fa-eye"></i>1</span></li>
-                                                                </ul>
-                            
-                                                                <div class="title">
-                                                                    <h3 class="h4"><a href=""
-                                                                            class="btn-link">Lào Cai: Quyết định xử phạt vi phạm hành chính là tài liệu mật?</a>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Post Item End -->
-                                                </li>
-                                                <li>
-                                                    <!-- Post Item Start -->
-                                                    <div class="post--item post--layout-3">
-                                                        <div class="post--img">
-                                                            <a href="" class="thumb"><img
-                                                                    src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-                                                                    alt=""></a>
-                                                            <div class="post--info">
-                                                                <ul class="nav meta">
-                                                                    <li><a href="javascript:;">2 ngày trước</a></li>
-                                                                    <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>0</a></li>
-                                                                    <li><span><i class="fa fm fa-eye"></i>1</span></li>
-                                                                </ul>
-                            
-                                                                <div class="title">
-                                                                    <h3 class="h4"><a href=""
-                                                                            class="btn-link">Phim Em và Trịnh 'cháy vé'</a>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Post Item End -->
-                                                </li>
-                                                <li>
-                                                    <!-- Post Item Start -->
-                                                    <div class="post--item post--layout-3">
-                                                        <div class="post--img">
-                                                            <a href="" class="thumb"><img
-                                                                    src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-                                                                    alt=""></a>
-                                                            <div class="post--info">
-                                                                <ul class="nav meta">
-                                                                    <li><a href="javascript:;">2 ngày trước</a></li>
-                                                                    <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>0</a></li>
-                                                                    <li><span><i class="fa fm fa-eye"></i>1</span></li>
-                                                                </ul>
-                            
-                                                                <div class="title">
-                                                                    <h3 class="h4"><a href=""
-                                                                            class="btn-link">Litva hạn chế chuyển hàng tới vùng lãnh thổ Nga</a>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Post Item End -->
-                                                </li>
-                                                <li>
-                                                    <!-- Post Item Start -->
-                                                    <div class="post--item post--layout-3">
-                                                        <div class="post--img">
-                                                            <a href="" class="thumb"><img
-                                                                    src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-                                                                    alt=""></a>
-                                                            <div class="post--info">
-                                                                <ul class="nav meta">
-                                                                    <li><a href="javascript:;">2 ngày trước</a></li>
-                                                                    <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>0</a></li>
-                                                                    <li><span><i class="fa fm fa-eye"></i>0</span></li>
-                                                                </ul>
-                            
-                                                                <div class="title">
-                                                                    <h3 class="h4"><a href=""
-                                                                            class="btn-link">Tuần lễ "điểm nhấn" tại Festival Huế 2022 - Festival bốn mùa có gì đặc sắc?</a>
-                                                                    </h3>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Post Item End -->
-                                                </li>
-                                            </ul>
-                            
-                                        <!-- Preloader Start -->
-                                        <!-- <div class="preloader bg--color-0--b" data-preloader="1">
-                                            <div class="preloader--inner"></div>
-                                        </div> -->
-                                        <!-- Preloader End -->
-                                    </div>
-                                    <!-- Post Items End -->
-                                </div>
-                                <!-- List Widgets End -->
-                            </div>
+                            <!-- Widget Start -->
+                            <x-blog.side-outstanding_posts :outstanding_posts="$outstanding_posts"/>
                             <!-- Widget End -->
 
 
@@ -566,4 +372,15 @@
         <!-- Main Content Section End -->
 @endsection
 
+@section('custom_js')
+
+<script>
+	setTimeout(() => {
+		$(".global-message").fadeOut();
+	}, 5000)
+</script>
+
+
+
+@endsection
 

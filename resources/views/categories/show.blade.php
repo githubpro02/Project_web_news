@@ -9,111 +9,44 @@
 	<div class="container">
 			<ul class="breadcrumb">
 				<li><a href="{{ route('home') }}" class="btn-link"><i class="fa fm fa-home"></i>Trang Chủ</a></li>
-				<li class="active"><span>Thế giới</span></li>
+				<li class="active"><span>{{ $category->name }}</span></li>
 			</ul>
 	</div>
 </div>
 	<!-- Main Breadcrumb End -->
 
 <div class="main-content--section pbottom--30">
-	<div class="container">
-		<div class="row">
-                    <!-- Main Content Start -->
-                    <div class="main--content col-md-8 col-sm-7" data-sticky-content="true">
-                        <div class="sticky-content-inner">
-                            <div class="row">
-
-                                <!-- Books and Magazine Start -->
-                                <div class="col-md-12 ptop--30 pbottom--30">
-                                    <!-- Post Items Start -->
-                                    <div class="post--items post--items-2" data-ajax-content="outer">
-                                        <ul class="nav" data-ajax-content="inner">
-											@for($i =0 ; $i < 9 ; $i++)
-                                            <li>
-                                                <!-- Post Item Start -->
-                                                <div class="post--item">
-                                                    <div class="row">
-                                                        <div class="col-md-6">
-                                                            <div class="post--img">
-                                                                <a href=""
-                                                                    class="thumb"><img
-                                                                        src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
-                                                                        alt=""></a>
-                                                                <a href=""
-                                                                    class="cat">Thế giới</a>
-
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="col-md-6">
-                                                            <div class="post--info">
-                                                                <ul class="nav meta">
-																	<li><span>Nguyen Duc Manh</a></li>
-																	<li><span>2 ngày trước</span></li>
-                                                                    <li><a href="#"><i class="fa fm fa-eye"></i>1</span></li>
-                                                                    <li><a href=""><i class="fa fm fa-comments"></i>0</a></li>
-                                                                </ul>
-
-
-                                                                <div class="title">
-                                                                    <h2 class="h3" style="color:black"><a
-                                                                            href=""
-                                                                            class="btn-link">EVN kiến nghị gỡ khó cho điện mặt trời mái nhà tự dùng</a></h3>
-                                                                </div>
-                                                            </div>
-
-                                                            <div class="post--content">
-                                                                <p>EVN kiến nghị các bộ, ngành sớm có quy định, cơ chế ràng buộc trách nhiệm, thủ tục đấu nối cũng như quy định về an toàn xây dựng với điện mặt trời mái nhà tự dùng.</p>
-                                                            </div>
-
-                                                            <div class="post--action">
-                                                                <a class="btn btn-link" href="">Đọc thêm</a>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <!-- Post Item End -->
-                                            </li>
-
-                                            <li>
-                                                <!-- Divider Start -->
-                                                <hr class="divider">
-                                                <!-- Divider End -->
-                                            </li>
-
-											@endfor
-                                        </ul>
-
-                                    </div>
-                                    <!-- Post Items End -->
-									
-									<!--Phân trang-->
-									<div class="row">
-										<div class="col-md-12">
-											<nav aria-label="Page navigation">
-												<ul class="pagination justify-content-start">
-													<li class="page-item">
-														<a class="page-link" href="#"><</a>
-													</li>
-													<li class="page-item"><a class="page-link" href="#">1</a></li>
-													<li class="page-item"><a class="page-link" href="#">2</a></li>
-													<li class="page-item"><a class="page-link" href="#">3</a></li>
-													<li class="page-item">
-														<a class="page-link" href="#">></a>
-													</li>
-												</ul>
-											</nav>
-										</div><!-- end col -->
-									</div><!-- end row -->
+    <div class="container">
+        <div class="row">
+                <div class="main--content col-md-8" data-sticky-content="true">
+                    <div class="sticky-content-inner">
+                        <div class="post--item post--single post--title-largest pd--30-0">
+                            @if(! count($posts))
+                                <p class="lead">Không có danh mục nào cả !</p>
+                            @else
+    
+                            @forelse($posts as $post)
+    
+                            <div class="block-21 d-flex animate-box post">
+                                <a href="{{ route('posts.show', $post) }}" class="blog-img" style="background-image: url({{ asset($post->image ? 'storage/' . $post->image->path : 'storage/placeholders/placeholder-image.png'  )}});"></a>
+                                <div class="text">
+                                <h3 class="heading"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h3>
+                                <p class="excerpt">{{ $post->excerpt }}</p></p>
+                                <div class="meta">
+                                    <div><a class="date" href="#"><span class="icon-calendar"></span>{{ $post->created_at->locale('vi')->diffForHumans() }}</a></div>
+                                    <div><a href="#"><span class="icon-user2"></span>{{ $post->author->name }} </a></div>
+                                    <div class="comments-count"><a href="{{ route('posts.show', $post) }}#post-comments"><span class="icon-chat"></span> {{$post->comments_count}}</a></div>
                                 </div>
-                                <!-- Books and Magazine End -->
+                                </div>
                             </div>
+                            @endforeach
+                            @endif
+                            <!-- phân trang -->
+                            {{$posts->links() }} 
                         </div>
                     </div>
-                    <!-- Main Content End -->
-
-					<!-- SIDEBAR: start -->
+                </div>
+                    <!-- SIDEBAR: start -->
                     <!-- Main Sidebar Start -->
                     <div class="main--sidebar col-md-4 col-sm-5 ptop--30 pbottom--30" data-sticky-content="true">
                         <div class="sticky-content-inner">

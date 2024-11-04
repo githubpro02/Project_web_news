@@ -24,7 +24,7 @@
 										<div class="post--img">
 											<a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="thumb">
 												<img src="{{ asset($posts_new[$i][0]->image ? 'storage/' .$posts_new[$i][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-													alt=""></a>
+												style="height: 165px" alt=""></a>
 											<a href="{{ route('categories.show', $posts_new[$i][0]->category) }}" class="cat">{{ $posts_new[$i][0]->category->name }}</a>
 
 											<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
@@ -52,7 +52,7 @@
 											{{-- {{ dd($posts_new[2][0]) }} --}}
 											<a href="{{ route('posts.show', $posts_new[2][0]) }}"class="thumb">
 												<img src="{{ asset($posts_new[2][0]->image ? 'storage/' .$posts_new[2][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-												style="height:200px" alt=""></a>
+												style="height: 220px" alt=""></a>
 
 											<a href="{{ route('categories.show', $posts_new[2][0]->category) }}" class="cat">{{ $posts_new[2][0]->category->name }}</a>
 											<a href="javascript:;" class="icon"><i class="fa fa-fire"></i></a>
@@ -81,10 +81,9 @@
 							<!-- Post Item Start -->
 							<div class="post--item post--layout-1 post--title-larger">
 								<div class="post--img">
-									{{-- {{ dd($posts_new[3][0]) }} --}}
 									<a href="{{ route('posts.show', $posts_new[3][0]) }}" class="thumb">
 										<img src="{{ asset($posts_new[3][0]->image ? 'storage/' .$posts_new[3][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}" 
-										alt=""></a>
+										style="height: 400px" alt=""></a>
 									<a href="{{ route('categories.show', $posts_new[3][0]->category ) }}" class="cat">{{ $posts_new[3][0]->category->name }}</a>
 															
 									<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
@@ -573,26 +572,26 @@
 								<div class="post--items post--items-3" data-ajax-content="outer">
 									<ul class="nav" data-ajax-content="inner">
 										
-										@for($i=1; $i <= 5; $i++)
+										@foreach($outstanding_posts as $outstanding_post)
 										<li>
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-3">
 												<div class="post--img">
 													<a href=""
 														class="thumb"><img width = "120"
-															src="{{ asset('kcnew/frontend/img/ads-img/banner_quangcao.png') }}"
+															src="{{ asset($outstanding_post->image ? 'storage/' .$outstanding_post->image->path : 'storage/placeholders/placeholder-image.png')}}"
 															alt=""></a>
 
 													<div class="post--info">
 														<ul class="nav meta">
-															<li><a href="javascript:;">1 ngày trước</a></li>
+															<li><a href="javascript:;">{{ $outstanding_post->created_at->locale('vi')->diffForHumans() }}</a></li>
 															<li><a  href="javascript:;"><i class="fa fm fa-comments"></i></a></li>
-                                       						<li><span><i class="fa fm fa-eye"></i></span></li>
+                                       						<li><span><i class="fa fm fa-eye"></i>{{ $outstanding_post->views }}</span></li>
 														</ul>
 
 														<div class="title">
 															<h3  class="h4">
-																<a href="" class="btn-link">Những niềm tin sai lầm về hôn nhân</a>
+																<a href="{{ route('posts.show', $outstanding_post) }}" class="btn-link">{{ $outstanding_post->title }}</a>
 															</h3>
 														</div>
 													</div>
@@ -600,7 +599,7 @@
 											</div>
 											<!-- Post Item End -->
 										</li>
-										@endfor
+										@endforeach
 									
 									</ul>
 
@@ -621,20 +620,7 @@
 								<!-- Post Items Start -->
 								<div class="post--items post--items-3">
 									<ul style="padding:20px" class="nav sidebar" data-ajax-content="inner">
-										<div class="side">
-											<div class="block-26">
-												<ul>
-													<li><a href="">virus</a></li>
-													<li><a href="">maybay</a></li>
-													<li><a href="">Gia-vang</a></li>
-													<li><a href="">Co-phieu</a></li>
-													<li><a href="">Thi-truong</a></li>
-													<li><a href="">Ronaldo</a></li>
-													<li><a href="">Trung-quoc</a></li>
-													<li><a href="">Moi-nhat</a></li>													
-												</ul>
-											</div>
-										</div>
+										<x-blog.side-tags :tags="$tags"/>
 									</ul>
 								</div>
 							</div>
@@ -1342,29 +1328,29 @@
 								<!-- Post Items Start -->
 								<div class="post--items post--items-3">
 									<ul class="nav" data-ajax-content="inner">
-										@for ($i=1; $i <=5; $i++) 
+										@foreach ($top_commnents as $top_commnent) 
 										<li>
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-3">
 												<div class="post--img">
-													<span class="thumb"><img style="margin: auto; background-size: cover ;  width: 60px; height: 60px;   background-image: url({{ asset('blog_template/images/person1.jpg') }})"  alt=""></span>
+													<span class="thumb"><img style="margin: auto; background-size: cover ;  width: 60px; height: 60px;   background-image: url({{ $top_commnent->user->image ?  asset('storage/' . $top_commnent->user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }})"  alt=""></span>
 
 													<div class="post--info">
 														<div class="title">
-															<h3 class="h4"><a href="">Công nghệ hiện đại thật tốt, đáng được sử dụng</a> </h3>
+															<h3 class="h4"><a href="{{ route('posts.show', $top_commnent->post ) }}">{{ $top_commnent->the_comment }}</a> </h3>
 														</div>
 
 														<ul class="nav meta">
-															<li><span>Nguyen Duc Manh
+															<li><span> {{ $top_commnent->user->name }}
 																</span></li>
-															<li><span>03/08/2024</span></li>
+															<li><span>{{ $top_commnent->created_at->format('d/m/Y') }}</span></li>
 														</ul>
 													</div>
 												</div>
 											</div>
 											<!-- Post Item End -->
 										</li>
-										@endfor
+										@endforeach
 									
 									</ul>
 

@@ -24,17 +24,16 @@ function checkPermission($name) {
         </div>
         <!--navigation-->
         <ul class="metismenu" id="menu">
-                {{-- @if(checkPermission("admin.index")) --}}
+                @if(checkPermission("admin.index"))
                 <li>
-                    {{-- <a href="{{ route('admin.index') }}" > --}}
-                    <a href="">
+                    <a href="{{ route('admin.index') }}" >
                     <div class="parent-icon"><i class='bx bx-home-circle'></i></div>
                     <div class="menu-title">Bảng điều khiển</div>
                     </a>
                 </li>
-                {{-- @endif --}}
+                @endif
 
-                {{-- @if(checkPermission("admin.posts.index") || checkPermission("admin.posts.create") ) --}}
+                @if(checkPermission("admin.posts.index") || checkPermission("admin.posts.create") )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-message-square-edit'></i>
@@ -43,21 +42,21 @@ function checkPermission($name) {
                     </a>
 
                     <ul>
-                        {{-- @if(checkPermission("admin.posts.index")) --}}
+                        @if(checkPermission("admin.posts.index"))
                             <li> <a href="{{ route('admin.posts.index') }}"><i class="bx bx-right-arrow-alt"></i>Tất cả bài viết</a>
                             </li>
-                        {{-- @endif          --}}
+                        @endif         
 
-                        {{-- @if(checkPermission("admin.posts.create")) --}}
+                        @if(checkPermission("admin.posts.create"))
                         <li> <a href="{{ route('admin.posts.create') }}"><i class="bx bx-right-arrow-alt"></i>Thêm bài viết mới</a>
                         </li>
-                        {{-- @endif  --}}
+                        @endif 
 
                     </ul>
                 </li>
-                {{-- @endif --}}
+                @endif
 
-                {{-- @if(checkPermission("admin.categories.index") || checkPermission("admin.categories.create") ) --}}
+                @if(checkPermission("admin.categories.index") || checkPermission("admin.categories.create") )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-menu'></i>
@@ -66,30 +65,29 @@ function checkPermission($name) {
                     </a>
 
                     <ul>
-                        {{-- @if(checkPermission("admin.categories.index")) --}}
+                        @if(checkPermission("admin.categories.index"))
                         <li> <a href="{{ route('admin.categories.index') }}"><i class="bx bx-right-arrow-alt"></i>Tất cả danh mục</a>
                         </li>
-                        {{-- @endif  --}}
+                        @endif 
 
-                        {{-- @if(checkPermission("admin.categories.create")) --}}
+                        @if(checkPermission("admin.categories.create"))
                         <li> <a href="{{ route('admin.categories.create') }}"><i class="bx bx-right-arrow-alt"></i>Thêm danh mục mới</a>
                         </li>
-                         {{-- @endif  --}}
+                         @endif 
                     </ul>
                 </li>
-                {{-- @endif --}}
+                @endif
 
                 {{-- @if(checkPermission("admin.tags.index")) --}}
                 <li>
-                    {{-- <a href="{{ route('admin.tags.index') }}"> --}}
-                    <a href="">
+                    <a href="{{ route('admin.tags.index') }}">
                     <div class="parent-icon"><i class='bx bx-purchase-tag'></i></div>
                         <div class="menu-title">Từ khóa</div>
                     </a>
                 </li>
-                {{-- @endif
+                {{-- @endif --}}
 
-                @if(checkPermission("admin.comments.index") || checkPermission("admin.comments.create") ) --}}
+                {{-- @if(checkPermission("admin.comments.index") || checkPermission("admin.comments.create") ) --}}
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-comment-dots'></i>
@@ -98,23 +96,23 @@ function checkPermission($name) {
                     </a>
 
                     <ul>
-                        {{-- @if(checkPermission("admin.comments.index"))
+                        {{-- @if(checkPermission("admin.comments.index")) --}}
                         <li> <a href="{{ route('admin.comments.index') }}"><i class="bx bx-right-arrow-alt"></i>Tất cả bình luận</a>
                         </li>
-                        @endif
+                        {{-- @endif --}}
 
-                        @if(checkPermission("admin.comments.create"))
+                        {{-- @if(checkPermission("admin.comments.create")) --}}
                         <li> <a href="{{ route('admin.comments.create') }}"><i class="bx bx-right-arrow-alt"></i>Thêm bình luận mới</a>
                         </li>
-                        @endif --}}
+                        {{-- @endif --}}
                         
                     </ul>
                 </li>
                 {{-- @endif --}}
 
-                <hr>
+                {{-- <hr> --}}
 
-                {{-- @if(checkPermission("admin.roles.index") || checkPermission("admin.roles.create") ) --}}
+                @if(checkPermission("admin.roles.index") || checkPermission("admin.roles.create") )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-key'></i>
@@ -123,20 +121,20 @@ function checkPermission($name) {
                     </a>
 
                     <ul>
-                         {{-- @if(checkPermission("admin.roles.index")) --}}
+                         @if(checkPermission("admin.roles.index"))
                         <li> <a href="{{ route('admin.roles.index') }}"><i class="bx bx-right-arrow-alt"></i>Tất cả quyền</a>
                         </li>
-                        {{-- @endif --}}
+                        @endif
 
-                        {{-- @if(checkPermission("admin.roles.create")) --}}
+                        @if(checkPermission("admin.roles.create"))
                         <li> <a href="{{ route('admin.roles.create') }}"><i class="bx bx-right-arrow-alt"></i>Thêm quyền mới</a>
                         </li>
-                        {{-- @endif --}}
+                        @endif
                     </ul>
                 </li>
-                {{-- @endif --}}
+                @endif
 
-                {{-- @if(checkPermission("admin.users.index") || checkPermission("admin.users.create") ) --}}
+                @if(checkPermission("admin.users.index") || checkPermission("admin.users.create") )
                 <li>
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-user'></i>
@@ -146,28 +144,28 @@ function checkPermission($name) {
 
                     <ul>
 
-                        {{-- @if(checkPermission("admin.users.index")) --}}
+                        @if(checkPermission("admin.users.index"))
                         <li> <a href="{{ route('admin.users.index') }}"><i class="bx bx-right-arrow-alt"></i>Tất cả tài khoản</a>
                         </li>
-                        {{-- @endif --}}
+                        @endif
 
-                        {{-- @if(checkPermission("admin.users.create")) --}}
+                        @if(checkPermission("admin.users.create"))
                         <li> <a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Thêm tài khoản mới</a>
                         </li>
-                        {{-- @endif --}}
+                        @endif
                         
                     </ul>
                 </li>
-                {{-- @endif
+                @endif
 
-                @if(checkPermission("admin.contacts")) --}}
+                @if(checkPermission("admin.contacts"))
                 <li>
-                    {{-- <a href="{{ route('admin.contacts') }}" > --}}
-                    {{-- <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
+                    <a href="{{ route('admin.contacts') }}" >
+                    <div class="parent-icon"><i class='bx bx-mail-send'></i></div>
                         <div class="menu-title">Liên hệ</div>
-                    </a> --}}
+                    </a>
                 </li>
-                {{-- @endif --}}
+                @endif
                 
                 {{-- @if(checkPermission("admin.setting.edit")) --}}
                 <li>

@@ -12,7 +12,7 @@
 		}
 	</style>
 
-	<script src="https://cdn.tiny.cloud/1/5nk94xe9fcwk22fkp6gou9ymszwidnujnr2mu3n3xe2biap3/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script src="https://cdn.tiny.cloud/1/fkndzshz8nietuhr2an4l2p929e67nnpk9fdz0e0mqbo8nub/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 @endsection
 		
 @section("wrapper")
@@ -96,10 +96,10 @@
 												</div>
 										</div>
 
-										{{-- <div class="mb-3">
+										<div class="mb-3">
                                             <label class="form-label">Từ khóa</label>
                                             <input type="text" class="form-control" value="{{ $tags }}" name="tags" data-role="tagsinput">
-                                        </div> --}}
+                                        </div>
 
 										<!-- <input id="image-uploadify" name="thumbnail" type="file" id="file" accept="image/*" multiple> -->								
 										<div class="mb-3">
@@ -117,9 +117,9 @@
                                                     </div>
                                                 </div>
 
-                                                {{-- <div class="col-md-7 text-center">                                                
+                                                <div class="col-md-7 text-center">                                                
 													<img style="width: 100%; border-radius: 16px;" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/placeholder-image.jpg' }}" class="img-responsive" alt="All thumbnail">
-												</div> --}}
+												</div>
                                             </div>
 										
 										</div>
@@ -169,18 +169,18 @@
 @endsection
 	
 @section("script")
-	<script src="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script>
+	<!-- <script src="{{ asset('admin_dashboard_assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js') }}"></script> -->
 	<script src="{{ asset('admin_dashboard_assets/plugins/select2/js/select2.min.js') }}"></script>
 	<script src="{{ asset('admin_dashboard_assets/plugins/input-tags/js/tagsinput.js') }}"></script>
-	{{-- <script>
+	<script>
 		$(document).ready(function () {
 			// $('#image-uploadify').imageuploadify();
-
+		
 			$('.single-select').select2({
-			theme: 'bootstrap4',
-			width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
-			placeholder: $(this).data('placeholder'),
-			allowClear: Boolean($(this).data('allow-clear')),
+				theme: 'bootstrap4',
+				width: $(this).data('width') ? $(this).data('width') : $(this).hasClass('w-100') ? '100%' : 'style',
+				placeholder: $(this).data('placeholder'),
+				allowClear: Boolean($(this).data('allow-clear')),
 			});
 			
 			$('.multiple-select').select2({
@@ -189,85 +189,83 @@
 				placeholder: $(this).data('placeholder'),
 				allowClear: Boolean($(this).data('allow-clear')),
 			});
-
-			tinymce.init({
-			selector: '#post_content',
-			// plugins: 'advlist autolink lists link image media charmap print preview hr anchor pagebreak',
-			plugins: 'advlist autolink lists link image media charmap preview anchor pagebreak',
-			toolbar_mode: 'floating',
-			height: '500',
-
-			toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code | rtl ltr',
-			toolbar_mode: 'floating',
-
-			image_title: true,
-			automatic_uploads: true,
-
-			images_upload_handler: function(blobinfo, success, failure){
-				let formData = new FormData();
-				let _token = $("input[name='_token']").val();
-				let xhr = new XMLHttpRequest();
-				xhr.open('post', "{{ route('admin.upload_tinymce_image') }}");
-				xhr.onload = () => {
-					if(xhr.status !== 200) {
-						failure("Http Error: " + xhr.status);
-						return 
-					}
-					let json = JSON.parse(xhr.responseText);
-					if(! json || typeof json.location != 'string'){
-						failure("Invalid JSON: " + xhr.responseText);
-						return
-					}
-					success(json.location);
-
-				}
-
-				formData.append('_token', _token);
-				formData.append('file', blobinfo.blob(), blobinfo.filename());
-				xhr.send(formData) ;
-			}
 			
-		});
-
-		setTimeout(()=>{
+			tinymce.init({
+				selector: '#post_content',
+				plugins: 'advlist autolink lists link image media charmap preview anchor pagebreak',
+				toolbar_mode: 'floating',
+				height: '500',
+				toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code | rtl ltr',
+				image_title: true,
+				automatic_uploads: true,
+				
+				images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+					console.log("Filename:", blobInfo.filename());
+					let formData = new FormData();
+					let _token = $("input[name='_token']").val();
+					let xhr = new XMLHttpRequest();
+					xhr.open('POST', "{{ route('admin.upload_tinymce_image') }}");
+					
+					xhr.onload = () => {
+						if (xhr.status !== 200) {
+							reject("HTTP Error: " + xhr.status);
+							return;
+						}
+						
+						let json = JSON.parse(xhr.responseText);
+						if (!json || typeof json.location !== 'string') {
+							reject("Invalid JSON: " + xhr.responseText);
+							return;
+						}
+						
+						resolve(json.location);
+					};
+		
+					formData.append('_token', _token);
+					formData.append('file', blobInfo.blob(), blobInfo.filename());
+					xhr.send(formData);
+					console.log("Form data:", formData.get('file'));
+				})
+			});
+			
+			console.log('read');
+			console.log("Handler called");
+			setTimeout(() => {
 				$(".general-message").fadeOut();
-		},5000);
-
+			}, 5000);
 		});
-
-
-	</script> --}}
-
-	<script>
-	$(document).on('change', '.inputPostTitle', (e) => {
-		e.preventDefault();
-
-		let $this = e.target;
-
-		let csrf_token = $($this).parents("form").find("input[name='_token']").val();
-		let titlePost =  $($this).parents("form").find("input[name='title']").val();
+		</script>
 		
-		let formData = new FormData();
-		formData.append('_token', csrf_token);
-		formData.append('title', titlePost);
-		
-		$.ajax({
-			url: "{{ route('admin.posts.to_slug') }}",
-			data: formData,
-			type: 'POST',
-			dataType: 'JSON',
-			processData: false,
-			contentType: false,
-			success: function (data) {
-				if(data.success){
-					$('.slugPost').val(data.message);
-
-				}else{
-					alert("Bị lỗi khi nhập title !")
+		<script>
+		$(document).on('change', '.inputPostTitle', (e) => {
+			e.preventDefault();
+			
+			let $this = e.target;
+			let csrf_token = $($this).parents("form").find("input[name='_token']").val();
+			let titlePost =  $($this).parents("form").find("input[name='title']").val();
+			
+			let formData = new FormData();
+			formData.append('_token', csrf_token);
+			formData.append('title', titlePost);
+			
+			$.ajax({
+				url: "{{ route('admin.posts.to_slug') }}",
+				data: formData,
+				type: 'POST',
+				dataType: 'JSON',
+				processData: false,
+				contentType: false,
+				success: function (data) {
+					if (data.success) {
+						$('.slugPost').val(data.message);
+					} else {
+						alert("Bị lỗi khi nhập title!");
+					}
 				}
-			}
-		})
-	})
-	</script>
+			});
+		});
+		</script>
 
 @endsection
+
+

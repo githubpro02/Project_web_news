@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 use App\Models\Category;
 $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
-
+$categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('created_at','DESC')->take(12)->get();
 ?>
 
 <!DOCTYPE HTML>
@@ -15,6 +15,7 @@ $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
 	<meta name="description" content="" />
 	<meta name="keywords" content="" />
 	<meta name="author" content="" />
+	<meta name="_token" content="{{ csrf_token()}}" />
 
 
   <!-- Facebook and Twitter integration -->
@@ -220,7 +221,7 @@ $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
 								<i class="icon_home fa fa-home"></i>
 							</a>
 						</li>
-						<li><a href="">{{ $categories[9]->name }}</a></li>
+						{{-- <li><a href="">{{ $categories[9]->name }}</a></li>
 						<li><a href="">{{ $categories[8]->name }}</a></li>
 						<li><a href="">{{ $categories[7]->name }}</a></li>
 						<li><a href="">{{ $categories[6]->name }}</a></li>
@@ -229,10 +230,13 @@ $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
 						<li><a href="">{{ $categories[3]->name }}</a></li>
 						<li><a href="">{{ $categories[2]->name }}</a></li>
 						<li><a href="">{{ $categories[1]->name }}</a></li>
-						<li><a href="">{{ $categories[0]->name }}</a></li>
-						{{-- @foreach($categories as $category)
-							<li><a href="">{{ $category->name }}</a></li>
-						@endforeach --}}
+						<li><a href="">{{ $categories[0]->name }}</a></li> --}}
+						{{-- @php
+							dd($categories[0])
+						@endphp --}}
+						@foreach($categories as $category)
+							<li><a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a></li>
+						@endforeach
 
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">Trang<i
@@ -307,12 +311,11 @@ $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
 
 				<div class="news-updates--list" data-marquee="true">
 					<ul class="nav">
-						<li>
-							<h3 class="h3"><a href="">Tỷ giá USD hôm nay 20/6: Đứng ở mức cao</a></h3>
-							<h3 class="h3"><a href="">Bitcoin mất mốc 20.000 USD</a></h3>
-							<h3 class="h3"><a href="">Litva hạn chế chuyển hàng tới vùng lãnh thổ Nga</a></h3>
-							<h3 class="h3"><a href="">Các tỷ phú tiền số mất 80% tài sản</a></h3>
-						</li>						
+						@foreach ($posts_new as $posts_new)
+							<li>
+								<h3 class="h3"><a href="{{ route('posts.show', $posts_new[0]) }}">{{ $posts_new[0]->title }}</a></h3>
+							</li>
+						@endforeach						
 					</ul>
 				</div>
 			</div>
@@ -335,30 +338,29 @@ $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
 					</ul>
 				</div>
 				<div class="col-md-2  colorlib-widget">
-						<ul class="colorlib-footer-links">
-							<li><a href="#" >Thế giới</a></li>
-							<li><a href="#" >Xã hội</a></li>
-							<li><a href="#" >Kinh tế</a></li>
-							<li><a href="#" >Văn hóa</a></li>
-						</ul>
-				</div>
-				<div class="col-md-2  colorlib-widget">
-						<ul class="colorlib-footer-links">
-							<li><a href="#" >Giáo dục</a></li>
-							<li><a href="#" >Thể thao</a></li>
-							<li><a href="#" >Giải trí</a></li>
-							<li><a href="#" >Pháp luật</a></li>
-						</ul>
-				</div>
+					<ul class="colorlib-footer-links">
+						@for($i = 0; $i < 4; $i++)
+						<li><a href="{{ route('categories.show', $categoryFooter[$i] ) }}">{{ $categoryFooter[$i]->name }}</a></li>
+						@endfor
+						
+					</ul>
+			</div>
+			<div class="col-md-2  colorlib-widget">
+					<ul class="colorlib-footer-links">
+						@for($i = 4; $i < 8; $i++)
+						<li><a href="{{ route('categories.show', $categoryFooter[$i] ) }}">{{ $categoryFooter[$i]->name }}</a></li>
+						@endfor
+						
+					</ul>
+			</div>
 
-				<div class="col-md-2  colorlib-widget">
-						<ul class="colorlib-footer-links">
-							<li><a href="#" >Công nghệ</a></li>
-							<li><a href="#" >Khoa học</a></li>
-							<li><a href="#" >Đời sống</a></li>
-							<li><a href="#" >Xe cộ</a></li>
-						</ul>
-				</div>
+			<div class="col-md-2  colorlib-widget">
+					<ul class="colorlib-footer-links">
+						@for($i = 8; $i < 12; $i++)
+						<li><a href="{{ route('categories.show', $categoryFooter[$i] ) }}">{{ $categoryFooter[$i]->name }}</a></li>
+						@endfor
+					</ul>
+			</div>
 
 				<div class="col-md-4 ">
 					<div class="widget--title">
