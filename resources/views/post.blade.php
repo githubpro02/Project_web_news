@@ -71,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="post--body post--content">
-                                {!! str_replace('src="../../../', 'src="'.asset('/'), $post->body) !!}					
+                                {!! str_replace('src="../../', 'src="'.asset('/'), $post->body) !!}					
                             </div>
                         </div>
                         <!-- Post Item End -->

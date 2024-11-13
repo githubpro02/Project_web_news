@@ -9,8 +9,8 @@
 		<div class="row">
 			<div class="col-md-7">
 				<div class="about-desc">
-					{{-- <div class="about-img-1 animate-box" style="background-image: url( {{ asset('storage/' . $setting->about_first_image ) }} );"></div>
-					<div class="about-img-2 animate-box" style="background-image: url( {{ asset('storage/' . $setting->about_second_image ) }} );"></div> --}}
+					<div class="about-img-1 animate-box" style="background-image: url( {{ asset('storage/' . $setting->about_first_image ) }} );"></div>
+					<div class="about-img-2 animate-box" style="background-image: url( {{ asset('storage/' . $setting->about_second_image ) }} );"></div>
 				</div>
 			</div>
 			<div class="col-md-5">
@@ -22,7 +22,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-12 animate-box pbottom--30">
-						{{-- <p>{{ $setting->about_first_text }}</p> --}}
+						<p>{{ $setting->about_first_text }}</p>
 					</div>
 					<div class="col-md-6 col-xs-6 animate-box">
 						<div class="counter-entry">
@@ -67,7 +67,7 @@
 				<div class="row">
 					<div class="col-md-6">
 						<h3>Là một trung tâm tin tức mới nhất</h3>
-						{{-- <p>{{ $setting->about_second_text }}</p> --}}
+						<p>{{ $setting->about_second_text }}</p>
 					</div>
 					<div class="col-md-6">
 						<div class="fancy-collapse-panel">
@@ -82,7 +82,7 @@
 	                         <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 	                             <div class="panel-body">
 										<div class="row">
-												{{-- {!! $setting->about_our_mission !!} --}}
+												{!! $setting->about_our_mission !!}
 										</div>
 	                             </div>
 	                         </div>
@@ -96,7 +96,7 @@
 	                         </div>
 	                         <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 	                             <div class="panel-body">
-								 		{{-- {!! $setting->about_our_vision !!} --}}
+								 		{!! $setting->about_our_vision !!}
 	                             </div>
 	                         </div>
 	                     </div>
@@ -109,7 +109,7 @@
 	                         </div>
 	                         <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 	                             <div class="panel-body">
-								 		{{-- {!! $setting->about_services !!} --}}
+								 		{!! $setting->about_services !!}
 	                             </div>
 	                         </div>
 	                     </div>

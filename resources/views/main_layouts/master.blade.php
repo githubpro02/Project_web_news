@@ -138,7 +138,7 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 									</li>
 									@endif
 									<li>
-										<a href="">Tài khoản của tôi</a>
+										<a href="{{ route('profile') }}">Tài khoản của tôi</a>
 									</li>
 									<li>
 										<a onclick="event.preventDefault(); document.getElementById('nav-logout-form').submit();"
@@ -221,19 +221,7 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 								<i class="icon_home fa fa-home"></i>
 							</a>
 						</li>
-						{{-- <li><a href="">{{ $categories[9]->name }}</a></li>
-						<li><a href="">{{ $categories[8]->name }}</a></li>
-						<li><a href="">{{ $categories[7]->name }}</a></li>
-						<li><a href="">{{ $categories[6]->name }}</a></li>
-						<li><a href="">{{ $categories[5]->name }}</a></li>
-						<li><a href="">{{ $categories[4]->name }}</a></li>
-						<li><a href="">{{ $categories[3]->name }}</a></li>
-						<li><a href="">{{ $categories[2]->name }}</a></li>
-						<li><a href="">{{ $categories[1]->name }}</a></li>
-						<li><a href="">{{ $categories[0]->name }}</a></li> --}}
-						{{-- @php
-							dd($categories[0])
-						@endphp --}}
+						
 						@foreach($categories as $category)
 							<li><a href="{{ route('categories.show', $category) }}">{{ $category->name }}</a></li>
 						@endforeach

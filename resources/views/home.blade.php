@@ -6,19 +6,18 @@
 
 <div class="wrapper">
 
-	<!-- Main Content Section Start -->
-	<div class="main-content--section pbottom--30">
-		<div class="container">
-			<!-- Main Content Start -->
-			<div class="main--content">
-				<!-- Post Items Start -->
-				<div class="post--items post--items-1 pd--30-0">
-					<div class="row gutter--15">
-						<div class="col-md-6">
-							<div class="row gutter--15">
-
-							@for ( $i = 0; $i <= 1; $i++)
-								<div class="col-xs-6 col-xss-12">
+    <!-- Main Content Section Start -->
+    <div class="main-content--section pbottom--30">
+        <div class="container">
+            <!-- Main Content Start -->
+            <div class="main--content">
+                <!-- Post Items Start -->
+                <div class="post--items post--items-1 pd--30-0">
+                    <div class="row gutter--15">
+                        <div class="col-md-3">
+                            <div class="row gutter--15">
+								@for ( $i = 0; $i <= 1; $i++)
+								<div class="col-md-12 col-xs-6 col-xxs-12">
 									<!-- Post Item Start -->
 									<div class="post--item post--layout-1 post--title-large">
 										<div class="post--img">
@@ -28,89 +27,95 @@
 											<a href="{{ route('categories.show', $posts_new[$i][0]->category) }}" class="cat">{{ $posts_new[$i][0]->category->name }}</a>
 
 											<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
-											<div class="post--info">
-												<ul class="nav meta">
-													<li><a href="javascript:;">{{ $posts_new[$i][0]->author->name }}</a></li>
-													<li><a href="javascript:;">{{ $posts_new[$i][0]->created_at->locale('vi')->diffForHumans() }}</a></li>
-												</ul>
-												<div class="title">
-													<h2 class="h4"><a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="btn-link">{{ $posts_new[$i][0]->title }}</a>
-													</h2>
-												</div>
+										</div>
+										<div class="post--info">
+											<div class="title">
+												<h2 class="h4"><a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="btn-link">{{ $posts_new[$i][0]->title }}</a>
+												</h2>
 											</div>
 										</div>
+									</div>
+									<div class="post--content">
+										<p>{{ $posts_new[$i][0]->excerpt }}</p>
+									</div>
+
+									<div class="post--action">
+										<a href="{{ route('posts.show', $posts_new[$i][0]) }}">Xem thêm...</a>
 									</div>
 									<!-- Post Item End -->
 								</div>
 								@endfor
-						
-
-								<div class="col-sm-12 hidden-sm hidden-xs">
-									<!-- Post Item Start -->
-									<div class="post--item post--layout-1 post--title-larger">
-										<div class="post--img">
-											{{-- {{ dd($posts_new[2][0]) }} --}}
-											<a href="{{ route('posts.show', $posts_new[2][0]) }}"class="thumb">
-												<img src="{{ asset($posts_new[2][0]->image ? 'storage/' .$posts_new[2][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-												style="height: 220px" alt=""></a>
-
-											<a href="{{ route('categories.show', $posts_new[2][0]->category) }}" class="cat">{{ $posts_new[2][0]->category->name }}</a>
-											<a href="javascript:;" class="icon"><i class="fa fa-fire"></i></a>
-
-											<div class="post--info">
-												<ul class="nav meta">
-													<li><a href="javascript:;">{{ $posts_new[2][0]->author->name }}</a></li>
-													<li><a href="javascript:;">{{ $posts_new[2][0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-												</ul>
-
-												<div class="title">
-													<h2 class="h4"><a
-															href="{{ route('posts.show', $posts_new[2][0]) }}"
-															class="btn-link">{{ $posts_new[2][0]->title }}</a></h2>
-												</div>
-											</div>
-										</div>
-									</div>
-									<!-- Post Item End -->
-								</div>
-
-							</div>
-						</div>
-
-						<div class="col-md-6">
+                                                             
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
 							<!-- Post Item Start -->
 							<div class="post--item post--layout-1 post--title-larger">
 								<div class="post--img">
-									<a href="{{ route('posts.show', $posts_new[3][0]) }}" class="thumb">
-										<img src="{{ asset($posts_new[3][0]->image ? 'storage/' .$posts_new[3][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}" 
-										style="height: 400px" alt=""></a>
-									<a href="{{ route('categories.show', $posts_new[3][0]->category ) }}" class="cat">{{ $posts_new[3][0]->category->name }}</a>
-															
-									<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
+									<a href="{{ route('posts.show', $posts_new[2][0]) }}"class="thumb">
+									<img src="{{ asset($posts_new[2][0]->image ? 'storage/' .$posts_new[2][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
+									alt=""></a>
 
-									<div class="post--info">
-										<ul class="nav meta">
-											<li><a href="javascript:;">{{ $posts_new[3][0]->author->name }}</a></li>
-											<li><a href="javascript:;">{{ $posts_new[3][0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-										</ul>
-
-										<div class="title">
-											<h2 class="h4"><a
-													href="{{ route('posts.show', $posts_new[3][0]) }}"
-													class="btn-link">{{ $posts_new[3][0]->title }}</a>
-											</h2>
-										</div>
+									<a href="{{ route('categories.show', $posts_new[2][0]->category) }}" class="cat">{{ $posts_new[2][0]->category->name }}</a>
+									<a href="javascript:;" class="icon"><i class="fa fa-fire"></i></a>
+								</div>
+								<div class="post--info">
+									<div class="title">
+										<h2 class="h4"><a
+											href="{{ route('posts.show', $posts_new[2][0]) }}"
+											class="btn-link">{{ $posts_new[2][0]->title }}</a></h2>
 									</div>
 								</div>
 							</div>
-							<!-- Post Item End -->
-						</div>
+							<div class="post--content">
+								<p>{{ $posts_new[2][0]->excerpt }}</p>
+							</div>
 
-					</div>
-				</div>
-				<!-- Post Items End -->
-			</div>
-			<!-- Main Content End -->
+							<div class="post--action">
+								<a href="{{ route('posts.show', $posts_new[2][0]) }}">Xem thêm...</a>
+							</div>
+						<!-- Post Item End -->
+                    	</div>
+
+                        <div class="col-md-3">
+                            <div class="row gutter--15">
+                                @for ( $i = 3; $i <= 4; $i++)
+								<div class="col-md-12 col-xs-6 col-xxs-12">
+									<!-- Post Item Start -->
+									<div class="post--item post--layout-1 post--title-large">
+										<div class="post--img">
+											<a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="thumb">
+												<img src="{{ asset($posts_new[$i][0]->image ? 'storage/' .$posts_new[$i][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
+												style="height: 165px" alt=""></a>
+											<a href="{{ route('categories.show', $posts_new[$i][0]->category) }}" class="cat">{{ $posts_new[$i][0]->category->name }}</a>
+
+											<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
+										</div>
+										<div class="post--info">
+											<div class="title">
+												<h2 class="h4"><a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="btn-link">{{ $posts_new[$i][0]->title }}</a>
+												</h2>
+											</div>
+										</div>
+									</div>
+									<div class="post--content">
+										<p>{{ $posts_new[$i][0]->excerpt }}</p>
+									</div>
+
+									<div class="post--action">
+										<a href="{{ route('posts.show', $posts_new[$i][0]) }}">Xem thêm...</a>
+									</div>
+									<!-- Post Item End -->
+								</div>
+								@endfor
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Post Items End -->
+            </div>
+            <!-- Main Content End -->
 
 			<div class="row">
 				<!-- Main Content Start -->
@@ -124,7 +129,7 @@
 									<h2 class="h4">{{ $category_home[0]->name }}</h2>
 								</div>
 								<!-- Post Items Title End -->
-								{{-- {{ dd($post_category_home8) }} --}}
+
 								<!-- Post Items Start -->
 								<div class="post--items post--items-2" data-ajax-content="outer">
 									<ul class="nav row gutter--15" data-ajax-content="inner">
@@ -141,11 +146,6 @@
 													<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home0[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home0[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home0[0]) }}"
@@ -154,6 +154,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home0[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home0[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -178,11 +185,6 @@
 															alt=""></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home0[$i]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home0[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home0[$i]) }}"
@@ -191,6 +193,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home0[$i]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home0[$i]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -225,11 +234,6 @@
 													<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home1[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home1[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home1[0]) }}"
@@ -238,6 +242,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home1[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home1[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -253,11 +264,6 @@
 														alt=""></a>
 
 												<div class="post--info">
-													<ul class="nav meta">
-														<li><a href="javascript:;">{{ $post_category_home1[$i]->author->name }}</a></li>
-														<li><a href="javascript:;">{{ $post_category_home1[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-													</ul>
-
 													<div class="title">
 														<h3 class="h4"><a
 																href="{{ route('posts.show', $post_category_home1[$i]) }}"
@@ -265,6 +271,13 @@
 														</h3>
 													</div>
 												</div>
+											</div>
+											<div class="post--content">
+												<p>{{ $post_category_home1[$i]->excerpt }}</p>
+											</div>
+
+											<div class="post--action">
+												<a href="{{ route('posts.show', $post_category_home1[$i]) }}">Xem thêm...</a>
 											</div>
 										</div>
 										<!-- Post Item End -->
@@ -301,11 +314,6 @@
 													<a href="javascript:;" class="icon"><i class="fa fa-star-o"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home2[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home2[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home2[0]) }}"
@@ -314,6 +322,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home2[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home2[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 
@@ -365,17 +380,19 @@
 																		alt=""></a>
 
 																<div class="post--info">
-																	<ul class="nav meta">																		
-																		<li><a href="javascript:;">{{ $post_category_home2[$i]->author->name }}</a></li>
-																		<li><a href="javascript:;">{{ $post_category_home2[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-																	</ul>
-
 																	<div class="title">
 																		<h3 class="h4"><a
 																				href="{{ route('posts.show', $post_category_home2[$i]) }}"
 																				class="btn-link">{{ $post_category_home2[$i]->title }}</a></h3>
 																	</div>
 																</div>
+															</div>
+															<div class="post--content">
+																<p>{{ $post_category_home2[$i]->excerpt }}</p>
+															</div>
+			
+															<div class="post--action">
+																<a href="{{ route('posts.show', $post_category_home2[$i]) }}">Xem thêm...</a>
 															</div>
 														</div>
 														<!-- Post Item End -->
@@ -418,11 +435,6 @@
 													<a href="{{ route('categories.show', $post_category_home3[0]->category) }}" class="icon"><i class="fa fa-fire"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home3[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home3[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a href="{{ route('posts.show', $post_category_home3[0]) }}"
 																	class="btn-link">{{ $post_category_home3[0]->title }}</a>
@@ -430,6 +442,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home3[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home3[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -452,11 +471,6 @@
 																alt=""></a>
 
 														<div class="post--info">
-															<ul class="nav meta">
-																<li><a href="javascript:;">{{ $post_category_home3[$i]->author->name }}</a></li>
-																<li><a href="javascript:;">{{ $post_category_home3[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-															</ul>
-
 															<div class="title">
 																<h3 class="h4"><a
 																		href="{{ route('posts.show', $post_category_home3[$i]) }}"
@@ -464,6 +478,13 @@
 																</h3>
 															</div>
 														</div>
+													</div>
+													<div class="post--content">
+														<p>{{ $post_category_home3[$i]->excerpt }}</p>
+													</div>
+	
+													<div class="post--action">
+														<a href="{{ route('posts.show', $post_category_home3[$i]) }}">Xem thêm...</a>
 													</div>
 												</div>
 												<!-- Post Item End -->
@@ -500,11 +521,6 @@
 													<a href="{{ route('categories.show', $post_category_home4[0]->category) }}" class="icon"><i class="fa fa-eye"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home4[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home4[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home4[0]) }}"
@@ -513,6 +529,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home4[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home4[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -528,11 +551,6 @@
 															alt=""></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home4[$i]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home4[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home4[$i]) }}"
@@ -540,6 +558,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home4[$i]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home4[$i]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -781,15 +806,17 @@
 									<a href="{{ route('categories.show', $post_category_home5[0]->category) }}" class="icon"><i class="fa fa-eye"></i></a>
 
 									<div class="post--info">
-										<ul class="nav meta">
-											<li><a href="javascript:;">{{ $post_category_home5[0]->author->name }}</a></li>
-											<li><a href="javascript:;">{{ $post_category_home5[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-										</ul>
-
 										<div class="title">
 											<h2 class="h4"><a
 													href="{{ route('posts.show', $post_category_home5[0]) }}"
 													class="btn-link">{{ $post_category_home5[0]->title }}</a></h2>
+										</div>
+										<div class="post--content">
+											<p>{{ $post_category_home5[0]->excerpt }}</p>
+										</div>
+
+										<div class="post--action">
+											<a href="{{ route('posts.show', $post_category_home5[0]) }}">Xem thêm...</a>
 										</div>
 									</div>
 								</div>
@@ -814,11 +841,6 @@
 													alt=""></a>
 
 											<div class="post--info">
-												<ul class="nav meta">
-													<li><a href="javascript:;">{{ $post_category_home5[$i]->author->name }}</a></li>
-													<li><a href="javascript:;">{{ $post_category_home5[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-												</ul>
-
 												<div class="title">
 													<h3 class="h4"><a
 															href="{{ route('posts.show', $post_category_home5[$i]) }}"
@@ -879,11 +901,6 @@
 													<a href="{{ route('categories.show', $post_category_home6[0]->category) }}" class="icon"><i class="fa fa-star-o"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home6[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home6[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home6[0]) }}"
@@ -891,6 +908,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home6[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home6[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -906,11 +930,6 @@
 															alt=""></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home6[$i]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home6[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home6[$i]) }}"
@@ -918,6 +937,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home6[$i]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home6[$i]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -958,11 +984,6 @@
 													<a href="{{ route('categories.show', $post_category_home7[0]->category) }}" class="icon"><i class="fa fa-heart-o"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home7[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home7[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home7[0]) }}"
@@ -971,6 +992,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home7[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home7[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										
@@ -993,11 +1021,6 @@
 															alt=""></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home7[$i]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home7[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home7[$i]) }}"
@@ -1005,6 +1028,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home7[$i]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home7[$i]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 										</li>
@@ -1040,11 +1070,6 @@
 													<a href="{{ route('categories.show', $post_category_home8[0]->category) }}" class="icon"><i class="fa fa-star-o"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home8[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home8[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h3 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home8[0]) }}"
@@ -1053,6 +1078,13 @@
 														</div>
 													</div>
 												</div>
+												<div class="post--content">
+                                                    <p>{{ $post_category_home8[0]->excerpt }}</p>
+                                                </div>
+
+                                                <div class="post--action">
+                                                    <a href="{{ route('posts.show', $post_category_home8[0]) }}">Xem thêm...</a>
+                                                </div>
 											</div>
 											<!-- Post Item End -->
 
@@ -1101,17 +1133,19 @@
 																		alt=""></a>
 
 																<div class="post--info">
-																	<ul class="nav meta">
-																		<li><a href="javascript:;">{{ $post_category_home8[$i]->author->name }}</a></li>
-																		<li><a href="javascript:;">{{ $post_category_home8[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-																	</ul>
-
 																	<div class="title">
 																		<h3 class="h4"><a
 																				href="{{ route('posts.show', $post_category_home8[$i]) }}"
 																				class="btn-link">{{ $post_category_home8[$i]->title }}</a></h3>
 																	</div>
 																</div>
+															</div>
+															<div class="post--content">
+																<p>{{ $post_category_home8[$i]->excerpt }}</p>
+															</div>
+			
+															<div class="post--action">
+																<a href="{{ route('posts.show', $post_category_home8[$i]) }}">Xem thêm...</a>
 															</div>
 														</div>
 														<!-- Post Item End -->
@@ -1153,15 +1187,17 @@
 													<a href="{{ route('categories.show', $post_category_home9[0]->category) }}" class="icon"><i class="fa fa-eye"></i></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home9[0]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home9[0]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title text-xxs-ellipsis">
 															<h2 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home9[0]) }}"
 																	class="btn-link">{{ $post_category_home9[0]->title }}</a></h2>
+														</div>
+														<div class="post--content">
+															<p>{{ $post_category_home9[0]->excerpt }}</p>
+														</div>
+		
+														<div class="post--action">
+															<a href="{{ route('posts.show', $post_category_home9[0]) }}">Xem thêm...</a>
 														</div>
 													</div>
 												</div>
@@ -1179,11 +1215,6 @@
 															alt=""></a>
 
 													<div class="post--info">
-														<ul class="nav meta">
-															<li><a href="javascript:;">{{ $post_category_home9[$i]->author->name }}</a></li>
-															<li><a href="javascript:;">{{ $post_category_home9[$i]->created_at->locale('vi')->diffForHumans()  }}</a></li>
-														</ul>
-
 														<div class="title">
 															<h2 class="h4"><a
 																	href="{{ route('posts.show', $post_category_home9[$i]) }}"

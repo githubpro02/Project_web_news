@@ -50,7 +50,7 @@ use App\Models\Category;
                                 <div class="post--info">
                                     <ul class="nav meta">
                                         <li><a href="javascript:;">{{ $outstanding_post->created_at->locale('vi')->diffForHumans() }}</a></li>
-                                        <li><a  href="javascript:;"><i class="fa fm fa-comments"></i></a></li>
+                                        <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($outstanding_post->comments) }}</a></li>
                                         <li><span><i class="fa fm fa-eye"></i>{{ $outstanding_post->views }}</span></li>
                                     </ul>
 
@@ -108,7 +108,7 @@ use App\Models\Category;
                                         <div class="post--info">
                                             <ul class="nav meta">
                                                 <li><a href="javascript:;">{{ $outstanding_posts_hot->created_at->locale('vi')->diffForHumans() }}</a></li>
-                                                <li><a  href="javascript:;"><i class="fa fm fa-comments"></i></a></li>
+                                                <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($outstanding_posts_hot->comments) }}</a></li>
                                                 <li><span><i class="fa fm fa-eye"></i>{{ $outstanding_posts_hot->views }}</span></li>
                                             </ul>
 
@@ -140,7 +140,7 @@ use App\Models\Category;
                                         <div class="post--info">
                                             <ul class="nav meta">
                                                 <li><a href="javascript:;">{{ $outstanding_post->created_at->locale('vi')->diffForHumans() }}</a></li>
-                                                <li><a  href="javascript:;"><i class="fa fm fa-comments"></i></a></li>
+                                                <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($outstanding_post->comments) }}</a></li>
                                                 <li><span><i class="fa fm fa-eye"></i>{{ $outstanding_post->views }}</span></li>
                                             </ul>
 
@@ -172,7 +172,7 @@ use App\Models\Category;
                                         <div class="post--info">
                                             <ul class="nav meta">
                                                 <li><a href="javascript:;">{{ $outstanding_posts_view->created_at->locale('vi')->diffForHumans() }}</a></li>
-                                                <li><a  href="javascript:;"><i class="fa fm fa-comments"></i></a></li>
+                                                <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($outstanding_posts_view->comments) }}</a></li>
                                                 <li><span><i class="fa fm fa-eye"></i>{{ $outstanding_posts_view->views }}</span></li>
                                             </ul>
 
@@ -196,7 +196,7 @@ use App\Models\Category;
         });
 </script>
 
-{{-- <script>
+<script>
 	$(document).on('click', '.send-comment-btn', (e) => {
 		e.preventDefault();
 		let $this = e.target;
@@ -214,6 +214,51 @@ use App\Models\Category;
 		formData.append('post_title', post_title);
 	
 
+
+		$.ajax({
+			url: "{{ route('posts.addCommentUser') }}",
+			data: formData,
+			type: 'POST',
+			dataType: 'JSON',
+			processData: false,
+			contentType: false,
+			success: function (data) {
+				if(data.success){
+
+                    console.log(data.result);
+                  
+                    // Xử lý thêm comment vào bài viết tạm thời
+                    count_comment = Number(count_comment) + 1;
+                    $('.comment_error').text('');
+
+                    $('.post_count_comment').text(count_comment);
+                    const htmls  = (() =>{
+                    return `
+                            @auth
+                                <li>
+                                    <div class="comment--item clearfix">
+                                        <div class="comment--img float--left">
+                                            <img style="border-radius: 50%; margin: auto; background-size: cover ;  width: 68px; height: 68px;   background-image: url({{ auth()->user()->image ?  asset('storage/' . auth()->user()->image->path) : asset('storage/placeholders/user_placeholder.jpg') }})"  alt="">
+                                        </div>
+                                        <div class="comment--info">
+                                            <div class="comment--header clearfix">
+                                            <p class="name">{{ auth()->user()->name }}</p> 
+                                                <p class="date">vừa xong</p>
+                                                <a href="javascript:;" class="reply"><i class="fa fa-flag"></i></a>
+                                            </div>
+                                            <div class="comment--content">
+                                                <p>${data.result['the_comment']}</p>
+                                                <p class="star">
+                                                    <span class="text-left"><a href="#" class="reply"><i class="icon-reply"></i></a></span>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            @endauth
+                        `
+                        });
+                    ListComment.append(htmls);
 
 
 					$('.global-message').addClass('alert alert-info');
@@ -234,6 +279,6 @@ use App\Models\Category;
 			}
 		})
 	})
-</script> --}}
+</script>
 
 @endsection

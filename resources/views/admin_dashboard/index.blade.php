@@ -13,7 +13,7 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <p class="mb-0 text-secondary">Tổng bài viết</p>
-                                    {{-- <h4 class="my-1 text-info">{{ $countPost }}</h4> --}}
+                                    <h4 class="my-1 text-info">{{ $countPost }}</h4>
                                     <!-- <p class="mb-0 font-13">+2.5% from last week</p> -->
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class='bx bx-message-square-edit'></i>
@@ -28,7 +28,7 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <p class="mb-0 text-secondary">Tổng danh mục</p>
-                                    {{-- <h4 class="my-1 text-danger">{{ $countCategories }}</h4> --}}
+                                    <h4 class="my-1 text-danger">{{ $countCategories }}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class='bx bx bx-menu'></i>
                                 </div>
@@ -42,7 +42,7 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <p class="mb-0 text-secondary">Tổng người quản trị</p>
-                                    {{-- <h4 class="my-1 text-success">{{ $countAdmin }}</h4> --}}
+                                    <h4 class="my-1 text-success">{{ $countAdmin }}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bx-user' ></i>
                                 </div>
@@ -56,7 +56,7 @@
                             <div class="d-flex align-items-center">
                                 <div>
                                     <p class="mb-0 text-secondary">Tổng khách hàng</p>
-                                    {{-- <h4 class="my-1 text-warning">{{ $countUser }}</h4> --}}
+                                    <h4 class="my-1 text-warning">{{ $countUser }}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='bx bxs-group'></i>
                                 </div>
@@ -129,7 +129,7 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">Lượt Xem</p>
-                                            {{-- <h4 class="my-1">{{ $countView }}</h4> --}}
+                                            <h4 class="my-1">{{ $countView }}</h4>
                                             <!-- <p class="mb-0 font-13">+6.2% from last week</p> -->
                                         </div>
                                         <div class="widgets-icons-2 bg-gradient-cosmic text-white ms-auto"><i class='bx bx-show'></i>
@@ -142,7 +142,7 @@
                                     <div class="d-flex align-items-center">
                                         <div>
                                             <p class="mb-0 text-secondary">Bình luận</p>
-                                            {{-- <h4 class="my-1">{{ $countComments }}</h4> --}}
+                                            <h4 class="my-1">{{ $countComments }}</h4>
                                         </div>
                                         <div class="widgets-icons-2 bg-gradient-ibiza text-white ms-auto"><i class='bx bxs-comment-detail'></i>
                                         </div>
@@ -183,5 +183,130 @@
     <script src="{{ asset('admin_dashboard_assets/plugins/jquery.easy-pie-chart/jquery.easypiechart.min.js') }}"></script>
     <script src="{{ asset('admin_dashboard_assets/js/index.js') }}"></script>
 
+    <script>
+		$(document).ready(function () {
+			// Biểu đồ
+        var ctx = document.getElementById("chart1").getContext('2d');
+        
+        var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+            gradientStroke1.addColorStop(0, '#6078ea');  
+            gradientStroke1.addColorStop(1, '#17c5ea'); 
+            
+        var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+            gradientStroke2.addColorStop(0, '#ff8359');
+            gradientStroke2.addColorStop(1, '#ffdf40');
+        
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                labels: ['16/06/2022', '17/06/2022', '18/06/2022', '19/06/2022', '20/06/2022', '21/06/2022', '22/06/2022'],
+                datasets: [{
+                    label: 'Lượt xem',
+                    data: [ 10, 13, 9,16, 10, 12,15],
+                    borderColor: gradientStroke1,
+                    backgroundColor: gradientStroke1,
+                    hoverBackgroundColor: gradientStroke1,
+                    pointRadius: 0,
+                    fill: false,
+                    borderWidth: 0
+                }, {
+                    label: 'Bình luận',
+                    data: [ 8, 14, 19, 12, 7, 18, 8],
+                    borderColor: gradientStroke2,
+                    backgroundColor: gradientStroke2,
+                    hoverBackgroundColor: gradientStroke2,
+                    pointRadius: 0,
+                    fill: false,
+                    borderWidth: 0
+                }]
+                },
+                
+                options:{
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom',
+                    display: false,
+                    labels: {
+                        boxWidth:8
+                    }
+                    },
+                    tooltips: {
+                    displayColors:false,
+                    },	
+                scales: {
+                    xAxes: [{
+                        barPercentage: .5
+                    }]
+                    }
+                }
+            });
+                });
+
+	</script>
 
 @endsection
+
+
+
+{{-- <script>
+    $(document).ready(function () {
+        var ctx = document.getElementById("chart1").getContext('2d');
+
+        var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
+        gradientStroke1.addColorStop(0, '#6078ea');  
+        gradientStroke1.addColorStop(1, '#17c5ea'); 
+
+        var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
+        gradientStroke2.addColorStop(0, '#ff8359');
+        gradientStroke2.addColorStop(1, '#ffdf40');
+
+        // Dữ liệu cho biểu đồ
+        var labels = {!! json_encode(array_keys($viewsPerDay)) !!};
+        var viewsData = {!! json_encode(array_values($viewsPerDay)) !!};
+        var commentsData = {!! json_encode(array_values($commentsPerDay)) !!};
+
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Lượt xem',
+                    data: viewsData,
+                    borderColor: gradientStroke1,
+                    backgroundColor: gradientStroke1,
+                    hoverBackgroundColor: gradientStroke1,
+                    pointRadius: 0,
+                    fill: false,
+                    borderWidth: 0
+                }, {
+                    label: 'Bình luận',
+                    data: commentsData,
+                    borderColor: gradientStroke2,
+                    backgroundColor: gradientStroke2,
+                    hoverBackgroundColor: gradientStroke2,
+                    pointRadius: 0,
+                    fill: false,
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                maintainAspectRatio: false,
+                legend: {
+                    position: 'bottom',
+                    display: true,
+                    labels: {
+                        boxWidth: 8
+                    }
+                },
+                tooltips: {
+                    displayColors: false,
+                },
+                scales: {
+                    xAxes: [{
+                        barPercentage: .5
+                    }]
+                }
+            }
+        });
+    });
+</script> --}}

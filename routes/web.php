@@ -20,6 +20,8 @@ use App\Http\Controllers\AdminControllers\AdminUsersController;
 use App\Http\Controllers\AdminControllers\AdminPostsController;
 use App\Http\Controllers\AdminControllers\AdminTagsController;
 use App\Http\Controllers\AdminControllers\AdminCommentsController;
+use App\Http\Controllers\AdminControllers\AdminContactsController;
+use App\Http\Controllers\AdminControllers\AdminSettingController;
 use App\Http\Controllers\AdminControllers\TinyMCEController;
 
 use App\Http\Controllers\HomeController;
@@ -37,6 +39,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/404', [HomeController::class, 'erorr404'])->name('erorrs.404');
 
+Route::get('/tai-khoan', [HomeController::class, 'profile'])->name('profile');
+
 Route::post('/tim-kiem', [HomeController::class,'search'])->name('search');
 Route::get('/tin-tuc-moi-nhat', [HomeController::class,'newPost'])->name('newPost');
 Route::get('/tin-nong', [HomeController::class,'hotPost'])->name('hotPost');
@@ -49,6 +53,7 @@ Route::post('/binh-luan', [PostsController::class, 'addCommentUser'])->name('pos
 Route::get('/gioi-thieu', AboutController::class)->name('about');
 
 Route::get('/lien-he', [ContactController::class, 'create'])->name('contact.create');
+Route::post('/lien-he', [ContactController::class, 'store'])->name('contact.store');
 
 Route::get('/chuyen-muc/{category:slug}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/tat-ca-chuyen-muc', [CategoryController::class, 'index'])->name('categories.index');
@@ -70,7 +75,14 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     Route::resource('posts', AdminPostsController::class);
     Route::post('/poststitle', [AdminPostsController::class, 'to_slug'])->name('posts.to_slug');
     Route::resource('categories', AdminCategoriesController::class);
+    
     Route::resource('tags', AdminTagsController::class)->only(['index','show','destroy']);
     Route::resource('comments', AdminCommentsController::class)->except('show');
+
+    Route::get('contacts',[AdminContactsController::class, 'index'])->name('contacts');
+    Route::delete('contacts/{contact}',[AdminContactsController::class, 'destroy'])->name('contacts.destroy');
+
+    Route::get('about',[AdminSettingController::class, 'edit'])->name('setting.edit');
+    Route::post('about',[AdminSettingController::class, 'update'])->name('setting.update');
 });
 
