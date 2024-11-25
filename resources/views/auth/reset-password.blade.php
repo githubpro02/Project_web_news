@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ==== Document Title ==== -->
-    <title>KCNEWS - Reset Password</title>
+    <title>KCNEWS - Đặt lại mật khẩu</title>
 
     <!-- ==== Document Meta ==== -->
     <meta name="author" content="">
@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/responsive-style.css') }}">
 
     <!-- ==== Theme Color Stylesheet ==== -->
-    <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-9.css') }}" id="changeColorScheme">
+    <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-1.css') }}" id="changeColorScheme">
 
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/custom.css') }}">
@@ -62,31 +62,46 @@
                 <!-- Login Form Start -->
                 <div class="login--form">
                     <div class="title">
-                        <h1 class="h1">Reset Password</h1>
+                        <h1 class="h1">Đặt lại mật khẩu</h1>
                     </div>
 
-                    <form method="POST" action="">
+                    <form method="POST" action="{{ route('password.update') }}">
                         @csrf
+                        <input type="hidden" name="token" value="{{ request()->route('token') }}">
                         <div class="form-group">
                             <label>
-                                <span>Password</span>
-                                <input id="password" type="password"
-                                    class="form-control" name="password"
-                                    required autocomplete="current-password">
+                                <span>{{ __('Email') }}</span>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email', request()->email) }}" required autocomplete="email">
                             </label>
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-
                         <div class="form-group">
                             <label>
-                                <span>{{ __('Confirm Password') }}</span>
+                                <span>{{ __('Mật khẩu mới') }}</span>
+                                <input id="password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password" required
+                                    autocomplete="new-password">
+                            </label>
+                            @error('password')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                        <div class="form-group">
+                            <label>
+                                <span>{{ __('Xác nhận mật khẩu') }}</span>
                                 <input id="password-confirm" type="password" class="form-control"
                                     name="password_confirmation" required autocomplete="new-password">
-
                             </label>
                         </div>
-
                         <button type="submit" class="btn btn-lg btn-block btn-primary">
-                            {{ __('Reset Password') }}
+                            {{ __('Đặt lại mật khẩu') }}
                         </button>
                     </form>
                 </div>

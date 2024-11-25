@@ -30,6 +30,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\TagController;
+use App\Http\Controllers\NewsletterController;
 
 
 // Điều hướng cho User
@@ -40,6 +41,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/404', [HomeController::class, 'erorr404'])->name('erorrs.404');
 
 Route::get('/tai-khoan', [HomeController::class, 'profile'])->name('profile');
+Route::post('/tai-khoan', [HomeController::class, 'update'])->name('update');
 
 Route::post('/tim-kiem', [HomeController::class,'search'])->name('search');
 Route::get('/tin-tuc-moi-nhat', [HomeController::class,'newPost'])->name('newPost');
@@ -60,6 +62,7 @@ Route::get('/tat-ca-chuyen-muc', [CategoryController::class, 'index'])->name('ca
 
 Route::get('/tu-khoa/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 
+Route::post('email',[NewsletterController::class, 'store'])->name('newsletter_store');
 
 require __DIR__.'/auth.php';
 
@@ -68,9 +71,6 @@ require __DIR__.'/auth.php';
 Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware\CheckPermission::class])->group(function(){
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
-
-    Route::resource('roles', AdminRolesController::class)->except('show');
-    Route::resource('users', AdminUsersController::class);
 
     Route::resource('posts', AdminPostsController::class);
     Route::post('/poststitle', [AdminPostsController::class, 'to_slug'])->name('posts.to_slug');
@@ -81,6 +81,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
 
     Route::get('contacts',[AdminContactsController::class, 'index'])->name('contacts');
     Route::delete('contacts/{contact}',[AdminContactsController::class, 'destroy'])->name('contacts.destroy');
+
+    Route::resource('roles', AdminRolesController::class)->except('show');
+    Route::resource('users', AdminUsersController::class);
 
     Route::get('about',[AdminSettingController::class, 'edit'])->name('setting.edit');
     Route::post('about',[AdminSettingController::class, 'update'])->name('setting.update');

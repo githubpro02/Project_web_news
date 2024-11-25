@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
@@ -47,9 +48,37 @@ class PostsController extends Controller
         // Bài viết nổi bật
         $outstanding_posts = Post::approved()->where('category_id', '!=',  optional($category_unclassified)->id )->take(5)->get();
         
-        // Tăng lượt xem khi xem bài viết
-        $post->views =  ($post->views) + 1;
-        $post->save();
+        // // Tăng lượt xem khi xem bài viết
+        // $post->views =  ($post->views) + 1;
+        // $post->save();
+
+        // Kiểm tra xem người dùng đã xem bài viết này chưa trong session
+        $sessionKey = 'viewed_post_' . $post->id;
+        
+        // Nếu người dùng chưa xem bài viết này trong phiên này, tăng views
+        if (!session()->has($sessionKey)) {
+            // Tăng lượt xem trong bảng `posts`
+            $post->increment('views');
+
+            // Tăng lượt xem trong bảng `post_views` cho ngày hiện tại
+            $today = Carbon::today()->toDateString();
+            $view = $post->views()->where('view_date', $today)->first();
+
+            if ($view) {
+                // Nếu đã có lượt xem trong ngày, tăng lượt xem
+                $view->increment('views');
+            } else {
+                // Nếu chưa có, tạo mới lượt xem cho ngày hôm nay
+                $post->views()->create([
+                    'view_date' => $today,
+                    'views' => 1,
+                ]);
+            }
+
+            // Lưu vào session để tránh tăng views nhiều lần trong cùng 1 phiên
+            session()->put($sessionKey, true);
+        }
+
 
         return view('post', [ 
             'post' => $post,

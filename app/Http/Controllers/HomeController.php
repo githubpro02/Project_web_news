@@ -316,5 +316,44 @@ class HomeController extends Controller
         return view('profile');
     }
 
+    private $rules = [
+        'name' => 'required|min:3',
+        'email' => 'required|email|unique:users,email',
+        'image' => 'nullable|file|mimes:jpg,png,webp,svg,jpeg|dimensions:max-width:300,max-height:300',
+    ];
+
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+        
+        if($request->email !== $user->email){
+            $this->rules['email'] = ['required','email', Rule::unique('users')->ignore($user)];
+        }else{
+            $this->rules['email'] = '';
+        }
+        
+        $validated = $request->validate($this->rules);
+        $user->update($validated);
+
+        if($request->has('image'))
+        {
+            $image_user = Image::where('imageable_id',  $user->id)->first();
+            if($image_user)
+                $image_user->delete();
+
+            $image = $request->file('image');
+            $filename = $image->getClientOriginalName();
+            $file_extension = $image->getClientOriginalExtension();
+            $path   = $image->store('images', 'public');
+            
+            $user->image()->create([
+                'name' => $filename,
+                'extension' => $file_extension,
+                'path' => $path,
+            ]);
+        }
+        
+        return redirect()->route('profile')->with('success', 'Sửa tài khoản thành công.');
+    }
 }
  

@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/responsive-style.css') }}">
 
     <!-- ==== Theme Color Stylesheet ==== -->
-    <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-9.css') }}" id="changeColorScheme">
+    <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-1.css') }}" id="changeColorScheme">
 
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/custom.css') }}">

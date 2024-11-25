@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -18,11 +19,17 @@ Route::middleware('guest')->group(function () {
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
     
-    Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
+    Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])
                 ->name('forgot-password');
 
-    Route::get('reset-password', [NewPasswordController::class, 'create'])
-                ->name('reset-password');
+    Route::post('forgot-password', [ForgotPasswordController::class, 'sendResetLink'])
+                ->name('password.email');
+
+    Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])
+                ->name('password.reset');
+
+    Route::post('reset-password', [ForgotPasswordController::class, 'resetPassword'])
+                ->name('password.update');
 
 });
 

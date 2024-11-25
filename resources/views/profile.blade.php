@@ -53,7 +53,7 @@ $posts_new[3] = Post::latest()->approved()
             <h3 class="page-header">Thông tin cá nhân</h3>
             <div class="row">
              
-                {{-- <form action="{{ route('update') }}" method="post"  enctype="multipart/form-data" > --}}
+                <form action="{{ route('update') }}" method="post"  enctype="multipart/form-data" >
                     @csrf
 
                     <!-- left column -->

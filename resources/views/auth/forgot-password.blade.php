@@ -39,7 +39,7 @@
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/responsive-style.css') }}">
 
     <!-- ==== Theme Color Stylesheet ==== -->
-    <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-9.css') }}" id="changeColorScheme">
+    <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-1.css') }}" id="changeColorScheme">
 
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/custom.css') }}">
@@ -64,38 +64,42 @@
                 <!-- Login Form Start -->
                 <div class="login--form">
                     <div class="title">
-                        <h1 class="h1">Forgot Password</h1>
+                        <h1 class="h1">Quên Mật Khẩu</h1>
                     </div>
 
-                    <form method="POST" action="">
-                        <div class="form-group">
-                            <label>
-                                <span>{{ __('Name') }}</span>
-                                <input id="name" type="text"
-                                    class="form-control" name="name"
-                                    required autocomplete="name" autofocus>
 
-                            </label>
-                        </div>
-
+                    <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
                         <div class="form-group">
                             <label>
                                 <span>{{ __('Email') }}</span>
-                                <input id="email" type="text"
-                                    class="form-control" name="email"
-                                     required autocomplete="email" autofocus>
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                    name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                             </label>
+                            @error('email')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
-
                         <button type="submit" class="btn btn-lg btn-block btn-primary">
-                            {{ __('Forgot Password') }}
+                            {{ __('Gửi liên kết đặt lại mật khẩu') }}
                         </button>
-
                         <p class="help-block clearfix">
-                            <span>Login again here?</span>
-                            <a href="{{ route('login') }}" class="btn-link pull-center">Login</a>
+                            <span>Đăng nhập lại tại đây?</span>
+                            <a href="{{ route('login') }}" class="btn-link">Đăng Nhập</a>
                         </p>
-
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                    
+                        @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                {{ __('Có lỗi xảy ra, vui lòng kiểm tra lại.') }}
+                            </div>
+                        @endif                        
                     </form>
                 </div>
                 <!-- Login Form End -->

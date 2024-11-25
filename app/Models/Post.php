@@ -10,6 +10,7 @@ use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Comment;
 use App\Models\Image;
+use App\Models\Postview;
 
 class Post extends Model
 {
@@ -35,7 +36,12 @@ class Post extends Model
 
     public function image() {
         return $this->morphOne(Image::class, 'imageable');
-    } 
+    }
+    
+    // Mối quan hệ với bảng PostView
+    public function views() {
+        return $this->hasMany(PostView::class);
+    }
 
     // scope functions
     public function scopeApproved($query){
