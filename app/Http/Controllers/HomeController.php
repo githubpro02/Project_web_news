@@ -160,7 +160,23 @@ class HomeController extends Controller
         // $cat = Category::where('name','like' , '%'.$key.'%')->first();
         // $pro = Category::where('name','like' , '%'.$key.'%')->first();
 
-        $posts = Post::latest()->approved()->where('title','like' , '%'.$key.'%')->paginate(30);
+        // Tìm kiếm theo tiêu đề
+        $postsQuery = Post::latest()->approved()->where('title', 'like', '%'.$key.'%');
+
+        // Tìm kiếm theo danh mục
+        $category = Category::where('name', 'like', '%'.$key.'%')->first();
+        if ($category) {
+            $postsQuery->orWhere('category_id', $category->id); // Tìm theo danh mục
+        }
+
+        // Tìm kiếm theo tag (nếu có mối quan hệ giữa Post và Tag)
+        $tags = Tag::where('name', 'like', '%'.$key.'%')->get(); // Lấy tất cả tags có tên tương ứng
+        if ($tags->isNotEmpty()) {
+            $postsQuery->orWhereIn('id', $tags->pluck('post_id')); // Giả sử mối quan hệ giữa Post và Tag là nhiều-nhiều, qua bảng trung gian post_tag
+        }
+
+        // Phân trang kết quả
+        $posts = $postsQuery->paginate(30);
         
         $title = 'Kết quả tìm kiếm';
         $title_t = 'Kết quả tìm kiếm theo';

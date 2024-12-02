@@ -118,7 +118,7 @@
                                                 </div>
 
                                                 <div class="col-md-7 text-center">                                                
-													<img style="width: 100%; border-radius: 16px;" src="/storage/{{ $post->image ? $post->image->path : 'placeholders/placeholder-image.jpg' }}" class="img-responsive" alt="All thumbnail">
+													<img style="width: 100%; border-radius: 16px;" src="{{ asset('/storage/' . ($post->image ? $post->image->path : 'placeholders/placeholder-image.jpg')) }}" class="img-responsive" alt="All thumbnail">
 												</div>
                                             </div>
 										
@@ -126,7 +126,7 @@
 										
 										<div class="mb-3">
 											<label for="inputProductDescription" class="form-label">Nội dung bài viết</label>
-											<textarea name="body" id="post_content" class="form-control" id="inputProductDescription" rows="3">{{ old("body", str_replace('../../', '../../../', $post->body )) }}</textarea>
+											<textarea name="body" id="post_content" class="form-control" id="inputProductDescription" rows="3">{{ old("body", preg_replace('/src="\.\.\/(\.\.\/)+/', 'src="' . asset('/'), $post->body)) }}</textarea>
 										
 											@error('body')
 												<p class="text-danger">{{ $message }}</p>

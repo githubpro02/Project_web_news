@@ -149,7 +149,7 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
 body {
     color: #777;
     font-family: "Source Sans Pro", sans-serif;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     font-weight: 400;
     word-wrap: break-word;
@@ -5000,7 +5000,7 @@ ul.header--menu-links.nav > li.open > a:focus {
 .post--info .meta > li > a,
 .post--info .meta > li > span {
     padding: 0;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
 }
 
@@ -5015,7 +5015,7 @@ ul.header--menu-links.nav > li.open > a:focus {
 .post--info .title .h4 {
     margin: 0;
     color: #222;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 24px;
     font-weight: 700;
 }
@@ -5023,7 +5023,7 @@ ul.header--menu-links.nav > li.open > a:focus {
 .post--item.post--layout-1 .post--info .title .h4 {
     margin-bottom: -3px;
     color: inherit;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 20px;
 }
 

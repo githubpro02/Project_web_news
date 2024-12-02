@@ -87,7 +87,7 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/responsive-style.css') }}">
 
     <!-- ==== Theme Color Stylesheet ==== -->
-    {{-- <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-9.css') }}" id="changeColorScheme"> --}}
+    <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/colors/theme-color-1.css') }}" id="changeColorScheme">
 
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/custom.css') }}">
@@ -105,6 +105,11 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 				<div class="float--left float--xs-none text-xs-center">
 					<!-- Header Topbar Info Start -->
 					<ul class="header--topbar-info nav">
+						<li>
+							<a href="{{ route('home') }}">
+								<img style="border-radius: 12px; height: 40px;" src="{{ asset('kcnew/frontend/img/kcnew.png') }}" alt="logo">
+							</a>
+						</li>
 						<li><i class="fa fm fa-map-marker"></i>Hà Nội</li>
 						<li><i class="fa fm fa-mixcloud"></i>28<sup>0</sup> C</li>
 						<li style="text-transform: capitalize" ><i class="fa fm fa-calendar"></i>Hôm nay ( {{ $now->translatedFormat('l') }}, Ngày {{ $now->translatedFormat('jS F')}} Năm {{ $now->translatedFormat('Y')}} )</li>

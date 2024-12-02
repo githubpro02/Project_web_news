@@ -112,11 +112,11 @@
                         <!-- Widget End -->
 
                         <!-- Widget Start -->
-                        {{-- <x-blog.side-vote /> --}}
+                        <x-blog.side-vote />
                         <!-- Widget End -->
 
                         <!-- Widget Start -->
-                        {{-- <x-blog.side-ad_banner /> --}}
+                        <x-blog.side-ad_banner />
                         <!-- Widget End -->
 
                     </div>

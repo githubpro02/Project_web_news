@@ -1,6 +1,6 @@
 @extends('main_layouts.master')
 
-@section('title',' TDQ - Liên hệ')
+@section('title',' KCNews - Liên hệ')
 
 @section('content')
 <div class="global-message info d-none"></div>
@@ -81,7 +81,17 @@
 
 					</div>
 					<div class="col-md-6">
-						<div id="map" class="colorlib-map"></div>
+						<!-- Thêm bản đồ minh họa -->
+						<div class="map-container">
+							<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7630333.005776548!2d96.78384264999998!3d20.962611199999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313452efff394ce3%3A0x391a39d4325be464!2zVHLGsOG7nW5nIMSQ4bqhaSBI4buNYyBQaGVuaWthYQ!5e0!3m2!1svi!2sus!4v1732941076460!5m2!1svi!2sus" 
+								width="600" 
+								height="450" 
+								style="border:0;" 
+								allowfullscreen="" 
+								loading="lazy" 
+								referrerpolicy="no-referrer-when-downgrade">
+							</iframe>
+						</div>
 					</div>
 				</div>
 			</div>
