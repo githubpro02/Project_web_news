@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ==== Document Title ==== -->
-    <title>KCnews - Login</title>
+    <title</title>
 
     <!-- ==== Document Meta ==== -->
     <meta name="author" content="">
@@ -15,10 +15,7 @@
     <meta name="keywords" content="">
 
     <!-- ==== Favicons ==== -->
-	<link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/KCN.png') }}"  sizes="160x160">
-
-	<!-- =====  CSS - Teamplate KCNEWS =========== -->
-
+    <link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/kcnew_logo.png') }}"  sizes="160x160">
 
     <!-- ==== Google Font ==== -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700">
@@ -44,6 +41,7 @@
     <!-- ==== Custom Stylesheet ==== -->
     <link rel="stylesheet" href="{{ asset('kcnew/frontend/css/custom.css') }}">
 
+
 </head>
 
 <body>
@@ -63,49 +61,35 @@
             <div class="container">
                 <!-- Login Form Start -->
                 <div class="login--form">
-                    <div class="title">
-                        <h1 class="h1">Đăng Nhập</h1>
+                    <div class="mb-4 text-sm text-gray-600">
+                        {{ __('Cảm ơn bạn đã đăng ký! Trước khi bắt đầu, bạn có thể xác minh địa chỉ email của mình bằng cách nhấp vào liên kết chúng tôi vừa gửi qua email cho bạn không? Nếu bạn không nhận được email, chúng tôi sẽ sẵn lòng gửi cho bạn một email khác.') }}
                     </div>
-
-                    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="form-group">
-                            <label>
-                                <span>Email</span>
-                                <input id="email" type="email"
-                                    class="form-control" name="email" :value="old('email')"
-                                    required autocomplete="email" autofocus>
-
-                            </label>
+            
+                    @if (session('status') == 'verification-link-sent')
+                        <div class="mb-4 font-medium text-sm text-green-600">
+                            {{ __('Một liên kết xác minh mới đã được gửi đến địa chỉ email bạn đã cung cấp trong quá trình đăng ký.') }}
                         </div>
-
-                        <div class="form-group">
-                            <label>
-                                <span>Mật Khẩu</span>
-                                <input id="password" type="password"
-                                    class="form-control"  name="password"
-                                    required autocomplete="current-password">
-                            </label>
-                        </div>
-
-                        <div class="checkbox">
-                            <label>
-                                <input type="checkbox" name="remember" id="remember"
-                                    {{ old('remember') ? 'checked' : '' }}>
-                                <span>Nhớ mật khẩu</span>
-                            </label>
-                        </div>
-
-                        <button type="submit" class="btn btn-lg btn-block btn-primary">
-                            {{ __('Đăng Nhập') }}
-                        </button>
-
-                        <p class="help-block clearfix">
-                            <a href="{{ route('forgot-password') }}" class="btn-link pull-left">Quên mật khẩu?</a>
-                            <a href="{{ route('register') }}" class="btn-link pull-right">Đăng ký tài khoản </a>
-                        </p>
-
-                    </form>
+                    @endif
+            
+                    <div class="mt-4 flex items-center justify-between">
+                        <form method="POST" action="{{ route('verification.send') }}">
+                            @csrf
+            
+                            <div>
+                                <button type="submit" class="btn btn-lg btn-block btn-primary">
+                                    {{ __('Gửi lại email xác minh') }}
+                                </button>
+                            </div>
+                        </form>
+            
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+            
+                            <button type="submit" class="btn btn-lg btn-block btn-primary">
+                                {{ __('Đăng xuất') }}
+                            </button>
+                        </form>
+                    </div>
                 </div>
                 <!-- Login Form End -->
             </div>
@@ -180,6 +164,7 @@
 
 	<!-- ==== Main JavaScript ==== -->
 	<script src="{{ asset('kcnew/frontend/js/main.js') }}"></script>
+
 
 </body>
 

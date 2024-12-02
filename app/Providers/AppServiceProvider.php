@@ -23,11 +23,11 @@ class AppServiceProvider extends ServiceProvider
 
         if(Schema::hasTable('categories'))
         {
-            // $categories = Category::withCount('posts')->orderBy('posts_count', 'DESC')->take(10)->get();
-            // View::Share('nabbar_categories',$categories);
+            $categories = Category::withCount('posts')->orderBy('posts_count', 'DESC')->take(10)->get();
+            View::Share('nabbar_categories',$categories);
 
-            // $categories = Category::withCount('posts')->orderBy('posts_count', 'DESC')->take(10)->get();
-            // View::Share('setting',$categories);
+            $categories = Category::withCount('posts')->orderBy('posts_count', 'DESC')->take(10)->get();
+            View::Share('setting',$categories);
 
             $setting = Setting::find(1);
             View::Share('setting',$setting);

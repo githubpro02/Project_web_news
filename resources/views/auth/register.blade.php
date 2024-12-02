@@ -59,25 +59,6 @@
         <div class="login--section pd--100-0 bg--overlay" data-bg-img="{{ asset('kcnew/frontend/img/KCN.png')}}">
             <div class="container">
 
-                <!-- Alert Message Start -->
-                @if(session('success'))
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                @endif
-                <!-- Alert Message End -->
-
-                <!-- Alert for Validation Errors -->
-                @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
-                <!-- Alert End -->
 
                 <!-- Login Form Start -->
                 <div class="login--form">
@@ -134,6 +115,17 @@
                             <a href="{{ route('login') }}" class="btn-link pull-center">Đăng Nhập</a>
                         </p>
 
+                        @if (session('status'))
+                            <div class="alert alert-success" role="alert">
+                                {{ session('status') }}
+                            </div>
+                        @endif
+                    
+                        @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                {{ __('Có lỗi xảy ra, vui lòng kiểm tra lại.') }}
+                            </div>
+                        @endif 
                     </form>
                 </div>
                 <!-- Login Form End -->

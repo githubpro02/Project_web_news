@@ -228,8 +228,7 @@
 				})
 			});
 			
-			console.log('read');
-			console.log("Handler called");
+
 			setTimeout(() => {
 				$(".general-message").fadeOut();
 			}, 5000);

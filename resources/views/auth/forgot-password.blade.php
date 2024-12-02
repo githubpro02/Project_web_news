@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- ==== Document Title ==== -->
-    <title>Kcnews - Quên mật khẩu</title>
+    <title>KCnews - Quên mật khẩu</title>
 
     <!-- ==== Document Meta ==== -->
     <meta name="author" content="">
