@@ -68,32 +68,39 @@ class DashboardController extends Controller
             }])->get()->sum('comments_count');
         }
 
-        // Most Read Articles (Top 5)
+       // Top 5 bài viết đọc nhiều nhất
         $mostReadArticles = Post::orderByDesc('views')->take(5)->get();
 
-        // Most Engaged Articles (Top 5, based on comments)
+        // Top 5 bài viết được quan tâm nhiều nhất (dựa trên lượt bình luận)
         $mostEngagedArticles = Post::withCount('comments', 'views')
             ->orderByDesc('views')
             ->orderByDesc('comments_count')
             ->take(5)
             ->get();
 
-        // List of Pending Articles (where status is 'pending' or null)
+        // Bài viết chờ duyệt
         $pendingArticles = Post::where(function ($query) {
             $query->where('approved', 0)
                   ->orWhereNull('approved');
         })->get();
 
-        // User List/Interactions (Top 5 users based on their interaction count)
+        // Người dùng có tương tác nhiều nhất (top 5)
         $userInteractions = User::withCount(['posts', 'comments'])
             ->orderByDesc('posts_count')
             ->orderByDesc('comments_count')
             ->take(5)
             ->get();
 
-        // Category List
+        // Danh mục với số bài viết
+        // $categories = Category::withCount('posts')
+        // ->where('name', '!=', 'chưa phân loại')
+        // ->get();
         $categories = Category::withCount('posts')
             ->where('name', '!=', 'chưa phân loại')
+            ->withSum('posts', 'views') // Tính tổng lượt xem
+            ->withCount('comments') // Đếm tổng số bình luận từ tất cả bài viết trong danh mục
+            ->orderBy('posts_sum_views', 'desc') // Sắp xếp theo lượt xem
+            ->orderBy('comments_count', 'desc') // Sắp xếp theo số bình luận
             ->get();
 
         return view('admin_dashboard.index', [

@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Models\Post; // Đảm bảo bạn đã import Post
+// use App\Models\Post; // Đảm bảo bạn đã import Post
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
@@ -13,7 +13,7 @@ class NewPostNotification extends Mailable
     public $post;
 
     // Khởi tạo với bài viết mới
-    public function __construct(Post $post)
+    public function __construct($post)
     {
         $this->post = $post; 
     }
@@ -21,7 +21,8 @@ class NewPostNotification extends Mailable
     // Xây dựng email
     public function build()
     {
-        return $this->subject('Thông báo bài viết mới')
-                    ->view('emails.new_post_notification'); // Đảm bảo bạn đã tạo view này
+        return $this->view('emails.new_post_notification')
+                    ->with(['post' => $this->post])
+                    ->subject('New Post Update: ' . $this->post->title);
     }
 }

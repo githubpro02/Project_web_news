@@ -101,7 +101,7 @@
                                 <canvas id="chart2"></canvas>
                             </div>
                         </div>
-                        <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
+                        {{-- <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
                             <div class="col">
                                 <div class="p-3">
                                     <h5 class="mb-0">24.15M</h5>
@@ -120,7 +120,7 @@
                                     <small class="mb-0">Pages/Visit <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
             
@@ -200,7 +200,7 @@
                     <div class="tab-pane fade show active" id="top-posts" role="tabpanel" aria-labelledby="top-posts-tab">
                         <div class="card my-3">
                             <div class="card-header">Tin Đọc Nhiều</div>
-                            <div class="card-body">
+                            <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -229,7 +229,7 @@
                     <div class="tab-pane fade" id="engaged-posts" role="tabpanel" aria-labelledby="engaged-posts-tab">
                         <div class="card my-3">
                             <div class="card-header">Tin Được Người Quan Tâm</div>
-                            <div class="card-body">
+                            <div class="card-body table-responsive">
                                 <table class="table table-hover-effect">
                                     <thead>
                                         <tr>
@@ -258,7 +258,7 @@
                     <div class="tab-pane fade" id="pending-posts" role="tabpanel" aria-labelledby="pending-posts-tab">
                         <div class="card my-3">
                             <div class="card-header">Tin Chưa Duyệt</div>
-                            <div class="card-body">
+                            <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
@@ -287,12 +287,12 @@
                     <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
                         <div class="card my-3">
                             <div class="card-header">Danh Sách Người Dùng</div>
-                            <div class="card-body">
+                            <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Tên Người Dùng</th>
-                                            <th class="text-center">Email</th>
+                                            <th>Tên Người Dùng</th>
+                                            <th>Email</th>
                                             <th class="text-center">Vai trò</th>
                                             <th class="text-center">Số bài viết</th>
                                             <th class="text-center">Số bình luận</th>
@@ -301,11 +301,11 @@
                                     <tbody>
                                         @foreach ($userInteractions as $user)
                                         <tr>
-                                            <td class="text-center">{{ $user->name }}</td>
-                                            <td class="text-center">{{ $user->email }}</td>
+                                            <td>{{ $user->name }}</td>
+                                            <td>{{ $user->email }}</td>
                                             <td class="text-center">{{ $user->role->name }}</td>
-                                            <td class="text-center">{{ $user->posts_count }}</td>  <!-- Number of posts -->
-                                            <td class="text-center">{{ $user->comments_count }}</td> <!-- Number of comments -->
+                                            <td class="text-center">{{ $user->posts_count }}</td>
+                                            <td class="text-center">{{ $user->comments_count }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -318,19 +318,23 @@
                     <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
                         <div class="card my-3">
                             <div class="card-header">Danh Sách Danh Mục</div>
-                            <div class="card-body">
+                            <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            <th class="text-center">Tên Danh Mục</th>
+                                            <th>Tên Danh Mục</th>
                                             <th class="text-center">Số Bài Viết</th>
+                                            <th class="text-center">Lượt Xem</th>
+                                            <th class="text-center">Số Bình Luận</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($categories as $category)
+                                        @foreach($categories as $category)
                                         <tr>
-                                            <td class="text-center">{{ $category->name }}</td>
+                                            <td>{{ $category->name }}</td>
                                             <td class="text-center">{{ $category->posts_count }}</td>
+                                            <td class="text-center">{{ $category->posts_sum_views }}</td>
+                                            <td class="text-center">{{ $category->comments_count }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -385,6 +389,7 @@
                         data: viewsDataDay,
                         borderColor: gradientStroke1,
                         backgroundColor: gradientStroke1,
+                        hoverBackgroundColor: gradientStroke1,
                         fill: false,
                         pointRadius: 4,
                         borderWidth: 2
@@ -393,6 +398,7 @@
                         data: commentsDataDay,
                         borderColor: gradientStroke2,
                         backgroundColor: gradientStroke2,
+                        hoverBackgroundColor: gradientStroke2,
                         fill: false,
                         pointRadius: 4,
                         borderWidth: 2
@@ -437,6 +443,7 @@
                         data: viewsDataMonth,
                         borderColor: gradientStroke1,
                         backgroundColor: gradientStroke1,
+                        hoverBackgroundColor: gradientStroke1,
                         fill: false,
                         pointRadius: 4,
                         borderWidth: 2
@@ -445,6 +452,7 @@
                         data: commentsDataMonth,
                         borderColor: gradientStroke2,
                         backgroundColor: gradientStroke2,
+                        hoverBackgroundColor: gradientStroke2,
                         fill: false,
                         pointRadius: 4,
                         borderWidth: 2
@@ -480,332 +488,3 @@
     </script>
     
 @endsection
-
-
-
-{{-- @extends("admin_dashboard.layouts.app") 
-@section("style")
-    <link href="{{ asset('admin_dashboard_assets/plugins/vectormap/jquery-jvectormap-2.0.2.css') }}" rel="stylesheet"/>
-@endsection
-
-@section("wrapper")
-    <div class="page-wrapper">
-        <div class="page-content">
-            <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
-                <div class="col">
-                    <div class="card radius-10 border-start border-0 border-3 border-info">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0 text-secondary">Tổng bài viết</p>
-                                    <h4 class="my-1 text-info">{{ $countPost }}</h4>
-                                </div>
-                                <div class="widgets-icons-2 rounded-circle bg-gradient-scooter text-white ms-auto"><i class='bx bx-message-square-edit'></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card radius-10 border-start border-0 border-3 border-danger">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0 text-secondary">Tổng danh mục</p>
-                                    <h4 class="my-1 text-danger">{{ $countCategories }}</h4>
-                                </div>
-                                <div class="widgets-icons-2 rounded-circle bg-gradient-bloody text-white ms-auto"><i class='bx bx bx-menu'></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card radius-10 border-start border-0 border-3 border-success">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0 text-secondary">Tổng người quản trị</p>
-                                    <h4 class="my-1 text-success">{{ $countAdmin }}</h4>
-                                </div>
-                                <div class="widgets-icons-2 rounded-circle bg-gradient-ohhappiness text-white ms-auto"><i class='bx bx-user' ></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="card radius-10 border-start border-0 border-3 border-warning">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <p class="mb-0 text-secondary">Tổng khách hàng</p>
-                                    <h4 class="my-1 text-warning">{{ $countUser }}</h4>
-                                </div>
-                                <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='bx bxs-group'></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--end row-->
-
-            <div class="row">
-                <div class="col-12 col-lg-8">
-                    <div class="card radius-10">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div>
-                                    <h6 class="mb-0">Biểu đồ lượt xem</h6>
-                                </div>
-                                <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="d-flex align-items-center ms-auto font-13 gap-2 my-3">
-                                <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i>Số đã người đọc</span>
-                                <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i>Số người đã bình luận</span>
-                            </div>
-                            <div class="chart-container-1">
-                                <canvas id="chart1"></canvas>
-                            </div>
-                        </div>
-                        <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">24.15M</h5>
-                                    <small class="mb-0">Overall Visitor <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">12:38</h5>
-                                    <small class="mb-0">Visitor Duration <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">639.82</h5>
-                                    <small class="mb-0">Pages/Visit <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-12 col-lg-4 d-flex">
-                    <div class="card w-100 radius-10">
-                        <div class="card-body">
-                            <div class="card radius-10 border shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <p class="mb-0 text-secondary">Lượt Xem</p>
-                                            <h4 class="my-1">{{ $countView }}</h4>
-                                        </div>
-                                        <div class="widgets-icons-2 bg-gradient-cosmic text-white ms-auto"><i class='bx bx-show'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card radius-10 border shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <p class="mb-0 text-secondary">Bình luận</p>
-                                            <h4 class="my-1">{{ $countComments }}</h4>
-                                        </div>
-                                        <div class="widgets-icons-2 bg-gradient-ibiza text-white ms-auto"><i class='bx bxs-comment-detail'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card radius-10 mb-0 border shadow-none">
-                                <div class="card-body">
-                                    <div class="d-flex align-items-center">
-                                        <div>
-                                            <p class="mb-0 text-secondary">Lượt thích</p>
-                                            <h5 class="my-1"></h5> Chờ cập nhật ...
-                                        </div>
-                                        <div class="widgets-icons-2 bg-gradient-moonlit text-white ms-auto"><i class='bx bxs-like'></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div><!--end row-->
-
-            <!-- Section: Most Viewed News -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Tin đọc nhiều</h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Tiêu đề</th>
-                                        <th>Lượt xem</th>
-                                        <th>Ngày đăng</th>
-                                        <th>Tác giả</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($mostReadArticles as $post)
-                                    <tr>
-                                        <td>{{ $post->title }}</td>
-                                        <td>{{ $post->views }}</td>
-                                        <td>{{ $post->created_at->format('Y-m-d') }}</td>
-                                        <td>{{ $post->author->name ?? 'Chưa có tác giả' }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section: Popular News -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Tin phổ biến</h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Tiêu đề</th>
-                                        <th>Lượt bình luận</th>
-                                        <th>Ngày đăng</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($mostEngagedArticles as $post)
-                                    <tr>
-                                        <td>{{ $post->title }}</td>
-                                        <td>{{ $post->comments_count }}</td> <!-- Assuming 'comments_count' is passed -->
-                                        <td>{{ $post->created_at->format('Y-m-d') }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section: Pending Approval News -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Tin chờ duyệt</h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Tiêu đề</th>
-                                        <th>Ngày gửi</th>
-                                        <th>Trạng thái</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($pendingArticles as $post)
-                                    <tr>
-                                        <td>{{ $post->title }}</td>
-                                        <td>{{ $post->created_at->format('Y-m-d') }}</td>
-                                        <td>{{ $post->status }}</td> <!-- Assuming 'status' is either 'Pending' or 'Approved' -->
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section: User List -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Danh sách người dùng</h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Tên</th>
-                                        <th>Email</th>
-                                        <th>Vai trò</th>
-                                        <th>Số bài viết</th>
-                                        <th>Số bình luận</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($userInteractions as $user)
-                                    <tr>
-                                        <td>{{ $user->name }}</td>
-                                        <td>{{ $user->email }}</td>
-                                        <td>{{ $user->role->name ?? 'Chưa có vai trò' }}</td>
-                                        <td>{{ $user->posts_count }}</td>  <!-- Number of posts -->
-                                        <td>{{ $user->comments_count }}</td> <!-- Number of comments -->
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Section: Category List -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-header">
-                            <h5>Danh sách danh mục</h5>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>Tên danh mục</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($categories as $category)
-                                    <tr>
-                                        <td>{{ $category->name }}</td>
-                                    </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div><!--end page-content-->
-    </div><!--end page-wrapper-->
-@endsection --}}

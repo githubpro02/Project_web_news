@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\NewPostNotification;
 
 use App\Models\User;
 use App\Models\Category;
@@ -46,6 +48,20 @@ class Post extends Model
     // scope functions
     public function scopeApproved($query){
         return $query->where('approved', 1);
+    }
+
+        // Model event to send email when a new post is created
+    protected static function booted()
+    {
+        static::created(function ($post) {
+            // Get all subscribers
+            $subscribers = \App\Models\Newsletter::all();
+
+            // Send an email to each subscriber
+            foreach ($subscribers as $subscriber) {
+                Mail::to($subscriber->email)->send(new NewPostNotification($post));
+            }
+        });
     }
 
 }
