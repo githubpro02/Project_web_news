@@ -49,35 +49,35 @@ class PostsController extends Controller
         $outstanding_posts = Post::approved()->where('category_id', '!=',  optional($category_unclassified)->id )->take(5)->get();
         
         // // Tăng lượt xem khi xem bài viết
-        // $post->views =  ($post->views) + 1;
-        // $post->save();
+        $post->views =  ($post->views) + 1;
+        $post->save();
 
-        // Kiểm tra xem người dùng đã xem bài viết này chưa trong session
-        $sessionKey = 'viewed_post_' . $post->id;
+        // // Kiểm tra xem người dùng đã xem bài viết này chưa trong session
+        // $sessionKey = 'viewed_post_' . $post->id;
         
-        // Nếu người dùng chưa xem bài viết này trong phiên này, tăng views
-        if (!session()->has($sessionKey)) {
-            // Tăng lượt xem trong bảng `posts`
-            $post->increment('views');
+        // // Nếu người dùng chưa xem bài viết này trong phiên này, tăng views
+        // if (!session()->has($sessionKey)) {
+        //     // Tăng lượt xem trong bảng `posts`
+        //     $post->increment('views');
 
-            // Tăng lượt xem trong bảng `post_views` cho ngày hiện tại
-            $today = Carbon::today()->toDateString();
-            $view = $post->views()->where('view_date', $today)->first();
+        //     // Tăng lượt xem trong bảng `post_views` cho ngày hiện tại
+        //     $today = Carbon::today()->toDateString();
+        //     $view = $post->views()->where('view_date', $today)->first();
 
-            if ($view) {
-                // Nếu đã có lượt xem trong ngày, tăng lượt xem
-                $view->increment('views');
-            } else {
-                // Nếu chưa có, tạo mới lượt xem cho ngày hôm nay
-                $post->views()->create([
-                    'view_date' => $today,
-                    'views' => 1,
-                ]);
-            }
+        //     if ($view) {
+        //         // Nếu đã có lượt xem trong ngày, tăng lượt xem
+        //         $view->increment('views');
+        //     } else {
+        //         // Nếu chưa có, tạo mới lượt xem cho ngày hôm nay
+        //         $post->views()->create([
+        //             'view_date' => $today,
+        //             'views' => 1,
+        //         ]);
+        //     }
 
-            // Lưu vào session để tránh tăng views nhiều lần trong cùng 1 phiên
-            session()->put($sessionKey, true);
-        }
+        //     // Lưu vào session để tránh tăng views nhiều lần trong cùng 1 phiên
+        //     session()->put($sessionKey, true);
+        // }
 
 
         return view('post', [ 
@@ -90,20 +90,7 @@ class PostsController extends Controller
             'outstanding_posts' => $outstanding_posts, // bài viết xu hướng
         ]);
     }
-
-    public function addComment(Post $post)
-    {
-        $attributes = request()->validate([
-            'the_comment' => 'required|min:5|max:300']);
-
-        $attributes['user_id'] = auth()->id();
-
-        $comment = $post->comments()->create($attributes);
-
-        return redirect('/posts/' . $post->slug . '#comment_' . $comment->id)->with('success', 'Bạn vừa bình luận thành công.');
-
-
-    }
+    
 
     public function addCommentUser(){
         $data = array();

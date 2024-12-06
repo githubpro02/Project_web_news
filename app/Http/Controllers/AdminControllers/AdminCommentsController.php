@@ -6,19 +6,37 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Comment;
+use App\Models\User;
 
 class AdminCommentsController extends Controller
 {
     private  $rules = [
                 'post_id' => 'required|numeric',
                 'the_comment' => 'required|min:3|max:1000',
+                'user_id' => 'required|numeric'
             ];
 
-    public function index()
+
+    public function index(Request $request)
     {
-        return view('admin_dashboard.comments.index', [
-            'comments' => Comment::latest()->paginate(20),
-        ]);
+        // Start a query builder for posts with their associated category
+        $query = Comment::with('user');
+    
+        // Check if there's a search query in the request
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $search = $request->input('search');
+            $query->where('id', 'LIKE', "%{$search}%")
+                  ->orwhere('the_comment', 'LIKE', "%{$search}%")
+                  ->orWhereHas('user', function ($q) use ($search) {
+                      $q->where('name', 'LIKE', "%{$search}%");
+                  });
+        }        
+    
+        // Get paginated results, ordered by ID
+        $comments = $query->paginate(20);
+    
+        // Return the view with posts data
+        return view('admin_dashboard.comments.index', compact('comments'));
     }
 
 

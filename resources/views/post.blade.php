@@ -165,7 +165,7 @@
                             <div class="comment-respond">
                                 <x-blog.message :status="'success'"/>
 								@auth	
-								<!-- <form method="POST" action="{{ route('posts.add_comment', $post )}}"> -->
+								{{-- <!-- <form method="POST" action="{{ route('posts.add_comment', $post )}}"> --> --}}
                                 <form onsubmit="return false;" autocomplete="off" method="POST" >
 									@csrf
 									<p>Đừng lo ! Địa chỉ email của bạn sẽ không được công bố (*).</p>

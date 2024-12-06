@@ -211,7 +211,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($mostReadArticles as $post)
+                                        @foreach ($mostReadPost as $post)
                                         <tr>
                                             <td>{{ $post->title }}</td>
                                             <td class="text-center">{{ $post->views }}</td>
@@ -240,10 +240,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($mostEngagedArticles as $post)
+                                        @foreach ($mostEngagedPost as $post)
                                         <tr>
                                             <td>{{ $post->title }}</td>
-                                            <td class="text-center">{{ $post->comments_count }}</td> <!-- Assuming 'comments_count' is passed -->
+                                            <td class="text-center">{{ $post->comments_count }}</td>
                                             <td class="text-center">{{ $post->views }}</td>
                                             <td class="text-center">{{ $post->created_at->format('Y-m-d') }}</td>
                                         </tr>
@@ -269,12 +269,12 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($pendingArticles as $post)
+                                        @foreach ($pendingPost as $post)
                                         <tr>
                                             <td >{{ $post->title }}</td>
                                             <td class="text-center">{{ $post->author->name }}</td>
                                             <td class="text-center">{{ $post->created_at->format('Y-m-d') }}</td>
-                                            <td class="text-center"><span class="badge bg-warning">Chưa Duyệt</span></td> <!-- Assuming 'status' is either 'Pending' or 'Approved' -->
+                                            <td class="text-center"><span class="badge bg-warning">Chưa Duyệt</span></td>
                                         </tr>
                                         @endforeach
                                     </tbody>
@@ -291,6 +291,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
+                                            {{-- <th>Hình ảnh</th> --}}
                                             <th>Tên Người Dùng</th>
                                             <th>Email</th>
                                             <th class="text-center">Vai trò</th>
@@ -300,7 +301,7 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($userInteractions as $user)
-                                        <tr>
+                                        <tr>                                            
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td class="text-center">{{ $user->role->name }}</td>

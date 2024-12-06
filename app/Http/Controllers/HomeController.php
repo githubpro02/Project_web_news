@@ -19,7 +19,7 @@ class HomeController extends Controller
 
         $posts = Post::latest()
         ->approved()
-        // where('approved',1)
+        // ->where('approved',1)
         ->withCount('comments')->paginate(8); 
         // phân trang 8 bài
         $recent_posts = Post::latest()->take(5)->get();
@@ -156,9 +156,6 @@ class HomeController extends Controller
         $outstanding_posts = Post::approved()->where('category_id', '!=',  $category_unclassified->id )->take(5)->get();
         
         $key = $request->search;
-        // tìm kiếm kết quả danh mục
-        // $cat = Category::where('name','like' , '%'.$key.'%')->first();
-        // $pro = Category::where('name','like' , '%'.$key.'%')->first();
 
         // Tìm kiếm theo tiêu đề
         $postsQuery = Post::latest()->approved()->where('title', 'like', '%'.$key.'%');
@@ -166,17 +163,26 @@ class HomeController extends Controller
         // Tìm kiếm theo danh mục
         $category = Category::where('name', 'like', '%'.$key.'%')->first();
         if ($category) {
-            $postsQuery->orWhere('category_id', $category->id); // Tìm theo danh mục
+            $postsQuery->orWhere(function ($query) use ($category) {
+                $query->where('category_id', $category->id)
+                      ->where('approved', 1); // Điều này sẽ được xử lý bởi scopeApproved
+            });
         }
 
         // Tìm kiếm theo tag (nếu có mối quan hệ giữa Post và Tag)
         $tags = Tag::where('name', 'like', '%'.$key.'%')->get(); // Lấy tất cả tags có tên tương ứng
         if ($tags->isNotEmpty()) {
-            $postsQuery->orWhereIn('id', $tags->pluck('post_id')); // Giả sử mối quan hệ giữa Post và Tag là nhiều-nhiều, qua bảng trung gian post_tag
+            // Lấy danh sách ID bài viết liên kết với các tag
+            $postIds = Post::approved()->whereHas('tags', function ($query) use ($tags) {
+                $query->whereIn('tags.id', $tags->pluck('id')); // Lọc các bài viết liên quan đến các tag
+            })->pluck('id');
+        
+            // Thêm điều kiện tìm kiếm vào query
+            $postsQuery->orWhereIn('id', $postIds);
         }
 
         // Phân trang kết quả
-        $posts = $postsQuery->paginate(30);
+        $posts = $postsQuery->paginate(10)->appends(['search' => $key]);;
         
         $title = 'Kết quả tìm kiếm';
         $title_t = 'Kết quả tìm kiếm theo';
@@ -232,7 +238,7 @@ class HomeController extends Controller
     public function hotPost(){
         
         // Bài viết mới nhất
-        $recent_posts = Post::latest()->take(5)->get();
+        // $recent_posts = Post::latest()->take(5)->get();
         $categories  = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('created_at','DESC')->take(10)->get();
        
          /*----- Lấy ra 4 bài viết mới nhất theo các danh mục khác nhau -----*/
@@ -274,7 +280,7 @@ class HomeController extends Controller
         $hotPosts_category[4]  = Post::approved()->where('category_id', $category_the_gioi-> id )->orderBy('created_at','DESC')->take(4)->get();
 
         return view('hotPost',compact(
-            'recent_posts',
+            // 'recent_posts',
             'categories',
             'posts_new',
             'outstanding_posts',

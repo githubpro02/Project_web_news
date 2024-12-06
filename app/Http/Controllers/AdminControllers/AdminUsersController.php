@@ -20,13 +20,28 @@ class AdminUsersController extends Controller
         'role_id' => 'required|numeric'
     ];
 
-    public function index()
-    {
-        return view('admin_dashboard.users.index', [
-            'users' => User::with('role')->paginate(20),
-        ]);
-    }
 
+    public function index(Request $request)
+    {
+        // Start a query builder for posts with their associated category
+        $query = User::with('role');
+    
+        // Check if there's a search query in the request
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $search = $request->input('search');
+            $query->where('email', 'LIKE', "%{$search}%")
+                  ->orWhere('name', 'LIKE', "%{$search}%")
+                  ->orWhereHas('role', function ($q) use ($search) {
+                      $q->where('name', 'LIKE', "%{$search}%");
+                  });
+        }
+    
+        // Get paginated results, ordered by ID
+        $users = $query->paginate(20);
+    
+        // Return the view with posts data
+        return view('admin_dashboard.users.index', compact('users'));
+    }
   
     public function create()
     {

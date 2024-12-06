@@ -21,13 +21,28 @@ class AdminPostsController extends Controller
         'body' => 'required',
     ];
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin_dashboard.posts.index', [
-            // 'posts' => Post::with('category')->get(),
-            'posts' => Post::with('category')->orderBy('id','ASC')->paginate(20),
-        ]);
+        // Start a query builder for posts with their associated category
+        $query = Post::with('category');
+    
+        // Check if there's a search query in the request
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $search = $request->input('search');
+            $query->where('title', 'LIKE', "%{$search}%")
+                  ->orWhere('excerpt', 'LIKE', "%{$search}%")
+                  ->orWhereHas('category', function ($q) use ($search) {
+                      $q->where('name', 'LIKE', "%{$search}%");
+                  });
+        }
+    
+        // Get paginated results, ordered by ID
+        $posts = $query->orderBy('id', 'ASC')->paginate(20);
+    
+        // Return the view with posts data
+        return view('admin_dashboard.posts.index', compact('posts'));
     }
+    
 
     public function create()
     {
@@ -66,20 +81,20 @@ class AdminPostsController extends Controller
         if (count($tags_ids) > 0)
             $post->tags()->sync( $tags_ids ); 
         
-        // $tags = explode(',', $request->input('tags'));
-        // $tags_ids = [];
-        // foreach ($tags as $tag) {
+        $tags = explode(',', $request->input('tags'));
+        $tags_ids = [];
+        foreach ($tags as $tag) {
 
-        //     $tag_exits = $post->tags()->where('name', trim($tag))->count();
-        //     if( $tag_exits == 0){
-        //         $tag_ob = Tag::create(['name'=> $tag]);
-        //         $tags_ids[]  = $tag_ob->id;
-        //     }
+            $tag_exits = $post->tags()->where('name', trim($tag))->count();
+            if( $tag_exits == 0){
+                $tag_ob = Tag::create(['name'=> $tag]);
+                $tags_ids[]  = $tag_ob->id;
+            }
             
-        // }
+        }
 
-        // if (count($tags_ids) > 0)
-        //     $post->tags()->syncWithoutDetaching( $tags_ids );
+        if (count($tags_ids) > 0)
+            $post->tags()->syncWithoutDetaching( $tags_ids );
 
         return redirect()->route('admin.posts.create')->with('success', 'Thêm bài viết thành công.');
     }

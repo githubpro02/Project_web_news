@@ -10,13 +10,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Liên hệ</div>
+            <div class="breadcrumb-title pe-3">Đăng kí</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Tất cả liên hệ</li>
+                        <li class="breadcrumb-item active" aria-current="page">Tất cả đăng kí</li>
                     </ol>
                 </nav>
             </div>
@@ -31,25 +31,30 @@
 							<table id="example2" class="table table-striped table-bordered">
 								<thead>
 									<tr>
-										<th>Họ và Tên</th>
+										<th>Mã đăng kí</th>
 										<th>Email</th>
-										<th>Tiêu đề</th>
-										<th>Nội dung</th>
 										<th>Chức năng</th>
 									</tr>
 								</thead>
 								<tbody>
-                                    @foreach($contacts as $contact)
+                                    @foreach($newsletter as $newletter)
 									<tr>
-										<td>{{ $contact->first_name }} {{ $contact->last_name }}</td>
-										<td>{{ $contact->email }}</td>
-										<td>{{ $contact->subject }}</td>
-										<td>{{ $contact->message }}</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div>
+                                                    <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
+                                                </div>
+                                                <div class="ms-2">
+                                                    <h6 class="mb-0 font-14">#P-{{ $newletter->id }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
+										<td>{{ $newletter->email }}</td>
                                         <td>
                                         <div class="d-flex order-actions">
-                                            <a href="#" onclick="event.preventDefault(); document.querySelector('#delete_form_{{  $contact->id }}').submit();" class="ms-3"><i class='bx bxs-trash'></i></a>
+                                            <a href="#" onclick="event.preventDefault(); document.querySelector('#delete_form_{{  $newletter->id }}').submit();" class="ms-3"><i class='bx bxs-trash'></i></a>
 
-                                            <form method="post" action="{{ route('admin.contacts.destroy',  $contact) }}" id="delete_form_{{  $contact->id }}">
+                                            <form method="post" action="{{ route('admin.newsletter.destroy',  $newletter) }}" id="delete_form_{{  $newletter->id }}">
                                                 @csrf
                                                 @method('DELETE')
                                             </form>

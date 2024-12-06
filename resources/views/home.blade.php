@@ -28,6 +28,7 @@
 
 											<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
 										</div>
+										
 										<div class="post--info">
 											<div class="title">
 												<h2 class="h4"><a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="btn-link">{{ $posts_new[$i][0]->title }}</a>
@@ -743,16 +744,13 @@
 									</p>
 								</div>
 
-								<form
-									action="https://themelooks.us13.list-manage.com/subscribe/post?u=79f0b132ec25ee223bb41835f&id=f4e0e93d1d"
-									method="post" name="mc-embedded-subscribe-form" target="_blank"
-									data-form="mailchimpAjax">
+								<form>
 									<div class="input-group">
-										<input type="email" name="EMAIL" placeholder="E-mail address"
-											class="form-control" autocomplete="off" required>
+										<input type="email" name="subscribe-email" placeholder="E-mail address"
+											required class="form-control" id="email">
 
 										<div class="input-group-btn">
-											<button type="submit" class="btn btn-lg btn-default active"><i
+											<button type="submit" id='subscibe-btn' class="btn btn-lg btn-default active"><i
 													class="fa fa-paper-plane-o"></i></button>
 										</div>
 									</div>

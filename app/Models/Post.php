@@ -50,7 +50,7 @@ class Post extends Model
         return $query->where('approved', 1);
     }
 
-        // Model event to send email when a new post is created
+    // Model event to send email when a new post is created
     protected static function booted()
     {
         static::created(function ($post) {

@@ -54,7 +54,7 @@ class DashboardController extends Controller
         $viewsPerMonth = [];
         $commentsPerMonth = [];
         for ($i = 5; $i >= 0; $i--) {
-            $date = Carbon::now()->subMonths($i)->format('Y-m');
+            $date = Carbon::now()->subMonths($i)->toDateString();
 
             // Lấy tổng lượt xem cho tháng
             $viewsPerMonth[$date] = PostView::whereMonth('created_at', Carbon::parse($date)->month)
@@ -69,17 +69,17 @@ class DashboardController extends Controller
         }
 
        // Top 5 bài viết đọc nhiều nhất
-        $mostReadArticles = Post::orderByDesc('views')->take(5)->get();
+        $mostReadPost = Post::orderByDesc('views')->take(5)->get();
 
         // Top 5 bài viết được quan tâm nhiều nhất (dựa trên lượt bình luận)
-        $mostEngagedArticles = Post::withCount('comments', 'views')
+        $mostEngagedPost = Post::withCount('comments', 'views')
             ->orderByDesc('views')
             ->orderByDesc('comments_count')
             ->take(5)
             ->get();
 
         // Bài viết chờ duyệt
-        $pendingArticles = Post::where(function ($query) {
+        $pendingPost = Post::where(function ($query) {
             $query->where('approved', 0)
                   ->orWhereNull('approved');
         })->get();
@@ -92,9 +92,6 @@ class DashboardController extends Controller
             ->get();
 
         // Danh mục với số bài viết
-        // $categories = Category::withCount('posts')
-        // ->where('name', '!=', 'chưa phân loại')
-        // ->get();
         $categories = Category::withCount('posts')
             ->where('name', '!=', 'chưa phân loại')
             ->withSum('posts', 'views') // Tính tổng lượt xem
@@ -114,9 +111,9 @@ class DashboardController extends Controller
             'commentsPerDay' => $commentsPerDay,
             'viewsPerMonth' => $viewsPerMonth,
             'commentsPerMonth' => $commentsPerMonth,
-            'mostReadArticles' => $mostReadArticles, 
-            'mostEngagedArticles'=> $mostEngagedArticles, 
-            'pendingArticles' => $pendingArticles, 
+            'mostReadPost' => $mostReadPost, 
+            'mostEngagedPost'=> $mostEngagedPost, 
+            'pendingPost' => $pendingPost, 
             'userInteractions' => $userInteractions, 
             'categories' => $categories
         ]); 

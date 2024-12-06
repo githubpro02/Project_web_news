@@ -13,6 +13,8 @@ class Newsletter extends Model
 
     protected $fillable = ['email'];
 
+    protected $guarded = [];
+
     // Add a method to store the subscriber email
     public static function store($request)
     {

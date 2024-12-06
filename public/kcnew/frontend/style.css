@@ -147,7 +147,7 @@ WE MAY RELEASE FUTURE UPDATES SO IT WILL OVERWRITE THIS FILE. IT'S BETTER AND SA
     1. GENERAL STYLES
 \*------------------------------------*/
 body {
-    color: #777;
+    color: inherit;
     font-family: "Source Sans Pro", sans-serif;
     font-size: 15px;
     line-height: 24px;
@@ -388,7 +388,7 @@ a:active, .btn-link:active {
     height: 36px;
     padding: 4px 20px;
     background-color: transparent;
-    border-color: #f9f9f9;
+    border-color: #999;
     border-radius: 0;
     box-shadow: none;
     font-size: 16px;

@@ -23,7 +23,12 @@
             <div class="card-body">
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
                     <div class="position-relative">
-                        <input type="text" class="form-control ps-5 radius-30" placeholder="Tìm kiếm bài viết"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        <form method="GET" action="{{ route('admin.posts.index') }}" class="position-relative">
+                            <input type="text" name="search" class="form-control ps-5 radius-30" placeholder="Tìm kiếm bài viết" value="{{ request()->query('search') }}">
+                            <button type="submit" class="position-absolute top-50 product-show translate-middle-y" style="border: none; background: none;">
+                                <i class="bx bx-search"></i>
+                            </button>
+                        </form>
                     </div>
                     <div class="ms-auto"><a href="{{ route('admin.posts.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm bài viết mới</a></div>
                 </div>
@@ -86,7 +91,7 @@
                     </table>
                 </div>
                 
-                <div class="mt-4">{{ $posts->links() }}</div>
+                <div class="mt-4">{{ $posts->appends(request()->input())->links() }}</div>
 
             </div>
         </div>
