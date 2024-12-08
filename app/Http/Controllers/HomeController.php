@@ -11,6 +11,7 @@ use App\Models\Image;
 
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 class HomeController extends Controller
@@ -346,7 +347,8 @@ class HomeController extends Controller
 
     public function update(Request $request)
     {
-        $user = auth()->user();
+        /** @var \App\Models\User $user */
+        $user = Auth::user();
         
         if($request->email !== $user->email){
             $this->rules['email'] = ['required','email', Rule::unique('users')->ignore($user)];

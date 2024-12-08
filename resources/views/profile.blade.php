@@ -97,6 +97,7 @@ $posts_new[3] = Post::latest()->approved()
                                             <button class="btn btn-primary" type="submit">Cập nhật</button>
 
                                             <a class="btn btn-danger" href="{{ route('home') }}">Quay lại</a>
+                                            <x-blog.message :status="'success'"/>
 
                                         </div>
                                     </div>

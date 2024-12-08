@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use App\Models\Category;
 use App\Models\Post;
@@ -54,7 +55,7 @@ class AdminPostsController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
         $post = Post::create($validated);
 
         if($request->has('thumbnail'))

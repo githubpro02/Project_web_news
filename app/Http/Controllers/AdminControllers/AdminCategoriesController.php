@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Category;
 class AdminCategoriesController extends Controller
 {
@@ -31,7 +32,7 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate($this->rules);
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
         Category::create($validated);
 
         return redirect()->route('admin.categories.create')->with('success','Thêm danh mục bài viết thành công.');

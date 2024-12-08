@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Post;
 use App\Models\Comment;
 use App\Models\User;
@@ -53,7 +54,7 @@ class AdminCommentsController extends Controller
     {
 
         $validated = $request->validate($this->rules);
-        $validated['user_id'] = auth()->id();
+        $validated['user_id'] = Auth::id();
 
         Comment::create($validated);
         return redirect()->route('admin.comments.create')->with('success', 'Thêm bình luận mới thành công.');

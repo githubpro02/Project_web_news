@@ -24,7 +24,7 @@
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
                     <div class="position-relative">
                         <form method="GET" action="{{ route('admin.comments.index') }}" class="position-relative">
-                            <input type="text" name="search" class="form-control ps-5 radius-30" placeholder="Tìm kiếm bài viết" value="{{ request()->query('search') }}">
+                            <input type="text" name="search" class="form-control ps-5 radius-30" placeholder="Tìm kiếm bình luận" value="{{ request()->query('search') }}">
                             <button type="submit" class="position-absolute top-50 product-show translate-middle-y" style="border: none; background: none;">
                                 <i class="bx bx-search"></i>
                             </button>

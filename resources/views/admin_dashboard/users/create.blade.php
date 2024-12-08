@@ -12,13 +12,13 @@
 			<div class="page-content">
 				<!--breadcrumb-->
 				<div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-					<div class="breadcrumb-title pe-3">Tài khoản</div>
+					<div class="breadcrumb-title pe-3">Người dùng</div>
 					<div class="ps-3">
 						<nav aria-label="breadcrumb">
 							<ol class="breadcrumb mb-0 p-0">
 								<li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
 								</li>
-								<li class="breadcrumb-item active" aria-current="page">Thêm mới tài khoản</li>
+								<li class="breadcrumb-item active" aria-current="page">Thêm mới người dùng</li>
 							</ol>
 						</nav>
 					</div>
@@ -27,7 +27,7 @@
 			  
 				<div class="card">
 				  <div class="card-body p-4">
-					  <h5 class="card-title">Thêm tài khoản mới</h5>
+					  <h5 class="card-title">Thêm người dùng mới</h5>
 					  <hr/>
 					<form action="{{ route('admin.users.store') }}" method="POST"  enctype="multipart/form-data" >
 						@csrf
@@ -96,7 +96,7 @@
 										</div>
 
 
-										<button class="btn btn-primary" type="submit">Thêm tài khoản mới</button>
+										<button class="btn btn-primary" type="submit">Thêm người dùng mới</button>
 
 									</div>
 								</div>

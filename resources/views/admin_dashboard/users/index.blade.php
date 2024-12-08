@@ -16,13 +16,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Tài khoản</div>
+            <div class="breadcrumb-title pe-3">Người dùng</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Tất cả tài khoản</li>
+                        <li class="breadcrumb-item active" aria-current="page">Tất cả người dùng</li>
                     </ol>
                 </nav>
             </div>
@@ -34,21 +34,21 @@
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
                     <div class="position-relative">
                         <form method="GET" action="{{ route('admin.users.index') }}" class="position-relative">
-                            <input type="text" name="search" class="form-control ps-5 radius-30" placeholder="Tìm kiếm bài viết" value="{{ request()->query('search') }}">
+                            <input type="text" name="search" class="form-control ps-5 radius-30" placeholder="Tìm kiếm người dùng" value="{{ request()->query('search') }}">
                             <button type="submit" class="position-absolute top-50 product-show translate-middle-y" style="border: none; background: none;">
                                 <i class="bx bx-search"></i>
                             </button>
                         </form>
                     </div>
-                    <div class="ms-auto"><a href="{{ route('admin.categories.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm danh mục mới</a></div>
+                    <div class="ms-auto"><a href="{{ route('admin.users.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm người dùng mới</a></div>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Mã Tài khoản</th>
+                                <th>Mã người dùng</th>
                                 <th>Ảnh dại diện</th>
-                                <th>Họ Tên</th>
+                                <th>Họ tên</th>
                                 <th>Email</th>
                                 <th>Quyền</th>
                                 <th>Thông tin</th>

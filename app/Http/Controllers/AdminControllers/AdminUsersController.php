@@ -4,6 +4,7 @@ namespace App\Http\Controllers\AdminControllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -124,7 +125,7 @@ class AdminUsersController extends Controller
 
     public function destroy(User $user)
     {
-        if($user->id === auth()->id())
+        if($user->id === Auth::id())
             return redirect()->back()->with('error', 'Bạn không thể xóa tài khoản bạn ( quản trị viên) ');
 
         User::whereHas('role', function($query){

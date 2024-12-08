@@ -7,6 +7,7 @@ use App\Models\Post;
 use App\Models\Category;
 use App\Models\Tag;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class PostsController extends Controller
@@ -115,7 +116,7 @@ class PostsController extends Controller
 
             $comment['the_comment'] = $attributes['the_comment']; 
             $comment['post_id'] = $post->id ; 
-            $comment['user_id'] = auth()->id();
+            $comment['user_id'] = Auth::id();
 
             $post->comments()->create($comment);
 

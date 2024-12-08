@@ -59,7 +59,7 @@
     <!-- Wrapper Start -->
     <div class="wrapper">
         <!-- Login Section Start -->
-        <div class="login--section pd--100-0 bg--overlay" data-bg-img="{{ asset('kcnew/frontend/img/KCN.png')}}">
+        <div class="login--section pd--100-0 bg--overlay" data-bg-img="{{ asset('kcnew/frontend/img/KCN.png')}}" >
             <div class="container">
                 <!-- Login Form Start -->
                 <div class="login--form">

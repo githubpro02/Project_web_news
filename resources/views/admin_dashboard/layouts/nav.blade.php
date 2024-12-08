@@ -139,18 +139,18 @@ function checkPermission($name) {
                     <a href="javascript:;" class="has-arrow">
                         <div class="parent-icon"><i class='bx bx-user'></i>
                         </div>
-                        <div class="menu-title">Tài khoản</div>
+                        <div class="menu-title">Người dùng</div>
                     </a>
 
                     <ul>
 
                         @if(checkPermission("admin.users.index"))
-                        <li> <a href="{{ route('admin.users.index') }}"><i class="bx bx-right-arrow-alt"></i>Tất cả tài khoản</a>
+                        <li> <a href="{{ route('admin.users.index') }}"><i class="bx bx-right-arrow-alt"></i>Tất cả người dùng</a>
                         </li>
                         @endif
 
                         @if(checkPermission("admin.users.create"))
-                        <li> <a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Thêm tài khoản mới</a>
+                        <li> <a href="{{ route('admin.users.create') }}"><i class="bx bx-right-arrow-alt"></i>Thêm người dùng mới</a>
                         </li>
                         @endif
                         
