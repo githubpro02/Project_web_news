@@ -23,7 +23,7 @@ class HomeController extends Controller
         // ->where('approved',1)
         ->withCount('comments')->paginate(8); 
         // phân trang 8 bài
-        $recent_posts = Post::latest()->take(5)->get();
+        // $recent_posts = Post::latest()->take(5)->get();
         $categories = Category::where('name','!=','Chưa phân loại')->orderBy('created_at','DESC')->take(10)->get();
         // $categories = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('posts_count', 'desc')->take(10)->get();
         $tags = Tag::latest()->take(50)->get();
@@ -129,7 +129,7 @@ class HomeController extends Controller
 
     public function search(Request $request){
         
-        $recent_posts = Post::latest()->take(5)->get();
+        // $recent_posts = Post::latest()->take(5)->get();
         $categories  = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('created_at','DESC')->take(10)->get();
        
          /*----- Lấy ra 4 bài viết mới nhất theo các danh mục khác nhau -----*/
@@ -189,14 +189,14 @@ class HomeController extends Controller
         $title_t = 'Kết quả tìm kiếm theo';
         $time = '(0,36 giây) ';
 
-        return view('search',compact('posts','title','time','recent_posts','categories', 'key','posts_new', 'outstanding_posts'));
+        return view('search',compact('posts','title','time','categories', 'key','posts_new', 'outstanding_posts'));
     }
 
 
     public function newPost(){
         
                 // Bài viết mới nhất
-                $recent_posts = Post::latest()->take(5)->get();
+                // $recent_posts = Post::latest()->take(5)->get();
                 $categories  = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('created_at','DESC')->take(10)->get();
                
                  /*----- Lấy ra 4 bài viết mới nhất theo các danh mục khác nhau -----*/
@@ -228,7 +228,7 @@ class HomeController extends Controller
                 $newPosts_category  = Post::latest()->approved()->where('category_id', '!=',  $category_unclassified->id )->take(20)->get(); 
         
                 return view('newPost',compact(
-                    'recent_posts',
+                    // 'recent_posts',
                     'categories',
                     'posts_new',
                     'outstanding_posts',
@@ -292,7 +292,7 @@ class HomeController extends Controller
     public function viewPost(){
         
         // Bài viết mới nhất
-        $recent_posts = Post::latest()->take(5)->get();
+        // $recent_posts = Post::latest()->take(5)->get();
         $categories  = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('created_at','DESC')->take(10)->get();
        
          /*----- Lấy ra 4 bài viết mới nhất theo các danh mục khác nhau -----*/
@@ -323,7 +323,7 @@ class HomeController extends Controller
         $viewPosts_category  = Post::approved()->where('category_id', '!=',  $category_unclassified->id )->orderBy('views','DESC')->take(20)->get(); 
 
         return view('viewPost',compact(
-            'recent_posts',
+            // 'recent_posts',
             'categories',
             'posts_new',
             'outstanding_posts',

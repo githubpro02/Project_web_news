@@ -84,10 +84,29 @@ class AdminUsersController extends Controller
         ]);
     }
 
-    public function show(User $user)
+    public function show(User $user, Request $request)
     {
+        // Start building the query
+        $query = $user->posts()->with('category');
+
+        // Check if there's a search keyword
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $keyword = $request->input('search');
+            $query->where(function ($query) use ($keyword) {
+                $query->where('title', 'LIKE', "%{$keyword}%")
+                    ->orWhere('excerpt', 'LIKE', "%{$keyword}%")
+                    ->orWhereHas('category', function ($query) use ($keyword) {
+                        $query->where('name', 'LIKE', "%{$keyword}%");
+                    });
+            });
+        }
+
+        // Paginate the posts
+        $posts = $query->paginate(20);
+        
         return view('admin_dashboard.users.show', [
             'user' => $user,
+            'posts' => $posts,
         ]);
     }
 

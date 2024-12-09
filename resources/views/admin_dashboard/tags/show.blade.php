@@ -6,13 +6,13 @@
     <div class="page-content">
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-            <div class="breadcrumb-title pe-3">Danh mục bài viết</div>
+            <div class="breadcrumb-title pe-3">Từ khóa</div>
             <div class="ps-3">
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{ route('admin.index') }}"><i class="bx bx-home-alt"></i></a>
                         </li>
-                        <li class="breadcrumb-item active" aria-current="page">Danh mục {{ $tag->name }}c</li>
+                        <li class="breadcrumb-item active" aria-current="page">Thông tin bài viết của từ khóa: {{ $tag->name }}</li>
                     </ol>
                 </nav>
             </div>
@@ -23,7 +23,12 @@
             <div class="card-body">
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
                     <div class="position-relative">
-                        <input type="text" class="form-control ps-5 radius-30" placeholder="Tìm kiếm từ khóa"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+                        <form method="GET" action="{{ route('admin.tags.show', $tag) }}" class="position-relative">
+                            <input type="text" name="search" class="form-control ps-5 radius-30" placeholder="Tìm kiếm bài viết" value="{{ request()->query('search') }}">
+                            <button type="submit" class="position-absolute top-50 product-show translate-middle-y" style="border: none; background: none;">
+                                <i class="bx bx-search"></i>
+                            </button>
+                        </form>
                     </div>
                     <div class="ms-auto"><a href="{{ route('admin.posts.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm bài viết mới</a></div>
                 </div>
@@ -42,7 +47,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($tag->posts as $post)
+                            @foreach ($posts as $post)
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
@@ -86,7 +91,7 @@
                     </table>
                 </div>
                 
-
+                <div class="mt-4">{{ $posts->appends(request()->input())->links() }}</div>
             </div>
         </div>
 

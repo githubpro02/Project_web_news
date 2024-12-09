@@ -22,14 +22,32 @@ class AdminTagsController extends Controller
         // Get paginated results, ordered by ID
         $tags = $query->with('posts')->paginate(20);
     
-        // Return the view with posts data
         return view('admin_dashboard.tags.index', compact('tags'));
     }
 
-    public function show(Tag $tag)
+    public function show(Tag $tag, Request $request)
     {
+        // Start building the query
+        $query = $tag->posts()->with('category');
+
+        // Check if there's a search keyword
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $keyword = $request->input('search');
+            $query->where(function ($query) use ($keyword) {
+                $query->where('title', 'LIKE', "%{$keyword}%")
+                    ->orWhere('excerpt', 'LIKE', "%{$keyword}%")
+                    ->orWhereHas('category', function ($query) use ($keyword) {
+                        $query->where('name', 'LIKE', "%{$keyword}%");
+                    });
+            });
+        }
+
+        // Paginate the posts
+        $posts = $query->paginate(20);
+        
         return view('admin_dashboard.tags.show',[
-            'tag' => $tag
+            'tag' => $tag,
+            'posts' => $posts,
         ]);
     }
 

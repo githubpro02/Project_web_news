@@ -30,7 +30,7 @@
                             </button>
                         </form>
                     </div>
-                    <div class="ms-auto"><a href="{{ route('admin.comments.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm danh mục mới</a></div>
+                    <div class="ms-auto"><a href="{{ route('admin.comments.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm bình luận mới</a></div>
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0">

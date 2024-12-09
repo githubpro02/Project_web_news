@@ -29,11 +29,11 @@ class AdminPostsController extends Controller
     
         // Check if there's a search query in the request
         if ($request->has('search') && !empty($request->input('search'))) {
-            $search = $request->input('search');
-            $query->where('title', 'LIKE', "%{$search}%")
-                  ->orWhere('excerpt', 'LIKE', "%{$search}%")
-                  ->orWhereHas('category', function ($q) use ($search) {
-                      $q->where('name', 'LIKE', "%{$search}%");
+            $keyword = $request->input('search');
+            $query->where('title', 'LIKE', "%{$keyword}%")
+                  ->orWhere('excerpt', 'LIKE', "%{$keyword}%")
+                  ->orWhereHas('category', function ($q) use ($keyword) {
+                      $q->where('name', 'LIKE', "%{$keyword}%");
                   });
         }
     

@@ -25,18 +25,17 @@ class AdminCommentsController extends Controller
     
         // Check if there's a search query in the request
         if ($request->has('search') && !empty($request->input('search'))) {
-            $search = $request->input('search');
-            $query->where('id', 'LIKE', "%{$search}%")
-                  ->orwhere('the_comment', 'LIKE', "%{$search}%")
-                  ->orWhereHas('user', function ($q) use ($search) {
-                      $q->where('name', 'LIKE', "%{$search}%");
+            $keyword = $request->input('search');
+            $query->where('id', 'LIKE', "%{$keyword}%")
+                  ->orwhere('the_comment', 'LIKE', "%{$keyword}%")
+                  ->orWhereHas('user', function ($q) use ($keyword) {
+                      $q->where('name', 'LIKE', "%{$keyword}%");
                   });
         }        
     
         // Get paginated results, ordered by ID
         $comments = $query->paginate(20);
     
-        // Return the view with posts data
         return view('admin_dashboard.comments.index', compact('comments'));
     }
 
