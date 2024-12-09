@@ -39,10 +39,29 @@ class AdminCategoriesController extends Controller
     }
 
 
-    public function show(Category $category)
+    public function show(Category $category, Request $request)
     {
+        // Start building the query
+        $query = $category->posts();
+
+        // Check if there's a search keyword
+        if ($request->has('search') && !empty($request->input('search'))) {
+            $keyword = $request->input('search');
+            $query->where(function ($query) use ($keyword) {
+                $query->where('title', 'LIKE', "%{$keyword}%")
+                    ->orWhere('excerpt', 'LIKE', "%{$keyword}%")
+                    ->orWhereHas('category', function ($query) use ($keyword) {
+                        $query->where('name', 'LIKE', "%{$keyword}%");
+                    });
+            });
+        }
+
+        // Paginate the posts
+        $posts = $query->paginate(20);
+
         return view('admin_dashboard.categories.show',[
-            'category' => $category
+            'category' => $category,
+            'posts' => $posts
         ]);
     }
 
