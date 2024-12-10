@@ -89,7 +89,7 @@
 
 										<button class="btn btn-primary" type="submit">Sửa quyền</button>
 										
-										<a class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete_role_{{ $role->id }}').submit();" 
+										<a class="btn btn-danger" onclick="event.preventDefault(); confirmDelete({{ $role->id }});" 
 										href="#">Xóa quyền</a>
 
 
@@ -115,7 +115,24 @@
 @endsection
 	
 @section("script")
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
+		function confirmDelete(id) {
+			Swal.fire({
+				title: 'Bạn có chắc chắn?',
+				text: "Hành động này không thể hoàn tác!",
+				icon: 'warning',
+				showCancelButton: true,
+				confirmButtonColor: '#d33',
+				cancelButtonColor: '#3085d6',
+				confirmButtonText: 'Xóa',
+				cancelButtonText: 'Hủy'
+			}).then((result) => {
+				if (result.isConfirmed) {
+					document.querySelector('#delete_form_' + id).submit();
+				}
+			});
+		}
 		$(document).ready(function () {
 
 			setTimeout(()=>{

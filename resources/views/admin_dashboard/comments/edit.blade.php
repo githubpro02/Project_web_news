@@ -70,9 +70,12 @@
 										</div>
 
 										<button class="btn btn-primary" type="submit">Sửa bình luận</button>
-										<a class="btn btn-danger" onclick="event.preventDefault(); document.getElementById('delete_comment_{{ $comment->id }}').submit();" 
+										<a class="btn btn-danger" onclick="event.preventDefault(); confirmDelete({{ $comment->id }});" 
 										href="#">Xóa bình luận</a>
-
+										<form method="post" action="{{ route('admin.comments.destroy', $comment) }}" id="delete_form_{{ $comment->id }}" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
 									</div>
 								</div>
 							</div>
@@ -97,6 +100,7 @@
 	
 @section("script")
 	<script src="{{ asset('admin_dashboard_assets/plugins/select2/js/select2.min.js') }}"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 	<script>
 		$(document).ready(function () {
 			// $('#image-uploadify').imageuploadify();
@@ -113,6 +117,22 @@
 		},5000);
 
 		});
+		function confirmDelete(id) {
+            Swal.fire({
+                title: 'Bạn có chắc chắn?',
+                text: "Hành động này không thể hoàn tác!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.querySelector('#delete_form_' + id).submit();
+                }
+            });
+        }
 
 
 	</script>

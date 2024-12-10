@@ -86,9 +86,9 @@
                                 <td>
                                     <div class="d-flex order-actions">
                                         <a href="{{ route('admin.users.edit', $user)}}" class=""><i class='bx bxs-edit'></i></a>
-                                        <a href="#" onclick="event.preventDefault(); document.querySelector('#delete_form_{{ $user->id }}').submit();" class="ms-3"><i class='bx bxs-trash'></i></a>
+                                        <a href="#" onclick="event.preventDefault(); confirmDelete({{ $user->id }});" class="ms-3"><i class='bx bxs-trash'></i></a>
 
-                                        <form method="post" action="{{ route('admin.users.destroy', $user) }}" id="delete_form_{{ $user->id }}">
+                                        <form method="post" action="{{ route('admin.users.destroy', $user) }}" id="delete_form_{{ $user->id }}" style="display: none;">
                                             @csrf
                                             @method('DELETE')
                                         </form>
@@ -114,7 +114,24 @@
 @endsection
 
 @section("script")
-	<script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        function confirmDelete(id) {
+            Swal.fire({
+                title: 'Bạn có chắc chắn?',
+                text: "Hành động này không thể hoàn tác!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Xóa',
+                cancelButtonText: 'Hủy'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.querySelector('#delete_form_' + id).submit();
+                }
+            });
+        }
 		$(document).ready(function () {
 		setTimeout(()=>{
 				$(".general-message").fadeOut();
