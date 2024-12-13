@@ -74,31 +74,24 @@ class AdminPostsController extends Controller
             ]);
         }
 
+        // Lấy danh sách tags từ input, tách chúng thành mảng và loại bỏ các tag trống
         $tags = explode(',', $request->input('tags'));
         $tags_ids = [];
         foreach ($tags as $tag) {
-            $tag_ob = Tag::create(['name'=> trim($tag)]);
-            $tags_ids[]  = $tag_ob->id;
+            $tag = trim($tag);// Loại bỏ khoảng trắng thừa
+            // Kiểm tra nếu tag không phải là chuỗi trống
+            if (!empty($tag)) {
+                // Tìm hoặc tạo mới tag nếu không tồn tại
+                $existingTag = Tag::firstOrCreate(['name' => $tag]);
+                // Thêm ID của tag vào mảng
+                $tags_ids[] = $existingTag->id;
+            }
         }
 
+        // Gắn các tags đã có vào bài viết
         if (count($tags_ids) > 0)
             $post->tags()->sync( $tags_ids ); 
-        
-        $tags = explode(',', $request->input('tags'));
-        $tags_ids = [];
-        foreach ($tags as $tag) {
-
-            $tag_exits = $post->tags()->where('name', trim($tag))->count();
-            if( $tag_exits == 0){
-                $tag_ob = Tag::create(['name'=> $tag]);
-                $tags_ids[]  = $tag_ob->id;
-            }
-            
-        }
-
-        if (count($tags_ids) > 0)
-            $post->tags()->syncWithoutDetaching( $tags_ids );
-
+         
         return redirect()->route('admin.posts.create')->with('success', 'Thêm bài viết thành công.');
     }
 
@@ -151,14 +144,18 @@ class AdminPostsController extends Controller
         $tags_ids = [];
         foreach ($tags as $tag) {
 
-            $tag_exits = $post->tags()->where('name', trim($tag))->count();
-            if( $tag_exits == 0){
-                $tag_ob = Tag::create(['name'=> $tag]);
-                $tags_ids[]  = $tag_ob->id;
+            $tag = trim($tag);// Loại bỏ khoảng trắng thừa
+            // Kiểm tra nếu tag không phải là chuỗi trống
+            if (!empty($tag)) {
+                // Tìm hoặc tạo mới tag nếu không tồn tại
+                $existingTag = Tag::firstOrCreate(['name' => $tag]);
+                // Thêm ID của tag vào mảng
+                $tags_ids[] = $existingTag->id;
             }
             
         }
 
+        // Gắn các tags đã có vào bài viết, giữ lại các tag đã gắn trước đó
         if (count($tags_ids) > 0)
             $post->tags()->syncWithoutDetaching( $tags_ids ); 
 
