@@ -229,7 +229,7 @@
 															<li><a href="javascript:;">{{ $postTheSame->author->name }}</a>
 															</li>
 															<li><a href="javascript:;">{{ $postTheSame->created_at->locale('vi')->diffForHumans() }}c</a></li>
-                                                            <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>2</a></li>
+                                                            <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($postTheSame->comments) }}</a></li>
 														</ul>
 													</div>
 												</div>

@@ -18,7 +18,7 @@
                     
                     <div class="top-menu ms-auto">
                         <ul class="navbar-nav align-items-center">
-                            <li class="nav-item dropdown dropdown-large">
+                            {{-- <li class="nav-item dropdown dropdown-large">
                                 <a class="nav-link dropdown-toggle dropdown-toggle-nocaret position-relative" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <span class="alert-count">10</span>
                                     <i class='bx bx-comment'></i>
                                 </a>
@@ -50,7 +50,7 @@
                                         <div class="text-center msg-footer">Xem tất cả</div>
                                     </a>
                                 </div>
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <div class="user-box dropdown">

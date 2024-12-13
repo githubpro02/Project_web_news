@@ -105,6 +105,17 @@
                             <a href="{{ route('register') }}" class="btn-link pull-right">Đăng ký tài khoản </a>
                         </p>
 
+                        @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                        @endif
+                    
+                        @if ($errors->any())
+                            <div class="alert alert-danger" role="alert">
+                                {{ __('Có lỗi xảy ra, vui lòng kiểm tra lại.') }}
+                            </div>
+                        @endif 
                     </form>
                 </div>
                 <!-- Login Form End -->

@@ -146,10 +146,6 @@
 
 										<a class="btn btn-danger" onclick="event.preventDefault(); confirmDelete({{ $post->id }});" 
 										href="#">Xóa bài viết</a>
-										<form method="post" action="{{ route('admin.posts.destroy', $post) }}" id="delete_form_{{ $post->id }}" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
 
 									</div>
 								</div>
@@ -158,7 +154,7 @@
 
 					</form>
 
-					<form id="delete_post_{{ $post->id }}" action="{{ route('admin.posts.destroy', $post) }}"  method="post">
+					<form method="post" action="{{ route('admin.posts.destroy', $post) }}" id="delete_form_{{ $post->id }}" style="display: none;">
 						@csrf
 						@method('DELETE')
 					</form>

@@ -52,10 +52,7 @@
 
 										<a class="btn btn-danger" onclick="event.preventDefault(); confirmDelete({{ $category->id }});" 
 										href="#">Xóa danh mục</a>
-										<form method="post" action="{{ route('admin.categories.destroy', $category) }}" id="delete_form_{{ $category->id }}" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
+
 									</div>
 								</div>
 							</div>
@@ -63,7 +60,7 @@
 
 					</form>
 
-					<form id="delete_category_{{ $category->id }}" action="{{ route('admin.categories.destroy', $category) }}"  method="post">
+					<form method="post" action="{{ route('admin.categories.destroy', $category) }}" id="delete_form_{{ $category->id }}" style="display: none;">
 						@csrf
 						@method('DELETE')
 					</form>

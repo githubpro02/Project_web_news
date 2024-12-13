@@ -100,7 +100,7 @@
 
 					</form>
 
-					<form id="delete_role_{{ $role->id }}" action="{{ route('admin.roles.destroy', $role) }}"  method="post">
+					<form id="delete_form_{{ $role->id }}" action="{{ route('admin.roles.destroy', $role) }}"  method="post" style="display: none;">
 						@csrf
 						@method('DELETE')
 					</form>

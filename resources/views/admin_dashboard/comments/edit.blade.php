@@ -72,10 +72,6 @@
 										<button class="btn btn-primary" type="submit">Sửa bình luận</button>
 										<a class="btn btn-danger" onclick="event.preventDefault(); confirmDelete({{ $comment->id }});" 
 										href="#">Xóa bình luận</a>
-										<form method="post" action="{{ route('admin.comments.destroy', $comment) }}" id="delete_form_{{ $comment->id }}" style="display: none;">
-                                            @csrf
-                                            @method('DELETE')
-                                        </form>
 									</div>
 								</div>
 							</div>
@@ -83,7 +79,7 @@
 
 					</form>
 
-					<form id="delete_comment_{{ $comment->id }}" action="{{ route('admin.comments.destroy', $comment) }}"  method="post">
+					<form method="post" action="{{ route('admin.comments.destroy', $comment) }}" id="delete_form_{{ $comment->id }}" style="display: none;">
 						@csrf
 						@method('DELETE')
 					</form>

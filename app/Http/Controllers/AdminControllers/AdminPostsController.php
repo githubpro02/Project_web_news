@@ -5,6 +5,7 @@ namespace App\Http\Controllers\AdminControllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 use App\Models\Category;
 use App\Models\Post;
@@ -54,6 +55,7 @@ class AdminPostsController extends Controller
 
     public function store(Request $request)
     {
+        $this->rules['slug'] = [ 'required', 'string', Rule::unique('posts') ]; // Đảm bảo slug là duy nhất
         $validated = $request->validate($this->rules);
         $validated['user_id'] = Auth::id();
         $post = Post::create($validated);
@@ -125,6 +127,8 @@ class AdminPostsController extends Controller
     public function update(Request $request, Post $post)
     {
         $this->rules['thumbnail'] = 'nullable|file||mimes:jpg,png,webp,svg,jpeg|dimensions:max-width:800,max-height:300';
+        $this->rules['slug'] = [ 'required', 'string', Rule::unique('posts')->ignore($post->id), ];// Kiểm tra duy nhất ngoại trừ bài viết hiện tại
+
         $validated = $request->validate($this->rules);
         $validated['approved'] = $request->input('approved') !== null; 
         $post->update($validated);

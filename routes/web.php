@@ -36,7 +36,7 @@ use App\Http\Controllers\NewsletterController;
 
 // Điều hướng cho User
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/tai-khoan', [HomeController::class, 'profile'])->name('profile');
+    // Route::get('/tai-khoan', [HomeController::class, 'profile'])->name('profile');
     Route::post('/tai-khoan', [HomeController::class, 'update'])->name('update');
 });
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -44,7 +44,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/404', [HomeController::class, 'erorr404'])->name('erorrs.404');
 
-// Route::get('/tai-khoan', [HomeController::class, 'profile'])->name('profile');
+Route::get('/tai-khoan', [HomeController::class, 'profile'])->name('profile');
 // Route::post('/tai-khoan', [HomeController::class, 'update'])->name('update');
 
 Route::post('/tim-kiem', [HomeController::class,'search'])->name('search');
