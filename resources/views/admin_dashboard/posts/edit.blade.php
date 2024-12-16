@@ -196,38 +196,67 @@
 				plugins: 'advlist autolink lists link image media charmap preview anchor pagebreak',
 				toolbar_mode: 'floating',
 				height: '500',
-				toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image code | rtl ltr',
+				toolbar: 'insertfile undo redo | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image media code | rtl ltr',
 				image_title: true,
 				automatic_uploads: true,
-				
+
+				// Image upload handler
 				images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
-					console.log("Filename:", blobInfo.filename());
 					let formData = new FormData();
 					let _token = $("input[name='_token']").val();
 					let xhr = new XMLHttpRequest();
 					xhr.open('POST', "{{ route('admin.upload_tinymce_image') }}");
-					
+
 					xhr.onload = () => {
 						if (xhr.status !== 200) {
 							reject("HTTP Error: " + xhr.status);
 							return;
 						}
-						
 						let json = JSON.parse(xhr.responseText);
 						if (!json || typeof json.location !== 'string') {
 							reject("Invalid JSON: " + xhr.responseText);
 							return;
 						}
-						
 						resolve(json.location);
 					};
-		
+
 					formData.append('_token', _token);
 					formData.append('file', blobInfo.blob(), blobInfo.filename());
 					xhr.send(formData);
-					console.log("Form data:", formData.get('file'));
-				})
+				}),
+
+				// Video upload handler (same as images)
+				file_picker_callback: (callback, value, meta) => {
+					if (meta.filetype === 'media') {
+						let input = document.createElement('input');
+						input.setAttribute('type', 'file');
+						input.setAttribute('accept', 'video/*');
+
+						input.onchange = function () {
+							let file = this.files[0];
+							let formData = new FormData();
+							formData.append('_token', $("input[name='_token']").val());
+							formData.append('file', file);
+
+							$.ajax({
+								url: "{{ route('admin.upload_tinymce_image') }}", // same endpoint for video
+								type: 'POST',
+								data: formData,
+								processData: false,
+								contentType: false,
+								success: function (response) {
+									callback(response.location, { title: file.name });
+								},
+								error: function (response) {
+									alert('Upload failed!');
+								}
+							});
+						};
+						input.click();
+					}
+				}
 			});
+
 			
 
 			setTimeout(() => {

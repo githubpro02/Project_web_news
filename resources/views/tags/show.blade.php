@@ -28,7 +28,15 @@
 						@forelse($posts as $post)
 
 						<div class="block-21 d-flex animate-box post">
-							<a href="{{ route('posts.show', $post) }}" class="blog-img" style="background-image: url({{ asset($post->image ? 'storage/' .$post->image->path : 'storage/placeholders/placeholder-image.png'  )}});"></a>
+							<a href="{{ route('posts.show', $post) }}" class="blog-img" 
+                                style="background-image: url({{ $post->image && !in_array(strtolower($post->image->extension), ['mp4', 'avi', 'mov', 'webm']) ? asset('storage/' . $post->image->path) : asset('storage/placeholders/placeholder-image.png') }});">
+                                    {{-- Nếu file là video, thêm thẻ video ẩn --}}
+                                    @if(isset($post->image) && in_array(strtolower($post->image->extension), ['mp4', 'avi', 'mov', 'webm']))
+                                        <video controls style="width: 100%; height: 100%; object-fit: cover;">
+                                            <source src="{{ asset('storage/' . $post->image->path) }}" type="video/{{ $post->image->extension }}">
+                                        </video>
+                                    @endif
+                            </a>
 							<div class="text">
 							<h3 class="heading"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h3>
 							<p class="excerpt">{{ $post->excerpt }}</p></p>

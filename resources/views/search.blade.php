@@ -42,9 +42,17 @@
                                                         <div class="col-md-6">
                                                             <div class="post--img">
                                                                 <a href="{{ route('posts.show', $posts[$i] ) }}"
-                                                                    class="thumb"><img
-                                                                        src="{{ asset($posts[$i]->image ? 'storage/' . $posts[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-                                                                        alt=""></a>
+                                                                    class="thumb">
+                                                                    @if(isset($posts[$i]->image) && in_array(strtolower($posts[$i]->image->extension), ['mp4', 'avi', 'mov', 'webm'])) 
+                                                                    {{-- Nếu file là video --}}
+                                                                        <video controls style="width: 100%; height: auto;">
+                                                                            <source src="{{ asset('storage/' . $posts[$i]->image->path) }}" type="video/{{ $posts[$i]->image->extension }}">
+                                                                        </video>
+                                                                    @else
+                                                                        {{-- Nếu file là ảnh --}}
+                                                                        <img src="{{ asset('storage/' . ($posts[$i]->image->path ?? 'placeholders/placeholder-image.png')) }}" alt="" style="width: 100%; height: auto;">
+                                                                    @endif
+                                                                </a>
                                                                 <a href="{{ route('categories.show', $posts[$i]->category) }}"
                                                                     class="cat">{{ $posts[$i]->category->name }}</a>
 

@@ -29,29 +29,29 @@ class HomeController extends Controller
         $tags = Tag::latest()->take(50)->get();
 
 
+        $category_video = Category::where('name', 'Video')->first();
         /*----- Lấy ra 4 bài viết mới nhất theo các danh mục khác nhau -----*/
         $category_unclassified = Category::where('name', 'Chưa phân loại')->first();
-
-        // Initialize array to avoid undefined index errors
-        $posts_new = [];
-
         // Get the first post, ensuring category exists
         $posts_new[0] = Post::latest()->approved()
                 ->where('category_id', '!=', optional($category_unclassified)->id)
-                ->with('image')
+                ->where('category_id','!=', $category_video->id)
+                // ->with('image')
                 ->take(1)->get();
         
         $posts_new[1] = Post::latest()->approved()
                 ->where('category_id', '!=', optional($category_unclassified)->id)
                 ->where('category_id', '!=', $posts_new[0][0]->category->id)
-                ->with('image')
+                ->where('category_id','!=', $category_video->id)
+                // ->with('image')
                 ->take(1)->get();
         
         $posts_new[2] = Post::latest()->approved()
                 ->where('category_id', '!=', optional($category_unclassified)->id)
                 ->where('category_id', '!=', $posts_new[0][0]->category->id)
                 ->where('category_id', '!=', $posts_new[1][0]->category->id)
-                ->with('image')
+                ->where('category_id','!=', $category_video->id)
+                // ->with('image')
                 ->take(1)->get();
         
         $posts_new[3] = Post::latest()->approved()
@@ -59,7 +59,8 @@ class HomeController extends Controller
                 ->where('category_id', '!=', $posts_new[0][0]->category->id)
                 ->where('category_id', '!=', $posts_new[1][0]->category->id)
                 ->where('category_id', '!=', $posts_new[2][0]->category->id)
-                ->with('image')
+                ->where('category_id','!=', $category_video->id)
+                // ->with('image')
                 ->take(1)->get();
                 
         $posts_new[4] = Post::latest()->approved()
@@ -68,7 +69,8 @@ class HomeController extends Controller
                 ->where('category_id', '!=', $posts_new[1][0]->category->id)
                 ->where('category_id', '!=', $posts_new[2][0]->category->id)
                 ->where('category_id', '!=', $posts_new[3][0]->category->id)
-                ->with('image')
+                ->where('category_id','!=', $category_video->id)
+                // ->with('image')
                 ->take(1)->get();
             
         // Lấy ra tin nổi bật -- Lấy theo views 
@@ -92,9 +94,9 @@ class HomeController extends Controller
             if($stt_home === 5)
                 $post_category_home4 =  Post::latest()->approved()->withCount('comments')->where('category_id',$category_item->id)->take(6)->get();
             if($stt_home === 6)
-                $post_category_home5 =  Post::latest()->approved()->withCount('comments')->where('category_id',$category_item->id)->take(5)->get();
+                $post_category_home5 =  Post::latest()->approved()->withCount('comments')->where('category_id',$category_item->id)->take(6)->get();
             if($stt_home === 7)
-                $post_category_home6 =  Post::latest()->approved()->withCount('comments')->where('category_id',$category_item->id)->take(5)->get();
+                $post_category_home6 =  Post::latest()->approved()->withCount('comments')->where('category_id',$category_item->id)->take(6)->get();
             if($stt_home === 8)
                 $post_category_home7 =  Post::latest()->approved()->withCount('comments')->where('category_id',$category_item->id)->take(5)->get();
             if($stt_home === 9)

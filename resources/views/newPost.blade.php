@@ -35,9 +35,17 @@
                                                         <div class="col-md-6">
                                                             <div class="post--img">
                                                                 <a href="{{ route('posts.show', $newPosts_category[$i] ) }}"
-                                                                    class="thumb"><img
-                                                                        src="{{ asset($newPosts_category[$i]->image ? 'storage/' . $newPosts_category[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-                                                                        alt=""></a>
+                                                                    class="thumb">
+                                                                    @if(isset($newPosts_category[$i]->image) && in_array(strtolower($newPosts_category[$i]->image->extension), ['mp4', 'avi', 'mov', 'webm'])) 
+                                                                    {{-- Nếu file là video --}}
+                                                                        <video controls style="width: 100%; height: auto;">
+                                                                            <source src="{{ asset('storage/' . $newPosts_category[$i]->image->path) }}" type="video/{{ $newPosts_category[$i]->image->extension }}">
+                                                                        </video>
+                                                                    @else
+                                                                        {{-- Nếu file là ảnh --}}
+                                                                        <img src="{{ asset('storage/' . ($newPosts_category[$i]->image->path ?? 'placeholders/placeholder-image.png')) }}" alt="" style="width: 100%; height: auto;">
+                                                                    @endif
+                                                                </a>
                                                                 <a href="{{ route('categories.show', $newPosts_category[$i]->category) }}"
                                                                     class="cat">{{ $newPosts_category[$i]->category->name }}</a>
 
@@ -56,7 +64,7 @@
                                                                 <div class="title">
                                                                     <h2 class="h3" style="color:black"><a
                                                                             href="{{ route('posts.show', $newPosts_category[$i] ) }}"
-                                                                            class="btn-link">{{ $newPosts_category[$i]->title }}</a></h3>
+                                                                            class="btn-link">{{ $newPosts_category[$i]->title }}</a></h2>
                                                                 </div>
                                                             </div>
 

@@ -305,7 +305,7 @@
 									<ul class="nav row" data-ajax-content="inner">
 										<li class="col-md-6">
 											<!-- Post Item Start -->
-											<div class="post--item post--layout-2">
+											<div class="post--item post--layout-1">
 												<div class="post--img">
 													<a href="{{ route('posts.show', $post_category_home2[0]) }}"
 														class="thumb"><img
@@ -611,7 +611,7 @@
 													<div class="post--info">
 														<ul class="nav meta">
 															<li><a href="javascript:;">{{ $outstanding_post->created_at->locale('vi')->diffForHumans() }}</a></li>
-															<li><a  href="javascript:;"><i class="fa fm fa-comments"></i></a></li>
+															<li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($outstanding_post->comments) }}</a></li>
                                        						<li><span><i class="fa fm fa-eye"></i>{{ $outstanding_post->views }}</span></li>
 														</ul>
 
@@ -828,7 +828,7 @@
 						<li class="col-md-4">
 							<ul class="nav">
 
-							@for ($i = 1; $i <= 4; $i++)
+							@for ($i = 1; $i <= 5; $i++)
 								<li>
 									<!-- Post Item Start -->
 									<div class="post--item post--type-audio post--layout-3">
@@ -917,7 +917,7 @@
 											<!-- Post Item End -->
 										</li>
 
-										@for ($i = 1; $i <= 4; $i++)
+										@for ($i = 1; $i <= 5; $i++)
 										<li>
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-3">
@@ -1058,7 +1058,7 @@
 									<ul class="nav row" data-ajax-content="inner">
 										<li class="col-md-6">
 											<!-- Post Item Start -->
-											<div class="post--item post--layout-2">
+											<div class="post--item post--layout-1">
 												<div class="post--img">
 													<a href="{{ route('posts.show', $post_category_home8[0]) }}"
 														class="thumb"><img

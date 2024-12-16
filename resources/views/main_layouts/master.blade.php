@@ -29,7 +29,7 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 	<meta name="twitter:url" content="" />
 	<meta name="twitter:card" content="" />
 
-	<link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/KCN.png') }}"  sizes="160x160">
+	<link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/logo_kcnews.png') }}"  sizes="160x160">
 
 	<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700,900" rel="stylesheet">
 	
@@ -107,7 +107,7 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 					<ul class="header--topbar-info nav">
 						<li>
 							<a href="{{ route('home') }}">
-								<img style="border-radius: 12px; height: 40px;" src="{{ asset('kcnew/frontend/img/kcnew.png') }}" alt="logo">
+								<img style="border-radius: 12px; height: 40px;" src="{{ asset('kcnew/frontend/img/logo_kcnew.png') }}" alt="logo">
 							</a>
 						</li>
 						<li><i class="fa fm fa-map-marker"></i>Hà Nội</li>
@@ -181,7 +181,7 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 		<!-- Header Topbar End -->
 		<div class="header--mainbar">
 			<div class="container">
-				<!-- Header Logo Start -->
+				{{-- <!-- Header Logo Start -->
 				<div class="header--logo float--left float--sm-none text-sm-center">
 					<h1 class="h1">
 						<a href="{{ url('/') }}" class="btn-link">
@@ -193,12 +193,12 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 						</a>
 					</h1>
 				</div>
-				<!-- Header Logo End -->
+				<!-- Header Logo End --> --}}
 				<!-- Header Ad Start -->
-				<div class="header--ad float--right float--sm-none hidden-xs" style="width:60% ;margin-top:60px">
+				<div class="header--ad float--right float--sm-none hidden-xs">
 					<a
-						href="https://masterisehomes.com/the-rivus/?utm_source=adtima&utm_medium=impression&utm_campaign=rivus-adtima-impression-phase1-na-cpd-8B115F30-mastheadtoppc">
-						<img src="{{ asset('kcnew/uploads/tintuc/728x90_baner1.png')}}" alt="Advertisement">
+						href="https://www.honda.com.vn/xe-may/khuyen-mai/chao-don-nam-moi-day-khoi-sac-voi-chuong-trinh-khuyen-mai-honda-ruoc-xuan-loc-den-muon-phan?utm_source=VNExpress&utm_medium=CPD&utm_campaign=Hakuhodo_Honda-Tet-Promotion_VNE-Masthead-PC">
+						<img src="{{ asset('kcnew/uploads/tintuc/banner_honda.png')}}" alt="Advertisement">
 					</a>
 				</div>
 				<!-- Header Ad End -->
