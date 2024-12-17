@@ -1,5 +1,5 @@
 @extends('main_layouts.master')
-@section('title','Tin Nóng')
+@section('title','KCNEWS - Tin Nóng')
 
 @section('content')
   <!-- Main Breadcrumb Start -->
@@ -50,7 +50,7 @@
                                                                         <ul class="nav meta">
                                                                             <li><span>{{ $hotPosts_category[$j][$i]->created_at->locale('vi')->diffForHumans() }}</span></li>
                                                                             <li><a href="#"><i class="fa fm fa-eye"></i>{{ $hotPosts_category[$j][$i]->views }}</span></li>
-                                                                            <li><a href=""><i class="fa fm fa-comments"></i>1</a></li>
+                                                                            <li><a href="{{ route('posts.show', $hotPosts_category[$j][$i] ) }}"><i class="fa fm fa-comments"></i>{{ count($hotPosts_category[$j][$i]->comments) }}</a></li>
                                                                         </ul>
 
 

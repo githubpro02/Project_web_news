@@ -1,6 +1,6 @@
 @extends('main_layouts.master')
 
-@section('title', $category->name . ' - KCNews')
+@section('title', $category->name . ' - KCNEWS')
 
 @section('content')
 
@@ -38,12 +38,12 @@
                                     @endif
                                 </a>
                                 <div class="text">
-                                <h3 class="heading"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h3>
-                                <p class="excerpt">{{ $post->excerpt }}</p></p>
-                                <div class="meta">
-                                    <div><a class="date" href="#"><span class="icon-calendar"></span>{{ $post->created_at->locale('vi')->diffForHumans() }}</a></div>
-                                    <div class="comments-count"><a href="{{ route('posts.show', $post) }}#post-comments"><span class="icon-chat"></span> {{$post->comments_count}}</a></div>
-                                </div>
+                                    <h3 class="heading"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h3>
+                                    <p class="excerpt">{{ $post->excerpt }}</p>
+                                    <div class="meta">
+                                        <div><a class="date" href="#"><span class="icon-calendar"></span> {{ $post->created_at->locale('vi')->diffForHumans() }}</a></div>
+                                        <div class="comments-count"><a href="{{ route('posts.show', $post) }}#post-comments"><span class="icon-chat"></span> {{$post->comments_count}}</a></div>
+                                    </div>
                                 </div>
                             </div>
                             @endforeach

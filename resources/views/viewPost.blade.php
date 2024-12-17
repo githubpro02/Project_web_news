@@ -1,5 +1,5 @@
 @extends('main_layouts.master')
-@section('title','Xem Nhiều Nhất')
+@section('title','KCNEWS - Xem Nhiều Nhất')
 
 @section('content')
   <!-- Main Breadcrumb Start -->
@@ -57,7 +57,7 @@
                                                                 <ul class="nav meta">
 																	<li><span>{{ $viewPosts_category[$i]->created_at->locale('vi')->diffForHumans() }}</span></li>
                                                                     <li><a href="#"><i class="fa fm fa-eye"></i>{{ $viewPosts_category[$i]->views }}</span></li>
-                                                                    <li><a href=""><i class="fa fm fa-comments"></i>0</a></li>
+                                                                    <li><a href="{{ route('posts.show', $viewPosts_category[$i] ) }}"><i class="fa fm fa-comments"></i>{{ count($viewPosts_category[$i]->comments) }}</a></li>
                                                                 </ul>
 
 

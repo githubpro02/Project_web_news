@@ -72,7 +72,7 @@ class CategoryController extends Controller
         
         return view('categories.show', [
             'category' => $category,
-            'posts' => $category->posts()->approved()->orderBy('created_at','DESC')->paginate(10) ,
+            'posts' => $category->posts()->withCount('comments')->approved()->orderBy('created_at','DESC')->paginate(10) ,
             'recent_posts' => $recent_posts,
             'categories' => $categories, 
             // 'tags' => $tags,

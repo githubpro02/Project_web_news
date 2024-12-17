@@ -233,7 +233,7 @@
                                                         <ul style="padding-top:10px" class="nav meta ">
 															<li><a href="javascript:;">{{ $postTheSame->author->name }}</a>
 															</li>
-															<li><a href="javascript:;">{{ $postTheSame->created_at->locale('vi')->diffForHumans() }}c</a></li>
+															<li><a href="javascript:;">{{ $postTheSame->created_at->locale('vi')->diffForHumans() }}</a></li>
                                                             <li><a  href="javascript:;"><i class="fa fm fa-comments"></i>{{ count($postTheSame->comments) }}</a></li>
 														</ul>
 													</div>
