@@ -29,8 +29,9 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="option-1">
-                            <img src="{{ asset('kcnew/frontend/img/Flag_barzill.png') }}" alt="Brasil" srcset="">
-                            <span>Brasil</span>
+                            <span style="background: url('{{ asset('kcnew/frontend/img/Flag_barzill.png') }}') no-repeat left center; padding-left: 30px;">
+                                Brasil
+                            </span>
                         </label>
 
                         <p>55%<span style="width: 55%;"></span></p>
@@ -39,8 +40,9 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="option-2">
-                            <img src="{{ asset('kcnew/frontend/img/Flag_Agrennal.png') }}" alt="Brasil" srcset="">
-                            <span>Argentina</span>
+                            <span style="background: url('{{ asset('kcnew/frontend/img/Flag_Agrennal.png') }}') no-repeat left center; padding-left: 30px;">
+                                Argentina
+                            </span>
                         </label>
 
                         <p>28%<span style="width: 28%;"></span></p>
@@ -49,20 +51,22 @@
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="option-2">
-                            <img src="{{ asset('kcnew/frontend/img/Flag_tay_ban_nha.png') }}" alt="Brasil" srcset="">
-                            <span>Tây Ban Nha</span>
+                            <span style="background: url('{{ asset('kcnew/frontend/img/Flag_tay_ban_nha.png') }}') no-repeat left center; padding-left: 30px;">
+                                Tây Ban Nha
+                            </span>
                         </label>
 
-                        <p>12%<span style="width: 12%;"></span></p>
+                        <p>15%<span style="width: 15%;"></span></p>
                     </div>
                     <div class="checkbox">
                         <label>
                             <input type="checkbox" name="option-2">
-                            <img src="{{ asset('kcnew/frontend/img/Flag_bo-dao-nha.png') }}" alt="Brasil" srcset="">
-                            <span>Bồ Đào Nha</span>
+                            <span style="background: url('{{ asset('kcnew/frontend/img/Flag_bo-dao-nha.png') }}') no-repeat left center; padding-left: 30px;">
+                                Bồ Đào Nha
+                            </span>
                         </label>
 
-                        <p>05%<span style="width: 05%;"></span></p>
+                        <p>10%<span style="width: 10%;"></span></p>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Vote Ngay</button>

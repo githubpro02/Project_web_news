@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 use App\Models\Category;
 $now = Carbon::now('Asia/Ho_Chi_Minh')->locale('vi');
-$categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('created_at','DESC')->take(12)->get();
+$categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount('posts')->orderBy('created_at','DESC')->take(13)->get();
 ?>
 
 <!DOCTYPE HTML>
@@ -327,7 +327,8 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 						<li><a href="{{ route('home') }}"></i>Trang chủ</a></li>
 						<li><a href="{{ route('about') }}"></i>Giới thiệu</a></li>
 						<li><a href="{{ route('contact.create') }}"></i>Liên hệ</a></li>
-						<li><a href="{{ route('contact.create') }}"></i>Mới nhất</a></li>
+						<li><a href="{{ route('newPost') }}"></i>Mới nhất</a></li>
+						<li><a href="{{ route('categories.show', $categoryFooter[12] ) }}">{{ $categoryFooter[12]->name }}</a></li>
 					</ul>
 				</div>
 				<div class="col-md-2  colorlib-widget">
@@ -381,6 +382,11 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 		<div class="container">
 			<div style=" padding: 15px 0; display: flex;" class=" row">
 				<div class="col-md-4">
+					<p>
+						<a href="{{ route('home') }}">
+							<img style="border-radius: 12px; width: 120px;" src="{{ asset('kcnew/frontend/img/logo_kcnew.png') }}" alt="logo">
+						</a>
+					</p>
 					<p>
 						<span style="font-size: 14px" class="block">Khoa Công nghệ thông tin, Trường Đại học PHENIKAA
 						</span>
