@@ -38,12 +38,13 @@
                                     @endif
                                 </a>
                                 <div class="text">
+                                    <div class="meta">
+                                        <span style="margin-right: 10px;"><span class="icon-calendar"></span> {{ $post->created_at->locale('vi')->diffForHumans() }}</span>
+                                        <span class="comments-count"><a href="{{ route('posts.show', $post) }}#post-comments" style="color: inherit;"><span class="icon-chat"></span> {{$post->comments_count}}</a></span>
+                                    </div>
                                     <h3 class="heading"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></h3>
                                     <p class="excerpt">{{ $post->excerpt }}</p>
-                                    <div class="meta">
-                                        <div><a class="date" href="#"><span class="icon-calendar"></span> {{ $post->created_at->locale('vi')->diffForHumans() }}</a></div>
-                                        <div class="comments-count"><a href="{{ route('posts.show', $post) }}#post-comments"><span class="icon-chat"></span> {{$post->comments_count}}</a></div>
-                                    </div>
+                                    <span><a class="btn btn-link" href="{{ route('posts.show', $post) }}">Đọc thêm</a></span>
                                 </div>
                             </div>
                             @endforeach
