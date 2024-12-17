@@ -84,7 +84,7 @@
                         <!-- Advertisement Start -->
                         <div class="ad--space pd--20-0-40">
 							<p class="author-info">Người viết: {{ $post->author->name }}</p>
-							<p class="post-time">Thời gian: {{ $post->created_at->locale('vi')->diffForHumans() }}c</p>
+							<p class="post-time">Thời gian: {{ $post->created_at->locale('vi')->diffForHumans() }}</p>
                         </div>
                         <!-- Advertisement End -->
 

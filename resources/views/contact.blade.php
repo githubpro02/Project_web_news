@@ -23,7 +23,7 @@
 										<p><span><i class="icon-paperplane"></i></span> <a href="mailto:20010783@st.phenikaa-uni.edu.vn">20010783@st.phenikaa-uni.edu.vn</a></p>
 									</div>
 									<div class="con-info">
-										<p><span><i class="icon-globe"></i></span> <a href="#">20010783@st.phenikaa-uni.edu.vn</a></p>
+										<p><span><i class="fa fa-facebook"></i></span> <a href="https://www.facebook.com/profile.php?id=100024515460327">https://www.facebook.com</a></p>
 									</div>
 								</div>
 							</div>

@@ -8,6 +8,17 @@ use App\Models\Category;
             ->where('category_id',  $category_hot->id )
             ->orderBy('created_at','DESC')
             ->take(5)->get();
+    // Bài viết xu hướng
+    $category_with_most_posts = Category::withCount('posts') // lấy danh mục có nhiều bài viết nhất
+        ->orderByDesc('posts_count') // sắp xếp theo số lượng bài viết
+        ->first();
+
+    $outstanding_posts = Post::approved()
+        ->where('category_id', $category_with_most_posts->id)
+        ->orderBy('views','DESC')
+        ->orderBy('created_at', 'DESC') // sắp xếp theo thời gian tạo
+        ->take(5) // Lấy 5 bài viết mới nhất trong danh mục có nhiều bài viết nhất
+        ->get();
     $outstanding_posts_views =  Post::approved()->orderBy('views','DESC')->take(5)->get();
     
  ?>
