@@ -31,7 +31,7 @@
                             <tr>
                                 <th>Mã quyền</th>
                                 <th>Tên quyền</th>
-                                <th>Ngày tạo</th>
+                                <th>Ngày đăng</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>

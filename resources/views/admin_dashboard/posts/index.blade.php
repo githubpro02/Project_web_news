@@ -40,7 +40,7 @@
                                 <th>Tên bài viết</th>
                                 <th>Mô tả</th>
                                 <th>Danh mục</th>
-                                <th>Ngày tạo</th>
+                                <th>Ngày đăng</th>
                                 <th>Trạng thái</th>
                                 <th>Lượt xem</th>
                                 <th>Chức năng</th>

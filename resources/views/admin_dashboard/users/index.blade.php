@@ -52,7 +52,7 @@
                                 <th>Email</th>
                                 <th>Quyền</th>
                                 <th>Thông tin</th>
-                                <th>Ngày tạo</th>
+                                <th>Ngày đăng</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>

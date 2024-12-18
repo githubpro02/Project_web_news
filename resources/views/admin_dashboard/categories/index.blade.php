@@ -33,7 +33,7 @@
                                 <th>Tên danh mục</th>
                                 <th>Người tạo</th>
                                 <th>Xem chi tiết</th>
-                                <th>Ngày tạo</th>
+                                <th>Ngày đăng</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>

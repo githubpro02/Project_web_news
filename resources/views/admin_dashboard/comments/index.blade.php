@@ -40,7 +40,7 @@
                                 <th>Người tạo</th>
                                 <th>Nội dung bình luận</th>
                                 <th>Xem bình luận</th>
-                                <th>Ngày tạo</th>
+                                <th>Ngày đăng</th>
                                 <th>Chức năng</th>
                             </tr>
                         </thead>
