@@ -79,6 +79,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'verified', \App\Htt
     Route::post('upload_tinymce_image', [TinyMCEController::class, 'upload_tinymce_image'])->name('upload_tinymce_image');
 
     Route::resource('posts', AdminPostsController::class);
+    Route::put('/posts/{post}/approve', [AdminPostsController::class, 'approve'])->name('posts.approve');
     Route::post('/poststitle', [AdminPostsController::class, 'to_slug'])->name('posts.to_slug');
     Route::resource('categories', AdminCategoriesController::class);
     

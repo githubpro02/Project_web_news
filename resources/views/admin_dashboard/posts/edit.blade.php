@@ -133,14 +133,20 @@
 											@enderror
 										</div>
 
-										<div class="mb-3">
-											<div class="form-check form-switch">
-												<input name="approved" {{  $post->approved ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchChecked">
-												<label class="form-check-label {{  $post->approved ? 'text-success' : 'text-warning' }}" for="flexSwitchChecked">
-													{{ $post->approved ? 'Đã phê duyệt' : 'Chưa phê duyệt' }}
-												</label>
+										@php
+											$CheckPermissions = auth()->user()->role->permissions->pluck('name');
+										@endphp
+										
+										@if($CheckPermissions->contains('admin.posts.approve'))
+											<div class="mb-3">
+												<div class="form-check form-switch">
+													<input name="approved" {{  $post->approved ? 'checked' : '' }} class="form-check-input" type="checkbox" id="flexSwitchChecked">
+													<label class="form-check-label {{  $post->approved ? 'text-success' : 'text-warning' }}" for="flexSwitchChecked">
+														{{ $post->approved ? 'Đã phê duyệt' : 'Chưa phê duyệt' }}
+													</label>
+												</div>
 											</div>
-										</div>
+										@endif
 
 										<button class="btn btn-primary" type="submit">Sửa bài viết</button>
 

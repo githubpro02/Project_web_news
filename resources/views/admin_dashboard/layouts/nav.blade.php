@@ -167,14 +167,14 @@ function checkPermission($name) {
                 </li>
                 @endif
 
-                {{-- @if(checkPermission("admin.newsletter")) --}}
+                @if(checkPermission("admin.newsletter"))
                 <li>
                     <a href="{{ route('admin.newsletter') }}" >
                     <div class="parent-icon"><i class='bx bx-news'></i></div>
                         <div class="menu-title">Đăng kí</div>
                     </a>
                 </li>
-                {{-- @endif --}}
+                @endif
                 
                 @if(checkPermission("admin.setting.edit"))
                 <li>
