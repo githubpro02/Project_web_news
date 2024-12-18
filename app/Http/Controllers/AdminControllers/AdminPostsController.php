@@ -58,6 +58,7 @@ class AdminPostsController extends Controller
         $this->rules['slug'] = [ 'required', 'string', Rule::unique('posts') ]; // Đảm bảo slug là duy nhất
         $validated = $request->validate($this->rules);
         $validated['user_id'] = Auth::id();
+        $validated['approved'] = false;  // Gán giá trị mặc định cho 'approved'
         $post = Post::create($validated);
 
         if($request->has('thumbnail'))
@@ -123,7 +124,7 @@ class AdminPostsController extends Controller
         $this->rules['slug'] = [ 'required', 'string', Rule::unique('posts')->ignore($post->id), ];// Kiểm tra duy nhất ngoại trừ bài viết hiện tại
 
         $validated = $request->validate($this->rules);
-        $validated['approved'] = $request->input('approved') !== null; 
+        $validated['approved'] = $request->has('approved') ? true : false; 
         $post->update($validated);
 
         if($request->has('thumbnail'))
