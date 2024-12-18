@@ -22,9 +22,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="d-lg-flex align-items-center mb-4 gap-3">
-                    {{-- <div class="position-relative">
-                        <input type="text" class="form-control ps-5 radius-30" placeholder="Tìm kiếm danh mục"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
-                    </div> --}}
+
                     <div class="ms-auto"><a href="{{ route('admin.categories.create') }}" class="btn btn-primary radius-30 mt-2 mt-lg-0"><i class="bx bxs-plus-square"></i>Thêm danh mục mới</a></div>
                 </div>
                 <div class="table-responsive">
@@ -44,9 +42,7 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <div>
-                                            <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                        </div>
+
                                         <div class="ms-2">
                                             <h6 class="mb-0 font-14">#P-{{ $category->id }}</h6>
                                         </div>

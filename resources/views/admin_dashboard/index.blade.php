@@ -180,7 +180,7 @@
                                         <tr>
                                             <th class="text-center">Tên Tin</th>
                                             <th class="text-center">Lượt Xem</th>
-                                            <th class="text-center">Thể Loại</th>
+                                            <th class="text-center">Danh Mục</th>
                                             <th class="text-center">Ngày Đăng</th>
                                         </tr>
                                     </thead>

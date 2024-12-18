@@ -49,9 +49,7 @@
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <div>
-                                            <input class="form-check-input me-3" type="checkbox" value="" aria-label="...">
-                                        </div>
+
                                         <div class="ms-2">
                                             <h6 class="mb-0 font-14">#P-{{ $comment->id }}</h6>
                                         </div>
