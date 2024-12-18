@@ -58,6 +58,11 @@
                         </thead>
                         <tbody>
                             @foreach ($users as $user)
+                            <style>
+                                .table td {
+                                    vertical-align: middle; /* Căn giữa theo chiều dọc */
+                                }
+                            </style>
                             <tr>
                                 <td>
                                     <div class="d-flex align-items-center">

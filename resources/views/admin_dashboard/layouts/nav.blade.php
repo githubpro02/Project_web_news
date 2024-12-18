@@ -14,12 +14,12 @@ function checkPermission($name) {
 <div class="sidebar-wrapper" data-simplebar="true">
             <div class="sidebar-header">
                 <div>
-                    <img src="{{ asset('kcnew/frontend/img/kcnew_logo.png') }}" class="logo-icon" alt="logo icon" sizes="160x160">
+                    <img src="{{ asset('kcnew/frontend/img/logo_kcnews.png') }}" class="logo-icon" alt="logo icon" sizes="160x160">
                 </div>
                 <div>
-                    <h4 style="color: #da0000" class="logo-text">KCNews</h4>
+                    <h4 style="color: #0700da" class="logo-text">KCNEWS</h4>
                 </div>
-                <div style="color: #da0000" class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
+                <div style="color: #0700da" class="toggle-icon ms-auto"><i class='bx bx-arrow-to-left'></i>
             </div>
         </div>
         <!--navigation-->

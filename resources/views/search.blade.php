@@ -62,7 +62,6 @@
                                                         <div class="col-md-6">
                                                             <div class="post--info">
                                                                 <ul class="nav meta">
-																	<li><span>{{ $posts[$i]->author->name }}</a></li>
 																	<li><span>{{ $posts[$i]->created_at->locale('vi')->diffForHumans() }}</span></li>
                                                                     <li><a href="#"><i class="fa fm fa-eye"></i>{{ $posts[$i]->views }}</span></li>
                                                                     <li><a href="{{ route('posts.show', $posts[$i] ) }}"><i class="fa fm fa-comments"></i>2</a></li>

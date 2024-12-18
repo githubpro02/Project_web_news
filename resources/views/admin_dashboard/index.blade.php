@@ -55,7 +55,7 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <p class="mb-0 text-secondary">Tổng khách hàng</p>
+                                    <p class="mb-0 text-secondary">Tổng người dùng</p>
                                     <h4 class="my-1 text-warning">{{ $countUser }}</h4>
                                 </div>
                                 <div class="widgets-icons-2 rounded-circle bg-gradient-blooker text-white ms-auto"><i class='bx bxs-group'></i>
@@ -72,9 +72,9 @@
                         <div class="card-body">
                             <div class="d-flex align-items-center">
                                 <div>
-                                    <h6 class="mb-0">Biểu đồ lượt xem</h6>
+                                    <h6 class="mb-0">Biểu đồ tương tác</h6>
                                 </div>
-                                <div class="dropdown ms-auto">
+                                {{-- <div class="dropdown ms-auto">
                                     <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
                                     </a>
                                     <ul class="dropdown-menu">
@@ -88,7 +88,7 @@
                                         <li><a class="dropdown-item" href="javascript:;">Something else here</a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> --}}
                             </div>
                             <div class="d-flex align-items-center ms-auto font-13 gap-2 my-3">
                                 <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i>Số đã người đọc</span>
@@ -291,7 +291,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                         <tr>
-                                            {{-- <th>Hình ảnh</th> --}}
+                                            <th>Ảnh đại diện</th>
                                             <th>Tên Người Dùng</th>
                                             <th>Email</th>
                                             <th class="text-center">Vai trò</th>
@@ -301,7 +301,15 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($userInteractions as $user)
-                                        <tr>                                            
+                                        <style>
+                                            .table td {
+                                                vertical-align: middle; /* Căn giữa theo chiều dọc */
+                                            }
+                                        </style>
+                                        <tr>
+                                            <td>
+                                                <img class="img_admn--user img-avatar" width="60" height="60" style="border-radius: 50% ; margin: auto; background-size: cover ;  background-image: url({{ $user->image ?  asset('storage/' . $user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }})" alt="">
+                                            </td>                                            
                                             <td>{{ $user->name }}</td>
                                             <td>{{ $user->email }}</td>
                                             <td class="text-center">{{ $user->role->name }}</td>
