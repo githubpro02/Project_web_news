@@ -74,54 +74,28 @@
                                 <div>
                                     <h6 class="mb-0">Biểu đồ tương tác</h6>
                                 </div>
-                                {{-- <div class="dropdown ms-auto">
-                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown"><i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
+                                <div class="dropdown ms-auto">
+                                    <a class="dropdown-toggle dropdown-toggle-nocaret" href="#" data-bs-toggle="dropdown">
+                                        <i class='bx bx-dots-horizontal-rounded font-22 text-option'></i>
                                     </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:;">Action</a>
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Another action</a>
-                                        </li>
-                                        <li>
-                                            <hr class="dropdown-divider">
-                                        </li>
-                                        <li><a class="dropdown-item" href="javascript:;">Something else here</a>
-                                        </li>
+                                    <ul class="dropdown-menu" id="chart-dropdown">
+                                        <li><a class="dropdown-item" href="#" data-chart="day">Biểu đồ theo ngày</a></li>
+                                        <li><a class="dropdown-item" href="#" data-chart="month">Biểu đồ theo tháng</a></li>
                                     </ul>
-                                </div> --}}
+                                </div>
                             </div>
                             <div class="d-flex align-items-center ms-auto font-13 gap-2 my-3">
                                 <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #14abef"></i>Số đã người đọc</span>
                                 <span class="border px-1 rounded cursor-pointer"><i class="bx bxs-circle me-1" style="color: #ffc107"></i>Số người đã bình luận</span>
                             </div>
                             <div class="chart-container-1">
-                                <canvas id="chart1"></canvas>
+                                <!-- Chỉ 1 canvas cho biểu đồ -->
+                                <canvas id="mainChart" height="400"></canvas>
                             </div>
-                            <div class="chart-container-1">
-                                <canvas id="chart2"></canvas>
-                            </div>
+
                         </div>
-                        {{-- <div class="row row-cols-1 row-cols-md-3 row-cols-xl-3 g-0 row-group text-center border-top">
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">24.15M</h5>
-                                    <small class="mb-0">Overall Visitor <span> <i class="bx bx-up-arrow-alt align-middle"></i> 2.43%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">12:38</h5>
-                                    <small class="mb-0">Visitor Duration <span> <i class="bx bx-up-arrow-alt align-middle"></i> 12.65%</span></small>
-                                </div>
-                            </div>
-                            <div class="col">
-                                <div class="p-3">
-                                    <h5 class="mb-0">639.82</h5>
-                                    <small class="mb-0">Pages/Visit <span> <i class="bx bx-up-arrow-alt align-middle"></i> 5.62%</span></small>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
+                    
                 </div>
             
                 <div class="col-12 col-lg-4 d-flex">
@@ -369,128 +343,103 @@
    
     <script>
         $(document).ready(function () {
-            var ctx = document.getElementById("chart1").getContext('2d');
-        
+            var ctx = document.getElementById("mainChart").getContext("2d");
+
+            // Gradient màu
             var gradientStroke1 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke1.addColorStop(0, '#6078ea');  
-            gradientStroke1.addColorStop(1, '#17c5ea'); 
-        
+            gradientStroke1.addColorStop(0, "#6078ea");
+            gradientStroke1.addColorStop(1, "#17c5ea");
+
             var gradientStroke2 = ctx.createLinearGradient(0, 0, 0, 300);
-            gradientStroke2.addColorStop(0, '#ff8359');
-            gradientStroke2.addColorStop(1, '#ffdf40');
-        
-            // Dữ liệu cho biểu đồ theo ngày
-            var labelsDay = {!! json_encode(array_keys($viewsPerDay)) !!};  // Các ngày
-            var viewsDataDay = {!! json_encode(array_values($viewsPerDay)) !!};  // Lượt xem theo ngày
-            var commentsDataDay = {!! json_encode(array_values($commentsPerDay)) !!};  // Bình luận theo ngày
-    
-            // Dữ liệu cho biểu đồ theo tháng
-            var labelsMonth = {!! json_encode(array_keys($viewsPerMonth)) !!};  // Các tháng
-            var viewsDataMonth = {!! json_encode(array_values($viewsPerMonth)) !!};  // Lượt xem theo tháng
-            var commentsDataMonth = {!! json_encode(array_values($commentsPerMonth)) !!};  // Bình luận theo tháng
-        
-            var myChart = new Chart(ctx, {
-                type: 'line',  // Biểu đồ đường (line chart)
-                data: {
-                    labels: labelsDay,  // Nhãn ngày
-                    datasets: [{
-                        label: 'Lượt xem theo ngày',
-                        data: viewsDataDay,
-                        borderColor: gradientStroke1,
-                        backgroundColor: gradientStroke1,
-                        hoverBackgroundColor: gradientStroke1,
-                        fill: false,
-                        pointRadius: 4,
-                        borderWidth: 2
-                    }, {
-                        label: 'Bình luận theo ngày',
-                        data: commentsDataDay,
-                        borderColor: gradientStroke2,
-                        backgroundColor: gradientStroke2,
-                        hoverBackgroundColor: gradientStroke2,
-                        fill: false,
-                        pointRadius: 4,
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    legend: {
-                        position: 'bottom',
-                        display: true,
-                        labels: {
-                            boxWidth: 8
-                        }
+            gradientStroke2.addColorStop(0, "#ff8359");
+            gradientStroke2.addColorStop(1, "#ffdf40");
+
+            // Dữ liệu biểu đồ
+            var labelsDay = {!! json_encode(array_keys($viewsPerDay)) !!};
+            var viewsDataDay = {!! json_encode(array_values($viewsPerDay)) !!};
+            var commentsDataDay = {!! json_encode(array_values($commentsPerDay)) !!};
+
+            var labelsMonth = {!! json_encode(array_keys($viewsPerMonth)) !!};
+            var viewsDataMonth = {!! json_encode(array_values($viewsPerMonth)) !!};
+            var commentsDataMonth = {!! json_encode(array_values($commentsPerMonth)) !!};
+
+            // Hàm khởi tạo biểu đồ
+            function createChart(labels, viewsData, commentsData) {
+                return new Chart(ctx, {
+                    type: "line",
+                    data: {
+                        labels: labels,
+                        datasets: [
+                            {
+                                label: "Lượt xem",
+                                data: viewsData,
+                                borderColor: gradientStroke1,
+                                backgroundColor: gradientStroke1,
+                                hoverBackgroundColor: gradientStroke1,
+                                fill: false,
+                                pointRadius: 4,
+                                borderWidth: 2,
+                            },
+                            {
+                                label: "Bình luận",
+                                data: commentsData,
+                                borderColor: gradientStroke2,
+                                backgroundColor: gradientStroke2,
+                                hoverBackgroundColor: gradientStroke2,
+                                fill: false,
+                                pointRadius: 4,
+                                borderWidth: 2,
+                            },
+                        ],
                     },
-                    tooltips: {
-                        displayColors: false,
+                    options: {
+                        maintainAspectRatio: false,
+                        legend: {
+                            position: "bottom",
+                            display: true,
+                            labels: {
+                                boxWidth: 8,
+                            },
+                        },
+                        tooltips: {
+                            displayColors: false,
+                        },
+                        scales: {
+                            xAxes: [
+                                {
+                                    ticks: {
+                                        beginAtZero: true,
+                                    },
+                                },
+                            ],
+                            yAxes: [
+                                {
+                                    ticks: {
+                                        beginAtZero: true,
+                                    },
+                                },
+                            ],
+                        },
                     },
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
-                }
-            });
-    
-            // Biểu đồ theo tháng
-            var ctx2 = document.getElementById("chart2").getContext('2d');
-        
-            var myChartMonth = new Chart(ctx2, {
-                type: 'line',  // Biểu đồ đường (line chart)
-                data: {
-                    labels: labelsMonth,  // Nhãn tháng
-                    datasets: [{
-                        label: 'Lượt xem theo tháng',
-                        data: viewsDataMonth,
-                        borderColor: gradientStroke1,
-                        backgroundColor: gradientStroke1,
-                        hoverBackgroundColor: gradientStroke1,
-                        fill: false,
-                        pointRadius: 4,
-                        borderWidth: 2
-                    }, {
-                        label: 'Bình luận theo tháng',
-                        data: commentsDataMonth,
-                        borderColor: gradientStroke2,
-                        backgroundColor: gradientStroke2,
-                        hoverBackgroundColor: gradientStroke2,
-                        fill: false,
-                        pointRadius: 4,
-                        borderWidth: 2
-                    }]
-                },
-                options: {
-                    maintainAspectRatio: false,
-                    legend: {
-                        position: 'bottom',
-                        display: true,
-                        labels: {
-                            boxWidth: 8
-                        }
-                    },
-                    tooltips: {
-                        displayColors: false,
-                    },
-                    scales: {
-                        xAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+                });
+            }
+
+            // Biểu đồ mặc định (theo ngày)
+            var currentChart = createChart(labelsDay, viewsDataDay, commentsDataDay);
+
+            // Xử lý sự kiện chuyển đổi biểu đồ
+            $("#chart-dropdown").on("click", "a", function (e) {
+                e.preventDefault();
+                var chartType = $(this).data("chart");
+
+                // Hủy biểu đồ hiện tại
+                currentChart.destroy();
+
+                // Tạo biểu đồ mới dựa trên loại được chọn
+                if (chartType === "day") {
+                    currentChart = createChart(labelsDay, viewsDataDay, commentsDataDay);
+                } else if (chartType === "month") {
+                    currentChart = createChart(labelsMonth, viewsDataMonth, commentsDataMonth);
                 }
             });
         });
