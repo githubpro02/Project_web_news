@@ -123,6 +123,21 @@
 											@enderror
 										
 										</div>
+										@php
+											$CheckPermissions = auth()->user()->role->permissions->pluck('name');
+										@endphp
+										
+										@if($CheckPermissions->contains('admin.posts.approve'))
+											<div class="mb-3">
+												<div class="form-check form-switch">
+													<input name="approved" class="form-check-input" type="checkbox" id="flexSwitchChecked" value="1">
+													<label class="form-check-label {{ old('approved') ? 'text-success' : 'text-warning' }}" for="flexSwitchChecked">
+														{{ old('approved') ? 'Đã phê duyệt' : 'Chưa phê duyệt' }}
+													</label>
+												</div>
+											</div>
+										@endif
+
 
 										<button class="btn btn-primary" type="submit">Thêm bài viết</button>
 

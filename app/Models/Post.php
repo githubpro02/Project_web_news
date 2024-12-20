@@ -62,7 +62,7 @@ class Post extends Model
         //         Mail::to($subscriber->email)->send(new NewPostNotification($post));
         //     }
         // });
-                // Kiểm tra khi tạo bài viết mới
+        // Kiểm tra khi tạo bài viết mới
         static::created(function ($post) {
             if ($post->approved == 1) {
                 // Gửi email cho tất cả subscribers khi bài viết được tạo với approved = 1

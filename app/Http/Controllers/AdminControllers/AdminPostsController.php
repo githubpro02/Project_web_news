@@ -58,7 +58,8 @@ class AdminPostsController extends Controller
         $this->rules['slug'] = [ 'required', 'string', Rule::unique('posts') ]; // Đảm bảo slug là duy nhất
         $validated = $request->validate($this->rules);
         $validated['user_id'] = Auth::id();
-        $validated['approved'] = false;  // Gán giá trị mặc định cho 'approved'
+        // Kiểm tra nếu người dùng đã chọn phê duyệt (checkbox checked)
+        $validated['approved'] = $request->has('approved') ? true : false;  // Gán giá trị đúng cho 'approved'
         $post = Post::create($validated);
 
         if($request->has('thumbnail'))
