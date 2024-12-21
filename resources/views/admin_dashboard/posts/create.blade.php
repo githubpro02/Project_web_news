@@ -105,7 +105,7 @@
 
 										<!-- <input id="image-uploadify" name="thumbnail" type="file" id="file" accept="image/*" multiple> -->								
 										<div class="mb-3">
-											<label for="inputProductDescription" class="form-label">Hình ảnh bài viết</label>
+											<label for="inputProductDescription" class="form-label">Hình ảnh hoặc video bài viết</label>
 											<input id="thumbnail" require name="thumbnail" type="file" id="file">
 										
 											@error('thumbnail')

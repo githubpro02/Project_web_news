@@ -107,7 +107,7 @@
 												<div class="col-md-5">
                                                     <div class="card">
                                                         <div class="card-body">
-                                                            <label for="inputProductDescription" class="form-label">Hình ảnh bài viết</label>
+                                                            <label for="inputProductDescription" class="form-label">Hình ảnh hoặc video bài viết</label>
 															<input id="thumbnail" name="thumbnail" type="file" id="file" value="">
                                                         
                                                             @error('thumbnail')
@@ -117,8 +117,16 @@
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-7 text-center">                                                
-													<img style="width: 100%; border-radius: 16px;" src="{{ asset('/storage/' . ($post->image ? $post->image->path : 'placeholders/placeholder-image.jpg')) }}" class="img-responsive" alt="All thumbnail">
+                                                <div class="col-md-7 text-center">
+													@if(isset($post->image) && in_array(strtolower($post->image->extension), ['mp4', 'avi', 'mov', 'webm']))
+														<!-- Nếu là video, hiển thị video -->
+														<video controls style="width: 100%; border-radius: 16px; object-fit: cover;">
+															<source src="{{ asset('storage/' . $post->image->path) }}" type="video/{{ $post->image->extension }}">
+														</video>
+													@else
+														<!-- Nếu không phải video, hiển thị hình ảnh -->
+														<img style="width: 100%; border-radius: 16px;" src="{{ asset('/storage/' . ($post->image ? $post->image->path : 'placeholders/placeholder-image.jpg')) }}" class="img-responsive" alt="All thumbnail">
+													@endif
 												</div>
                                             </div>
 										

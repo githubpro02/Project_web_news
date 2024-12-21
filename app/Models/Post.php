@@ -50,39 +50,4 @@ class Post extends Model
         return $query->where('approved', 1);
     }
 
-    // Model event to send email when a new post is created
-    protected static function booted()
-    {
-        // static::created(function ($post) {
-        //     // Get all subscribers
-        //     $subscribers = \App\Models\Newsletter::all();
-
-        //     // Send an email to each subscriber
-        //     foreach ($subscribers as $subscriber) {
-        //         Mail::to($subscriber->email)->send(new NewPostNotification($post));
-        //     }
-        // });
-        // Kiểm tra khi tạo bài viết mới
-        static::created(function ($post) {
-            if ($post->approved == 1) {
-                // Gửi email cho tất cả subscribers khi bài viết được tạo với approved = 1
-                $subscribers = Newsletter::all();
-                foreach ($subscribers as $subscriber) {
-                    Mail::to($subscriber->email)->send(new NewPostNotification($post));
-                }
-            }
-        });
-
-        // Kiểm tra khi cập nhật bài viết
-        static::updated(function ($post) {
-            if ($post->approved == 1 && $post->isDirty('approved')) {
-                // Gửi email khi bài viết được cập nhật và approved = 1
-                $subscribers = Newsletter::all();
-                foreach ($subscribers as $subscriber) {
-                    Mail::to($subscriber->email)->send(new NewPostNotification($post));
-                }
-            }
-        });
-    }
-
 }

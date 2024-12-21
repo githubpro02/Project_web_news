@@ -6,10 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Mail;
 
 use App\Models\Category;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\Newsletter;
+use App\Mail\NewPostNotification;
 
 class AdminPostsController extends Controller
 {
@@ -92,7 +95,16 @@ class AdminPostsController extends Controller
 
         // Gắn các tags đã có vào bài viết
         if (count($tags_ids) > 0)
-            $post->tags()->sync( $tags_ids ); 
+            $post->tags()->sync( $tags_ids );
+        
+        // Kiểm tra nếu bài viết được phê duyệt thì gửi email cho tất cả subscribers
+        if ($post->approved == 1) {
+            $subscribers = Newsletter::all();
+            foreach ($subscribers as $subscriber) {
+                Mail::to($subscriber->email)->send(new NewPostNotification($post));
+            }
+        }
+
          
         return redirect()->route('admin.posts.create')->with('success', 'Thêm bài viết thành công.');
     }
@@ -121,11 +133,13 @@ class AdminPostsController extends Controller
 
     public function update(Request $request, Post $post)
     {
-        $this->rules['thumbnail'] = 'nullable|file||mimes:jpg,png,webp,svg,jpeg|dimensions:max-width:800,max-height:300';
+        $this->rules['thumbnail'] = 'nullable|file||mimes:jpg,png,webp,svg,jpeg,mp4,avi,mov|dimensions:max-width:800,max-height:300';
         $this->rules['slug'] = [ 'required', 'string', Rule::unique('posts')->ignore($post->id), ];// Kiểm tra duy nhất ngoại trừ bài viết hiện tại
 
         $validated = $request->validate($this->rules);
-        $validated['approved'] = $request->has('approved') ? true : false; 
+        $validated['approved'] = $request->has('approved') ? true : false;
+        // Kiểm tra sự thay đổi của 'approved' trước khi cập nhật
+        $isApprovedChanged = $post->approved != $validated['approved']; 
         $post->update($validated);
 
         if($request->has('thumbnail'))
@@ -159,7 +173,15 @@ class AdminPostsController extends Controller
 
         // Gắn các tags đã có vào bài viết, giữ lại các tag đã gắn trước đó
         if (count($tags_ids) > 0)
-            $post->tags()->syncWithoutDetaching( $tags_ids ); 
+            $post->tags()->syncWithoutDetaching( $tags_ids );
+        
+        // Gửi email nếu trạng thái 'approved' thay đổi và được phê duyệt
+        if ($isApprovedChanged && $validated['approved'] == 1) {
+            $subscribers = Newsletter::all();
+            foreach ($subscribers as $subscriber) {
+                Mail::to($subscriber->email)->send(new NewPostNotification($post));
+            }
+        }
 
         return redirect()->route('admin.posts.edit', $post)->with('success', 'Sửa viết thành công.');
     }
