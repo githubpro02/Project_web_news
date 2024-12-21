@@ -103,10 +103,13 @@ class AdminPostsController extends Controller
             foreach ($subscribers as $subscriber) {
                 Mail::to($subscriber->email)->send(new NewPostNotification($post));
             }
+            // Thêm thông báo vào session sau khi gửi email thành công
+            session()->flash('success', 'Thêm bài viết thành công và email đã được gửi đến tất cả người đăng ký.');
+        } else {
+            // Nếu không có thay đổi về phê duyệt, chỉ thông báo sửa thành công
+            session()->flash('success', 'Thêm bài viết thành công.');
         }
-
-         
-        return redirect()->route('admin.posts.create')->with('success', 'Thêm bài viết thành công.');
+        return redirect()->route('admin.posts.create');
     }
 
     public function show($id)
@@ -181,9 +184,15 @@ class AdminPostsController extends Controller
             foreach ($subscribers as $subscriber) {
                 Mail::to($subscriber->email)->send(new NewPostNotification($post));
             }
+            // Thêm thông báo vào session sau khi gửi email thành công
+            session()->flash('success', 'Sửa bài viết thành công và email đã được gửi đến tất cả người đăng ký.');
+        } else {
+            // Nếu không có thay đổi về phê duyệt, chỉ thông báo sửa thành công
+            session()->flash('success', 'Sửa bài viết thành công.');
         }
 
-        return redirect()->route('admin.posts.edit', $post)->with('success', 'Sửa viết thành công.');
+        // Trả về trang chỉnh sửa với thông báo thành công
+        return redirect()->route('admin.posts.edit', $post);
     }
 
     public function destroy(Post $post)

@@ -10,6 +10,7 @@ use Illuminate\Validation\Rule;
 
 use App\Models\Role;
 use App\Models\User;
+use App\Models\Image;
 
 class AdminUsersController extends Controller
 {
@@ -126,6 +127,10 @@ class AdminUsersController extends Controller
 
         if($request->has('image'))
         {
+            $image_user = Image::where('imageable_id',  $user->id)->first();
+            if($image_user)
+                $image_user->delete();
+
             $image = $request->file('image');
             $filename = $image->getClientOriginalName();
             $file_extension = $image->getClientOriginalExtension();
