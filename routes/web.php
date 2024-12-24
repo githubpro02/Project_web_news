@@ -68,6 +68,7 @@ Route::get('/tat-ca-chuyen-muc', [CategoryController::class, 'index'])->name('ca
 Route::get('/tu-khoa/{tag:name}', [TagController::class, 'show'])->name('tags.show');
 
 Route::post('email',[NewsletterController::class, 'store'])->name('newsletter_store');
+Route::get('/unsubscribe/{email}', [NewsletterController::class, 'unsubscribe'])->name('unsubscribe');
 // });
 
 require __DIR__.'/auth.php';

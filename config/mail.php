@@ -107,7 +107,7 @@ return [
 
     'from' => [
         'address' => env('MAIL_FROM_ADDRESS', 'nguyenducmanh1112002@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'KcNews - Liên Hệ'),
+        'name' => env('MAIL_FROM_NAME', 'KCNNEWS'),
     ],
 
 ];

@@ -101,7 +101,7 @@ class AdminPostsController extends Controller
         if ($post->approved == 1) {
             $subscribers = Newsletter::all();
             foreach ($subscribers as $subscriber) {
-                Mail::to($subscriber->email)->send(new NewPostNotification($post));
+                Mail::to($subscriber->email)->send(new NewPostNotification($post, $subscriber));
             }
             // Thêm thông báo vào session sau khi gửi email thành công
             session()->flash('success', 'Thêm bài viết thành công và email đã được gửi đến tất cả người đăng ký.');
@@ -152,7 +152,7 @@ class AdminPostsController extends Controller
             $file_extension = $thumbnail->getClientOriginalExtension();
             $path   = $thumbnail->store('images', 'public');
             
-            $post->image()->update([
+            $post->image()->updateOrCreate([
                 'name' => $filename,
                 'extension' => $file_extension,
                 'path' => $path
@@ -182,7 +182,7 @@ class AdminPostsController extends Controller
         if ($isApprovedChanged && $validated['approved'] == 1) {
             $subscribers = Newsletter::all();
             foreach ($subscribers as $subscriber) {
-                Mail::to($subscriber->email)->send(new NewPostNotification($post));
+                Mail::to($subscriber->email)->send(new NewPostNotification($post, $subscriber));
             }
             // Thêm thông báo vào session sau khi gửi email thành công
             session()->flash('success', 'Sửa bài viết thành công và email đã được gửi đến tất cả người đăng ký.');
