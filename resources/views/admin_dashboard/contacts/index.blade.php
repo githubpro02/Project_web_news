@@ -31,7 +31,8 @@
 							<table id="example2" class="table table-striped table-bordered">
 								<thead>
 									<tr>
-										<th>Họ và Tên</th>
+                                        <th>Mã liên hệ</th>
+										<th>Họ và tên</th>
 										<th>Email</th>
 										<th>Tiêu đề</th>
 										<th>Nội dung</th>
@@ -41,6 +42,14 @@
 								<tbody>
                                     @foreach($contacts as $contact)
 									<tr>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+
+                                                <div class="ms-2">
+                                                    <h6 class="mb-0 font-14">#P-{{ $contact->id }}</h6>
+                                                </div>
+                                            </div>
+                                        </td>
 										<td>{{ $contact->first_name }} {{ $contact->last_name }}</td>
 										<td>{{ $contact->email }}</td>
 										<td>{{ $contact->subject }}</td>

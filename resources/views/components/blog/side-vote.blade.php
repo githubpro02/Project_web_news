@@ -21,7 +21,7 @@
         <ul class="nav" data-ajax-content="inner">
             <li class="title">
                 <h3 class="h4">
-                    Theo bạn thì giải đội bóng nào sẽ vô địch WoldCup 2022 ?</h3>
+                    Theo bạn thì giải đội bóng nào sẽ vô địch WoldCup 2026 ?</h3>
             </li>
 
             <li class="options">

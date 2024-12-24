@@ -23,7 +23,7 @@
 										<div class="post--img">
 											<a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="thumb">
 												<img src="{{ asset($posts_new[$i][0]->image ? 'storage/' .$posts_new[$i][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-												style="height: 165px" alt=""></a>
+												style="height: 165px; width: 100%; object-fit: cover;" alt=""></a>
 											<a href="{{ route('categories.show', $posts_new[$i][0]->category) }}" class="cat">{{ $posts_new[$i][0]->category->name }}</a>
 
 											<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
@@ -88,7 +88,7 @@
 										<div class="post--img">
 											<a href="{{ route('posts.show', $posts_new[$i][0]) }}" class="thumb">
 												<img src="{{ asset($posts_new[$i][0]->image ? 'storage/' .$posts_new[$i][0]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-												style="height: 165px" alt=""></a>
+												style="height: 165px; width: 100%; object-fit: cover;" alt=""></a>
 											<a href="{{ route('categories.show', $posts_new[$i][0]->category) }}" class="cat">{{ $posts_new[$i][0]->category->name }}</a>
 
 											<a href="javascript:;" class="icon"><i class="fa fa-flash"></i></a>
@@ -1210,7 +1210,7 @@
 													<a href="{{ route('posts.show', $post_category_home9[$i]) }}"
 														class="thumb"><img
 															src="{{ asset($post_category_home9[$i]->image ? 'storage/' . $post_category_home9[$i]->image->path : 'storage/placeholders/placeholder-image.png'  )}}"
-															alt=""></a>
+															style="height: 160px; width: 100%; object-fit: cover;" alt=""></a>
 
 													<div class="post--info">
 														<div class="title">
@@ -1263,7 +1263,7 @@
 								<ul class="nav" data-ajax-content="inner">
 									<li class="title">
 										<h3 class="h4">
-											Theo bạn thì giải đội bóng nào sẽ vô địch WoldCup 2022 ?</h3>
+											Theo bạn thì giải đội bóng nào sẽ vô địch WoldCup 2026 ?</h3>
 									</li>
 
 									<li class="options">
