@@ -29,7 +29,7 @@
                     <table class="table mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Danh mục</th>
+                                <th>Mã danh mục</th>
                                 <th>Tên danh mục</th>
                                 <th>Người tạo</th>
                                 <th>Xem chi tiết</th>
