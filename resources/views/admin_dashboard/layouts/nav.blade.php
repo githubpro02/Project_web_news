@@ -171,7 +171,7 @@ function checkPermission($name) {
                 <li>
                     <a href="{{ route('admin.newsletter') }}" >
                     <div class="parent-icon"><i class='bx bx-news'></i></div>
-                        <div class="menu-title">Đăng kí</div>
+                        <div class="menu-title">Đăng ký theo dõi</div>
                     </a>
                 </li>
                 @endif

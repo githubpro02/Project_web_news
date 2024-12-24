@@ -181,19 +181,6 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 		<!-- Header Topbar End -->
 		<div class="header--mainbar">
 			<div class="container">
-				{{-- <!-- Header Logo Start -->
-				<div class="header--logo float--left float--sm-none text-sm-center">
-					<h1 class="h1">
-						<a href="{{ url('/') }}" class="btn-link">
-							<video autoplay loop muted plays-inline width="60%">
-								<source src="{{ asset('kcnew/frontend/img/KCN (online-video-cutter.com).mp4')}}"
-									style="video/mp4">
-							</video>
-							<span class="hidden">Kcnew - logo</span>
-						</a>
-					</h1>
-				</div>
-				<!-- Header Logo End --> --}}
 				<!-- Header Ad Start -->
 				<div class="header--ad float--right float--sm-none hidden-xs">
 					<a
@@ -538,7 +525,7 @@ $categoryFooter  = Category::where('name','!=','Chưa phân loại')->withCount(
 						},
 						statusCode: {
 							500: () => {								 
-								$("body").append("<div class='global-message alert alert-danger subscribe-error'>Email này đã subscribe website chúng tôi</div>");
+								$("body").append("<div class='global-message alert alert-danger subscribe-error'>Email này đã đăng ký theo dõi website chúng tôi</div>");
 
 							}
 						} 

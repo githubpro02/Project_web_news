@@ -18,6 +18,6 @@ class AdminNewsletterController extends Controller
 
     public function destroy(Newsletter $newsletter){
         $newsletter->delete();
-        return redirect()->route('admin.newsletter')->with('success', 'Xóa liên hệ thành công');
+        return redirect()->route('admin.newsletter')->with('success', 'Xóa đăng ký thành công');
     }
 }

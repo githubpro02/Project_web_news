@@ -133,9 +133,9 @@
                                 <li>
                                     <!-- Comment Item Start -->
                                    <div class="comment--item clearfix">
-										<div class="comment--img float--left">
-                                            <img style="border-radius: 50%; margin: auto; background-size: cover ;  width: 68px; height: 68px;   background-image: url({{ asset('blog_template/images/person2.jpg') }})"  alt="">
-										</div>
+                                        <div class="comment--img float--left">
+                                            <img style="border-radius: 50%; margin: auto; background-size: cover ;  width: 68px; height: 68px;   background-image: url({{ $comment->user->image ?  asset('storage/' . $comment->user->image->path) : asset('storage/placeholders/user_placeholder.jpg') }})"  alt="">
+                                        </div>
 										<div class="comment--info">
 											<div class="comment--header clearfix">
 												<p class="name">{{ $comment->user->name }}</p>

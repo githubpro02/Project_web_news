@@ -23,7 +23,7 @@ class Newsletter extends Model
 
         if ($existingSubscriber) {
             return response()->json([
-                'message' => 'Email này đã subscribe website chúng tôi'
+                'message' => 'Email này đã đăng ký theo dõi website chúng tôi'
             ], 500);
         }
 
@@ -34,7 +34,7 @@ class Newsletter extends Model
         // Mail::to($request->input('email'))->send(new \App\Mail\SubscriptionConfirmation());
 
         return response()->json([
-            'message' => 'Cảm ơn bạn đã subscribe website chúng tôi'
+            'message' => 'Cảm ơn bạn đã đăng ký theo dõi website chúng tôi'
         ], 200);
     }
 }

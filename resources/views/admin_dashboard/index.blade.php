@@ -260,7 +260,7 @@
                     <!-- Người Dùng -->
                     <div class="tab-pane fade" id="users" role="tabpanel" aria-labelledby="users-tab">
                         <div class="card my-3">
-                            <div class="card-header">Danh Sách Người Dùng</div>
+                            <div class="card-header">Danh Sách Người Dùng Nổi Bật</div>
                             <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead>
@@ -300,7 +300,7 @@
                     <!-- Danh Mục -->
                     <div class="tab-pane fade" id="categories" role="tabpanel" aria-labelledby="categories-tab">
                         <div class="card my-3">
-                            <div class="card-header">Danh Sách Danh Mục</div>
+                            <div class="card-header">Danh Sách Danh Mục Xếp Hạng</div>
                             <div class="card-body table-responsive">
                                 <table class="table table-hover">
                                     <thead>

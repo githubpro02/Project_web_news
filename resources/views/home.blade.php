@@ -1311,7 +1311,7 @@
 												<p>10%<span style="width: 10%;"></span></p>
 											</div>
 
-											<button type="submit" class="btn btn-primary">Vote Ngay</button>
+											<button type="submit" class="btn btn-primary">Bình chọn</button>
 										</form>
 									</li>
 								</ul>

@@ -143,20 +143,20 @@ class AdminUsersController extends Controller
             ]);
         }
         
-        return redirect()->route('admin.users.edit', $user)->with('success', 'Sửa tài khoản thành công.');
+        return redirect()->route('admin.users.edit', $user)->with('success', 'Sửa người dùng thành công.');
     }
 
 
     public function destroy(User $user)
     {
         if($user->id === Auth::id())
-            return redirect()->back()->with('error', 'Bạn không thể xóa tài khoản bạn ( quản trị viên) ');
+            return redirect()->back()->with('error', 'Bạn không thể xóa thông tin của bạn ( quản trị viên) ');
 
         User::whereHas('role', function($query){
             $query->where('name','admin');
         })->first()->posts()->saveMany($user->posts);
 
         $user->delete();
-        return redirect()->route('admin.users.index')->with('success', 'Xóa tài khoản thành công.');
+        return redirect()->route('admin.users.index')->with('success', 'Xóa người dùng thành công.');
     }
 }
