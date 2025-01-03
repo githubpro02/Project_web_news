@@ -15,7 +15,7 @@
     <meta name="keywords" content="">
 
     <!-- ==== Favicons ==== -->
-    <link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/kcnew_logo.png') }}"  sizes="160x160">
+    <link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/logo_kcnews.png') }}"  sizes="160x160">
 
     <!-- ==== Google Font ==== -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700">

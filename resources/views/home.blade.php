@@ -603,7 +603,7 @@
 											<!-- Post Item Start -->
 											<div class="post--item post--layout-3">
 												<div class="post--img">
-													<a href=""
+													<a href="{{ route('posts.show', $outstanding_post) }}"
 														class="thumb"><img width = "120"
 															src="{{ asset($outstanding_post->image ? 'storage/' .$outstanding_post->image->path : 'storage/placeholders/placeholder-image.png')}}"
 															alt=""></a>

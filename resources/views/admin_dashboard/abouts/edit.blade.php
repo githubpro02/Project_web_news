@@ -73,7 +73,7 @@
 										<div class="row">
 											<div class="col-md-8">
 												<div class="mb-3">
-													<label for="about_second_image" class="form-label">Ảnh giới thiệu thứ hait</label>
+													<label for="about_second_image" class="form-label">Ảnh giới thiệu thứ hai</label>
 													<input name="about_second_image" type="file" class="form-control" id="about_second_image" >
 													@error('about_second_image')
 														<p class="text-danger">{{ $message }}</p>

@@ -1,6 +1,6 @@
 @extends('main_layouts.master')
 
-@section('title',' KCNews - Liên hệ')
+@section('title',' KCNEWS - Liên hệ')
 
 @section('content')
 <div class="global-message info d-none"></div>

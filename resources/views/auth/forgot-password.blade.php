@@ -15,7 +15,7 @@
     <meta name="keywords" content="">
 
     <!-- ==== Favicons ==== -->
-	<link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/KCN.png') }}"  sizes="160x160">
+	<link rel="icon" type="image/png" href="{{ asset('kcnew/frontend/img/logo_kcnews.png') }}"  sizes="160x160">
 
 	<!-- =====  CSS - Teamplate KCNEWS =========== -->
 

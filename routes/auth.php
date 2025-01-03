@@ -49,9 +49,6 @@ Route::middleware('auth')->group(function () {
     ->middleware('throttle:6,1')
     ->name('verification.send');
 
-    Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
-                ->name('password.confirm');
-
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });
